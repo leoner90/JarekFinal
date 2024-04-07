@@ -177,15 +177,13 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="playerInterface.cpp" />
-    <ClCompile Include="playerStats.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="PlayerEntity.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="map.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -199,12 +197,10 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\mapGen.h" />
+    <ClInclude Include="headers\Map.h" />
     <ClInclude Include="headers\MyGame.h" />
-    <ClInclude Include="headers\Enemy.h" />
-    <ClInclude Include="headers\Player.h" />
+    <ClInclude Include="headers\PlayerEntity.h" />
     <ClInclude Include="headers\playerInterface.h" />
-    <ClInclude Include="headers\playerStats.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

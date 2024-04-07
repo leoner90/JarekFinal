@@ -1,155 +1,65 @@
 ﻿#include "stdafx.h"
-#include "headers/mapGen.h"
+#include "headers/Map.h"
 
 void MapGen::init(float screenHeight, int screenWidth)
 {
 	//local variables
 	localScreenHeight = screenHeight;
 
-	//is player passed certain Threshold , true if moves forward , false if moves backward
-	Pass4k = Pass7k = Pass10k = Pass13k = Pass16k = Pass19k = Pass22k =  false;
 
-	//clear variables for Restart
-	delete BgScreen;
-	delete BgScreen2;
-	delete BgScreen3;
-	delete bgBottom;
-	delete bgBottom2;
-	delete bgBottom3;
-	 
-	//main Bg
-	BgScreen = new CSprite();
-	BgScreen2 = new CSprite();
-	BgScreen3 = new CSprite();
+	// dismantle the old castle
+	for each (CSprite * pSprite in m_castle)
+		delete pSprite;
+	m_castle.clear();
+
+	// build a new castle...
+	const int W = 2000 / 32;	
+	const int numberOfBrigs = 600;	
+	int a[W];		 // array of integers	size of width
+
+	memset(a, 0, sizeof(a)); // fill with 0
+
+
+	for (int i = 0; i < numberOfBrigs; i++)
+	{
+		int random = rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4);
+		a[random]++; // puts + 1 in random array cell where width is max of 4
+		if (a[random] > 15) a[random] = 15;	// maximum height limit
+		m_castle.push_back(new CSprite(910.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, "brick.jpg", 0));
+	}
+
  
-	//Bg bottom (used for hit test, Prepare your CPU!! )
-	bgBottom = new CSprite();
-	bgBottom2 = new CSprite();
-	bgBottom3 = new CSprite();
+	gameBg.LoadImage("gameBg.jpg");
+	gameBg.SetImage("gameBg.jpg");
+	gameBg.SetSize(screenWidth , screenHeight );
+	gameBg.SetPosition(screenWidth / 2, screenHeight / 2);
 
-	//limits and map scrolling
-	leftScreenLimit = 300;
-	rightScreenLimit = 21000;
-	scrollOffset = 0;
-
-	//map image sizes
-	BgImageSize = 2759;
-	BgImagePos1 = BgImageSize / 2;
-	BgImagePos2 = BgImageSize + BgImageSize / 2;
-	BgImagePos3 = 2 * BgImageSize + BgImageSize / 2;
-	TpToLastBoss = false;
-	
-	//Init map constructor , first 3 BG images and bottom Images
-	MapConstructor(*BgScreen, "MainBgtest.jpg", { BgImagePos1, screenHeight / 2 + 130 }, *bgBottom, "bgBottomMain1.png", { BgImagePos1, 156 });
-	MapConstructor(*BgScreen2, "MainBgtest.jpg", { BgImagePos2, screenHeight / 2 + 130 }, *bgBottom2, "bgBottomMain2.png", { BgImagePos2, 156 });
-	MapConstructor(*BgScreen3, "MainBgtest.jpg", { BgImagePos3, screenHeight / 2 + 130 }, *bgBottom3, "bgBottomMain3.png", { BgImagePos3, 156 });
-}
-
-//Map images loader (bg and bottom img)
-void MapGen::MapConstructor(CSprite& mainBg, char* mainImgPath ,CVector bgimgPos, CSprite& bottom, char* bottomimgPath, CVector bottomimgPos)
-{
-	//main Background Img
-	mainBg.LoadImage(mainImgPath, CColor::Black());
-	mainBg.SetImage(mainImgPath);
-	mainBg.SetPosition(bgimgPos);
-
-	//Bottom images For hit Tests
-	bottom.LoadImage(bottomimgPath);
-	bottom.SetImage(bottomimgPath);
-	bottom.SetPosition(bottomimgPos);
-	bottom.SetColorKey(CColor::Black());
-	bottom.ClearColorKey();
-}
-
-//Map changing if player moves Forward
-void MapGen::ForwardMapChanger( char* bgImgName , char* bottomImgName, CSprite** mainBg, CSprite** bottom, int passThresholdPx, bool &ThresholdCondition, float BgImagePosX, float BgHeigth , float bottomHeigth)
-{
-	if (localPlayerXpos > passThresholdPx && !ThresholdCondition)
-	{
-		delete *mainBg;
-		*mainBg = new CSprite();
-		delete *bottom;
-		*bottom = new CSprite();
-
-		ThresholdCondition = true;
-		MapConstructor(**mainBg, bgImgName, { BgImagePosX, localScreenHeight / 2 + BgHeigth }, **bottom, bottomImgName, { BgImagePosX, bottomHeigth });
-	}
-} 
-
-//Map changing if player moves back
-void MapGen::OnWayBackMapChanger(char* bgImgName, char* bottomImgName, CSprite** mainBg, CSprite** bottom, int passThresholdPx, bool& ThresholdCondition, float BgImagePosX, float BgHeigth, float bottomHeigth)
-{
-	if (localPlayerXpos < passThresholdPx && ThresholdCondition)
-	{
-		delete* mainBg;
-		*mainBg = new CSprite();
-		delete* bottom;
-		*bottom = new CSprite();
-
-		ThresholdCondition = false;
-		MapConstructor(**mainBg, bgImgName, { BgImagePosX, localScreenHeight / 2 + 130 }, **bottom, bottomImgName, { BgImagePosX, 156 });
-	}
+	turnChanged = false;
 }
 
 
-void MapGen::OnUpdate(long t, CSprite& player, float screenHeight  )
+void MapGen::OnUpdate(long t, float screenHeight  )
 {
-	localPlayerXpos = player.GetX();
-	//4k image change
-	ForwardMapChanger("MainBgtest.jpg"  , "bgBottomMain4.png", &BgScreen, &bgBottom, 4000, Pass4k , BgImageSize * 3 + BgImagePos1, 130 , 156 );
-	OnWayBackMapChanger("MainBgtest.jpg", "bgBottomMain1.png", &BgScreen, &bgBottom, 4000, Pass4k, BgImageSize / 2, 130, 156);
+	for (auto brig : m_castle) brig->Update(t);
 
-	//7k image change
-	ForwardMapChanger("MainBgtest.jpg", "bgBottomMain5.png", &BgScreen2, &bgBottom2, 7000, Pass7k, BgImageSize * 4 + BgImagePos1, 130, 156);
-	OnWayBackMapChanger("MainBgtest.jpg", "bgBottomMain2.png", &BgScreen2, &bgBottom2, 7000, Pass7k, BgImageSize  + BgImagePos1, 130, 156);
-
-	//10k image change
-	ForwardMapChanger("MainBgtest.jpg", "bgBottomMain6.png", &BgScreen3, &bgBottom3, 10000, Pass10k, BgImageSize * 5 + BgImagePos1, 130, 276);
-	OnWayBackMapChanger("MainBgtest.jpg", "bgBottomMain3.png", &BgScreen3, &bgBottom3, 10000, Pass10k, BgImageSize * 2+ BgImagePos1, 130, 156);
-
-	//13k image change
-	ForwardMapChanger("townBg1.jpg", "bgBottomMain7.png", &BgScreen, &bgBottom, 13000, Pass13k, BgImageSize * 6 + BgImagePos1, 206, 276);
-	OnWayBackMapChanger("MainBgtest.jpg", "bgBottomMain4.png", &BgScreen, &bgBottom, 13000, Pass13k, BgImageSize * 3 + BgImagePos1, 130, 156);
-
-	//16k image change
-	ForwardMapChanger("townBg2.jpg", "bgBottomMain8.png", &BgScreen2, &bgBottom2, 16000, Pass16k, BgImageSize * 7 + BgImagePos1, 206, 276);
-	OnWayBackMapChanger("MainBgtest.jpg", "bgBottomMain5.png", &BgScreen2, &bgBottom2, 16000, Pass16k, BgImageSize * 4 + BgImagePos1, 130, 156);
-	
-	//finall boss
-	if (localPlayerXpos > 21950 && player.GetX() < 24000 && !TpToLastBoss)
-	{
-		ForwardMapChanger("final1.jpg", "finalBottom.jpg", &BgScreen3, &bgBottom3, 21950, TpToLastBoss, 25500, 130, 116);
-		bgBottom3->SetSize(1920, 30);
-		rightScreenLimit = 25130;
-		leftScreenLimit = 120;
-	}	 
 }
 
 void MapGen::OnDraw(CGraphics* g)
 {
-	//map Scrolling
-	if (localPlayerXpos < leftScreenLimit)
-	{
-		scrollOffset = 0;
-		g->SetScrollPos(0, 0);
-	}
-	else if (localPlayerXpos >= leftScreenLimit && localPlayerXpos <= rightScreenLimit)
-	{
-		scrollOffset = leftScreenLimit - localPlayerXpos;
-		g->SetScrollPos(leftScreenLimit - localPlayerXpos, 0);
-	}
-	else if (localPlayerXpos > rightScreenLimit - leftScreenLimit - 800)
-	{
-		scrollOffset = leftScreenLimit - rightScreenLimit;
-		g->SetScrollPos(leftScreenLimit - rightScreenLimit, 0);
-	}
- 
-	//Map Drawing
-	BgScreen->Draw(g);
-	BgScreen2->Draw(g);
-	BgScreen3->Draw(g);
 
-	bgBottom->Draw(g);
-	bgBottom2->Draw(g);
-	bgBottom3->Draw(g);
+	gameBg.Draw(g);
+
+ 
+
+	g->SetScrollPos(offset, 0);
+	for (auto brig : m_castle) brig->Draw(g);
+	
+ 
+	
 }
+
+void MapGen::setCameraToCurrentPlayer(float curentPlayerPos)
+{
+	offset = curentPlayerPos;
+}
+

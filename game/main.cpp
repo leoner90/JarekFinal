@@ -7,9 +7,10 @@ CGameApp app;
 int main(int argc, char* argv[])
 {
 	//app.DebugMemoryLeaks();
-	//app.OpenWindow(1366, 768, "NINJA GAME");
-	app.OpenFullScreen(1366, 768, 32);
-	//app.OpenConsole();
+	app.OpenConsole();
+	app.OpenWindow(1920, 1080, "WORMS");
+	//app.OpenFullScreen(1920, 1080, 32);
+
 	app.SetClearColor(CColor::Black());
 	app.Run(&game);
 	return(0);
