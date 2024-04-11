@@ -177,6 +177,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="playerInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MyGame.cpp" />
@@ -197,6 +198,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Inventory.h" />
     <ClInclude Include="headers\Map.h" />
     <ClInclude Include="headers\MyGame.h" />
     <ClInclude Include="headers\PlayerEntity.h" />

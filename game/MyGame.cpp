@@ -23,6 +23,7 @@ void CMyGame::OnInitialize()
 
 	startScreenSelection = NEWGAME;
 	deathScreenTimer = 0;
+	currentPlayerTeam = 0;
 
 	//menu Music
 	menuMusic.Play("menu.wav",44);
@@ -42,7 +43,8 @@ void CMyGame::OnInitialize()
 	PlayerEntitys.back()->init(400, 700, 0);
 
 	currentPlayerTurnIndex = 0;
- 
+	isLoadingComplite = false;
+	isTurnFinished = false;
 }
 
 
@@ -51,12 +53,16 @@ void CMyGame::OnStartLevel(Sint16 nLevel)
 
 }
 
+
+
 /******************************** UPDATE ********************************/
 void CMyGame::OnUpdate()
 {	
 	if (IsMenuMode() || IsGameOver() || GameWonConditon || !gameStarted) 
 	{
-		star->Update(GetTime());
+	 
+		loadingLogo.Update(GetTime());
+		if (loadingTimer < GetTime()) isLoadingComplite = true;
 		return; //prevent update while in menu and cutscenes
 	}
 	else 
@@ -68,6 +74,8 @@ void CMyGame::OnUpdate()
 		playerInterface->OnUpdate();
 
 		//All player update
+		if (isTurnFinished) currentPlayerTurnIndex++;
+		if (currentPlayerTurnIndex > 1) currentPlayerTurnIndex = 0;
 		int i = 0;
 		for (auto player : PlayerEntitys)
 		{
@@ -75,9 +83,10 @@ void CMyGame::OnUpdate()
 			if (currentPlayerTurnIndex == i && !player->isPlayerTurn)
 			{
 				player->isPlayerTurn = true;
+				isTurnFinished = false;
 				//mapGen->setCameraToCurrentPlayer(player->enemySprite->GetX());
 			}
-			player->OnUpdate(GetTime(), *mapGen, IsKeyDown(SDLK_d), IsKeyDown(SDLK_a));
+			player->OnUpdate(GetTime(), *mapGen, IsKeyDown(SDLK_d), IsKeyDown(SDLK_a), IsKeyDown(SDLK_w), IsKeyDown(SDLK_s), isTurnFinished);
 			i++;
 		}
 		
@@ -104,7 +113,7 @@ void CMyGame::OnDraw(CGraphics* g)
 	if (IsMenuMode()) 
 	{
 		if (currentMenuState == MENU)  menuHandler(g);
-		if (currentMenuState == CHARSTATS);
+		if (currentMenuState == LOADING) LoadingScreen(g);
 	}
 
 	//*** IF IN GAME!
@@ -113,16 +122,29 @@ void CMyGame::OnDraw(CGraphics* g)
 		mapGen->OnDraw(g);
 		
 		//reset world Scroll to zero
-		g->SetScrollPos(0, 0);
+		//g->SetScrollPos(0, 0);
 
 		playerInterface->OnDraw(g, GetWidth(), GetHeight());
 
 		for (auto player : PlayerEntitys) player->OnDraw(g);
 
-
+		
 	}
+
+	//mousePointer.Draw(g);
 }
 
+void CMyGame::LoadingScreen(CGraphics* g)
+{
+	loadingScreen.Draw(g);
+	if (!isLoadingComplite)
+	{
+		loadingLogo.Draw(g);
+		*g << font(35) << color(CColor::LightGray()) << xy(loadingLogo.GetX() - 40, loadingLogo.GetY() - 80) << "LOADING...";
+	}
+	else *g << font(35) << color(CColor::LightGray()) << xy(loadingLogo.GetX() - 150, loadingLogo.GetY() - 20 ) << "PRESS ENTER  TO  CONTINUE";
+	
+}
 
 //************************************* INIT SPRITES *************************************
 void CMyGame::initSpritesHandler()
@@ -155,9 +177,30 @@ void CMyGame::initSpritesHandler()
 	star = new CSprite();
 	star->LoadImage("star.png");
 	star->SetImage("star.png");
-	star->SetOmega(130);
+	star->SetSize(110, 90);;
 
 
+	//Loading
+ 
+	loadingLogo.AddImage("loadingLogo.png", "loadingLogo");
+	loadingLogo.SetAnimation("loadingLogo", 1);
+	loadingLogo.SetPosition(980, 290);
+	loadingLogo.SetSize(70, 70);
+	 
+ 
+	loadingLogo.SetOmega(90);
+
+
+
+
+	//loading
+	loadingScreen.LoadImage("loadingScreen.jpg");
+	loadingScreen.SetImage("loadingScreen.jpg");
+	loadingScreen.SetSize(GetWidth(), GetHeight());
+	loadingScreen.SetPosition(GetWidth() / 2, GetHeight() / 2);
+
+
+ 
 }
 
 //************************************* ALL PLAYERS *************************************
@@ -170,45 +213,42 @@ void CMyGame::menuHandler(CGraphics* g)
 	startScreen->Draw(g);
 	if (showControllImg)
 	{
-		*g << font(42) << color(CColor::LightGray()) << xy(400, 550) << "Movement";
-		*g << font(25) << color(CColor::White()) << xy(400, 520) << "S - Move Left";
-		*g << font(25) << color(CColor::White()) << xy(400, 490) << "D - Move Right";
+ 
+		*g << font(32) << color(CColor::White()) << xy(800, 670) << "S - Move Left";
+		*g << font(32) << color(CColor::White()) << xy(800, 630) << "D - Move Right";
+		*g << font(32) << color(CColor::White()) << xy(800, 590) << "W - AIM UP";
+		*g << font(32) << color(CColor::White()) << xy(800, 550) << "S - AIM DOWN";
 
-		*g << font(42) << color(CColor::LightGray()) << xy(400, 430) << "Actions";
-		*g << font(25) << color(CColor::White()) << xy(400, 400) << "SPACE - Jump";
-		*g << font(25) << color(CColor::White()) << xy(400, 375) << "F - Slide";
-		*g << font(25) << color(CColor::White()) << xy(400, 345) << "X - Pick Up An Item";
-		*g << font(25) << color(CColor::White()) << xy(400, 315) << "C - Open Stats";
+ 
+		*g << font(32) << color(CColor::White()) << xy(800, 510) << "F - Jump";;
+		*g << font(32) << color(CColor::White()) << xy(800, 470) << "TAB - Select Weapon";
+		*g << font(32) << color(CColor::White()) << xy(800, 430) << "SPACE - START ATTACK";
 
-		*g << font(42) << color(CColor::LightGray()) << xy(400, 255) << "Fighting";
-		*g << font(25) << color(CColor::White()) << xy(400, 225) << "Q - Firebolt";
-		*g << font(25) << color(CColor::White()) << xy(400, 195) << "E - Kunai";
-		*g << font(25) << color(CColor::White()) << xy(400, 165) << "R - Katana Attack";
 
-		*g << font(52) << color(startScreenSelection == BACK ? CColor::White() : CColor::LightGray()) << xy(600, 100) << "BACK";
+		*g << font(52) << color(startScreenSelection == BACK ? CColor::White() : CColor::LightGray()) << xy(880, 350) << "BACK";
 	}
 	else
 	{
 		if (gameStarted)
 		{
-			*g << font(52) << color(startScreenSelection == CONTINUE ? CColor::White() : CColor::LightGray()) << xy(900, 650) << "CONTINUE";
-			if (startScreenSelection == CONTINUE) star->SetPosition(550, 670);
+			*g << font(52) << color(startScreenSelection == CONTINUE ? CColor::White() : CColor::LightGray()) << xy(885, 650) << "CONTINUE";
+			if (startScreenSelection == CONTINUE) star->SetPosition(800, 670);
 
-			*g << font(52) << color(startScreenSelection == NEWGAME ? CColor::White() : CColor::LightGray()) << xy(900, 550) << "NEW GAME";
-			if (startScreenSelection == NEWGAME) star->SetPosition(900, 570);
+			*g << font(52) << color(startScreenSelection == NEWGAME ? CColor::White() : CColor::LightGray()) << xy(885, 550) << "NEW GAME";
+			if (startScreenSelection == NEWGAME) star->SetPosition(800, 570);
 		}
 		else
 		{
-			if (startScreenSelection == NEWGAME) star->SetPosition(550, 670);
-			*g << font(52) << color(startScreenSelection == NEWGAME ? CColor::White() : CColor::LightGray()) << xy(900, 650) << "NEW GAME";
-			*g << font(52) << color(CColor::DarkGray()) << xy(900, 550) << "CONTINUE";
+			if (startScreenSelection == NEWGAME) star->SetPosition(800, 670);
+			*g << font(52) << color(startScreenSelection == NEWGAME ? CColor::White() : CColor::LightGray()) << xy(885, 650) << "NEW GAME";
+			*g << font(52) << color(CColor::DarkGray()) << xy(885, 550) << "CONTINUE";
 		}
 
-		*g << font(52) << color(startScreenSelection == CONTROLS ? CColor::White() : CColor::LightGray()) << xy(900, 450) << "CONTROLS";
-		if (startScreenSelection == CONTROLS) star->SetPosition(550, 470);
+		*g << font(52) << color(startScreenSelection == CONTROLS ? CColor::White() : CColor::LightGray()) << xy(885, 450) << "CONTROLS";
+		if (startScreenSelection == CONTROLS) star->SetPosition(800, 470);
 
-		*g << font(52) << color(startScreenSelection == EXIT ? CColor::White() : CColor::LightGray()) << xy(900, 350) << "EXIT";
-		if (startScreenSelection == EXIT) star->SetPosition(550, 370);
+		*g << font(52) << color(startScreenSelection == EXIT ? CColor::White() : CColor::LightGray()) << xy(885, 350) << "EXIT";
+		if (startScreenSelection == EXIT) star->SetPosition(800, 370);
 
 		star->Draw(g);
 	}
@@ -216,9 +256,29 @@ void CMyGame::menuHandler(CGraphics* g)
 
 
 //*************************************KEYBOARD EVENTS  *************************************
+void CMyGame::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)
+{
+	if (!IsMenuMode())
+	{
+		for (auto currentPlayer : PlayerEntitys)
+		{
+			if (currentPlayer->isPlayerTurn) currentPlayer->OnKeyUp(sym);
+		}
+	}
+}
+
 
 void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 {
+
+	if (!IsMenuMode())
+	{
+		for (auto currentPlayer : PlayerEntitys)
+		{
+			if (currentPlayer->isPlayerTurn) currentPlayer->OnKeyDown(sym);
+		}
+	}
+
 	//*** MENU NAVIGATION
 	if (IsMenuMode() && ((sym == SDLK_s) || (sym == SDLK_DOWN)) && !showControllImg)
 	{
@@ -243,8 +303,19 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	}
 
 	////*** MAIN MENU
-	if (IsMenuMode() && (sym == 13) && currentMenuState != CHARSTATS) //enter
+	if (IsMenuMode() && (sym == 13) ) //enter
 	{
+
+		if (currentMenuState == LOADING && isLoadingComplite)
+		{
+			StartGame();
+			ChangeMode(MODE_GAME);
+			currentMenuState = INGAME;
+			gameStarted = true;
+		}
+
+		if (currentMenuState == LOADING) return;
+
 		//New Game
 		if (startScreenSelection == NEWGAME    )
 		{
@@ -252,12 +323,10 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 			PlayerEntitys.clear();
 
 			OnInitialize();
-			StartGame();
-
+			currentMenuState = LOADING;
 			startScreenSelection = CONTINUE;
-			ChangeMode(MODE_GAME);
-			currentMenuState = INGAME;
-			gameStarted = true;
+			loadingTimer = GetTime() + 3000;
+		
 		}
 
 		//Continue
@@ -324,8 +393,25 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	}
 }
 
+
+
 //*** MOUSE Update Player Stats
-void CMyGame::OnLButtonUp(Uint16 x,Uint16 y) 
+void CMyGame::OnLButtonDown(Uint16 x,Uint16 y)
 {
- 
+	if (!IsMenuMode())
+	{
+		for (auto currentPlayer : PlayerEntitys)
+		{
+			if (currentPlayer->isPlayerTurn) currentPlayer->OnLButtonDown(x,y);
+		}
+	}
+}
+
+void CMyGame::OnMouseMove(Uint16 x, Uint16 y, Sint16 relx, Sint16 rely, bool bLeft, bool bRight, bool bMiddle)
+{
+	//mousePointer.SetPosition(x, y);
+	for (auto currentPlayer : PlayerEntitys)
+	{
+		if (currentPlayer->isPlayerTurn) currentPlayer->OnMouseMove(x, y);
+	}
 }

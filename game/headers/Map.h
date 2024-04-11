@@ -11,7 +11,7 @@ public:
 	void init(float screenHeight, int screenWidth);
 	void OnUpdate(long t, float screenHeight);
 	void OnDraw(CGraphics* g);
-	CSpriteList m_castle;
+	CSpriteList mapList;
 	void setCameraToCurrentPlayer(float curentPlayerPos);
 	float offset;
 

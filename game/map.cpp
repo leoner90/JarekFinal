@@ -8,9 +8,9 @@ void MapGen::init(float screenHeight, int screenWidth)
 
 
 	// dismantle the old castle
-	for each (CSprite * pSprite in m_castle)
+	for each (CSprite * pSprite in mapList)
 		delete pSprite;
-	m_castle.clear();
+	mapList.clear();
 
 	// build a new castle...
 	const int W = 2000 / 32;	
@@ -25,7 +25,8 @@ void MapGen::init(float screenHeight, int screenWidth)
 		int random = rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4);
 		a[random]++; // puts + 1 in random array cell where width is max of 4
 		if (a[random] > 15) a[random] = 15;	// maximum height limit
-		m_castle.push_back(new CSprite(910.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, "brick.jpg", 0));
+		mapList.push_back(new CSprite(910.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, "brick2.jpg", 0));
+		//if (random % 2 == 0) m_castle.back()->Rotate(90);
 	}
 
  
@@ -40,7 +41,8 @@ void MapGen::init(float screenHeight, int screenWidth)
 
 void MapGen::OnUpdate(long t, float screenHeight  )
 {
-	for (auto brig : m_castle) brig->Update(t);
+	for (auto brig : mapList) brig->Update(t);
+	mapList.delete_if(deleted);
 
 }
 
@@ -49,13 +51,9 @@ void MapGen::OnDraw(CGraphics* g)
 
 	gameBg.Draw(g);
 
- 
-
 	g->SetScrollPos(offset, 0);
-	for (auto brig : m_castle) brig->Draw(g);
-	
- 
-	
+	for (auto brig : mapList) brig->Draw(g);
+		
 }
 
 void MapGen::setCameraToCurrentPlayer(float curentPlayerPos)
@@ -63,3 +61,9 @@ void MapGen::setCameraToCurrentPlayer(float curentPlayerPos)
 	offset = curentPlayerPos;
 }
 
+
+//exploudion area?
+//why black edges when rotate just img not animation
+//set specific frame of animation
+//map
+//camera

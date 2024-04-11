@@ -1,9 +1,10 @@
 #pragma once
- 
+#include "headers/Inventory.h"
+
 class Player;
 class MapGen;
 
-class PlayerEntity
+class PlayerEntity : public Inventory
 {
 public:
 	//constructor & destructor
@@ -12,21 +13,36 @@ public:
 
 	//Main Functions
 	void init(int xPos, int yPos, int typeofEnemy);
-	void OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey);
+	void OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool Wkey, bool Skey, bool& isTurnFinished);
 	void OnDraw(CGraphics* g);
-	
+	void OnKeyDown(SDLKey sym);
+	void OnKeyUp(SDLKey sym);
 	//Damage
 	void EnemyGettingDamage(float damageAmount, float t, CSpriteList& DroppedPoutions);
-
+	void  OnLButtonDown(Uint16 x, Uint16 y);
+	void OnMouseMove(Uint16 x, Uint16 y);
+	void performShot();
 	//mainSprite
 	CSprite* enemySprite;
 
 	//Is enemy dead , And coundown till insstance is deleted to play animation
+	bool* finishTurn;
 	bool dead;
 	bool DeathTimer;
 	int enemyType;
 	bool isPlayerTurn;
 
+	bool weaponSelected;
+	enum weaponTypes { AXE, MISSILE, BOMB, BANANA, DYNAMIT, MINE, UZI, BOW, MAIL, SKIP };
+	int weaponType;
+	bool isInventoryOpen;
+
+	float ProjectileSpeed;
+	float maxChargeAttackTime;
+	bool IsInAttackChargeMode;
+	float chargeAttackTimer;
+
+	CSprite chargedAttackBar;
 private:
 	//Variables Miroring for local use
 	MapGen* localMapVar;
@@ -34,19 +50,21 @@ private:
 	Uint32 CurrentTime;
 
 	//Enemie Stats 
-	float CurrentEnemyHealth, CurrentEnemyMp, CurrentEnemyEnergy;
-	int str, intellect, con, dex;
-	float maxEnemyHealth, maxEnemyMp, maxEnemyEnergy;
+	float CurrentEnemyHealth;
+	float maxEnemyHealth;
 
 	//Hp bar
 	void EnemyInterface();
 
-	CSpriteRect* enemyHpBarRect2 = new CSpriteRect(0, 500, 70, 20, CColor::Red(), CColor::Red(), 1);
+	CSpriteRect* enemyHpBarRect = new CSpriteRect(0, 500, 60, 35, CColor::Blue(), CColor::Blue(), 1);
+	CSpriteRect* enemyHpBarRect2 = new CSpriteRect(0, 500, 60, 35, CColor::Red(), CColor::Red(), 1);
 
 
 	//Sprite Lists for Hit Effect and Shots List
 	CSpriteList hitEffectList;
 	CSpriteList EnemyShotList;
+	CSpriteList explosionList;
+	CSprite explosionSprite;
 
 	//Enemie Conditions
 	enum AllEnemies { WARIOR, NINJAGIRL, NINJAGIRLKUNAI, DOG, NINJAGIRLMELEE, BOSS1 };
@@ -56,7 +74,6 @@ private:
 	bool inAttack, inDamage;
 
 	//Combat
-	void EnemyAttack(Player& player);
 	void shotsHandler();
 
 
@@ -76,8 +93,12 @@ private:
 	float enemySpeed, attackDistance;
 	float EnemyDirection;
 	char* throwAttackImgPath;
-	float EnemyRotation;
+ 
 	float meleeDamage, kunaiDamage, fireboltDamage, RangeAttackDamage;
+
+
+	CSprite aimPointer;
+	float aimAngle;
 
 	//Sounds
 	CSoundPlayer deadSound;
@@ -98,7 +119,7 @@ private:
 
 	//Collisions
 	void playerCollision();
-	CSprite* BottomHitTestEmnemy;
+ 
 
 	//Animation Handler
 	void EnemyAnimation(int old_animation_status);
