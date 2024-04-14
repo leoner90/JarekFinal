@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "headers/MyGame.h"
+#include "../headers/MyGame.h"
 
 CMyGame game;
 CGameApp app;

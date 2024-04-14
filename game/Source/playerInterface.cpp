@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "headers/playerInterface.h"
+#include "../headers/playerInterface.h"
  
 
 //Global energy bars for player (todo -> move to .h)

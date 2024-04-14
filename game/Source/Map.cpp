@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "headers/Map.h"
+#include "../headers/Map.h"
 
 void MapGen::init(float screenHeight, int screenWidth)
 {
@@ -60,10 +60,3 @@ void MapGen::setCameraToCurrentPlayer(float curentPlayerPos)
 {
 	offset = curentPlayerPos;
 }
-
-
-//exploudion area?
-//why black edges when rotate just img not animation
-//set specific frame of animation
-//map
-//camera

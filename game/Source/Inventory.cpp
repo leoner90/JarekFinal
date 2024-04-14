@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "headers/Inventory.h"
+#include "../headers/PlayerEntity/Inventory.h"
 
 
 

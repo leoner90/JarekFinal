@@ -1,10 +1,14 @@
 #pragma once
-#include "headers/Inventory.h"
+#include "../headers/PlayerEntity/Inventory.h"
+#include "../headers/PlayerEntity/EntityAnimation.h"
+#include "../headers/PlayerEntity/EntityPhysic.h"
+#include "../headers/PlayerEntity/EntityWeapon.h"
 
+//Forward Declaration
 class Player;
 class MapGen;
 
-class PlayerEntity : public Inventory
+class PlayerEntity : public Inventory, public EntityAnimation, public EntityPhysic, public EntityWeapon
 {
 public:
 	//constructor & destructor
@@ -17,11 +21,13 @@ public:
 	void OnDraw(CGraphics* g);
 	void OnKeyDown(SDLKey sym);
 	void OnKeyUp(SDLKey sym);
+
 	//Damage
 	void EnemyGettingDamage(float damageAmount, float t, CSpriteList& DroppedPoutions);
-	void  OnLButtonDown(Uint16 x, Uint16 y);
+	void OnLButtonDown(Uint16 x, Uint16 y);
 	void OnMouseMove(Uint16 x, Uint16 y);
-	void performShot();
+	 
+
 	//mainSprite
 	CSprite* enemySprite;
 
@@ -33,11 +39,11 @@ public:
 	bool isPlayerTurn;
 
 	bool weaponSelected;
-	enum weaponTypes { AXE, MISSILE, BOMB, BANANA, DYNAMIT, MINE, UZI, BOW, MAIL, SKIP };
+	
 	int weaponType;
 	bool isInventoryOpen;
 
-	float ProjectileSpeed;
+ 
 	float maxChargeAttackTime;
 	bool IsInAttackChargeMode;
 	float chargeAttackTimer;
@@ -67,21 +73,20 @@ private:
 	CSprite explosionSprite;
 
 	//Enemie Conditions
+	enum weaponTypes { AXE, MISSILE, BOMB, BANANA, DYNAMIT, MINE, UZI, BOW, MAIL, SKIP };
 	enum AllEnemies { WARIOR, NINJAGIRL, NINJAGIRLKUNAI, DOG, NINJAGIRLMELEE, BOSS1 };
-				
-	enum action_state { PATROL , CHASSING };
 	enum animation_state { NONE, STANDLEFT, STANDRIGHT, WALKLEFT, WALKRIGHT, INAIR, FALLING, SLIDE, INATTACK, ONHIT, DEAD };
 	bool inAttack, inDamage;
 
-	//Combat
-	void shotsHandler();
 
-
-
-
- 
- 
 	void playerPickUpItem();
+	//Combat
+	//void shotsHandler(EnemyShotList, localMapVar, explosionList, CurrentTime);
+	//Animation Handler
+	void initAnimations();
+
+	//Death
+	void deathHandler();
 
 
 	int playerState;
@@ -96,9 +101,8 @@ private:
  
 	float meleeDamage, kunaiDamage, fireboltDamage, RangeAttackDamage;
 
-
-	CSprite aimPointer;
 	float aimAngle;
+	CSprite aimPointer;
 
 	//Sounds
 	CSoundPlayer deadSound;
@@ -110,19 +114,4 @@ private:
 
 	//enemie position
 	CVector pos;
-
-	//Death
-	void enemyDeathHandler();
-
-	//Controller
-	void playerControler();
-
-	//Collisions
-	void playerCollision();
- 
-
-	//Animation Handler
-	void EnemyAnimation(int old_animation_status);
-	void setDefaultStandAnimation();
-	void initAnimations();
 };

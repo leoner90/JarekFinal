@@ -15,25 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Source\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyGame.cpp">
+    <ClCompile Include="Source\MyGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerEntity.cpp">
+    <ClCompile Include="Source\PlayerEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="Source\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="playerInterface.cpp">
+    <ClCompile Include="Source\playerInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Inventory.cpp">
+    <ClCompile Include="Source\Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityAnimation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityPhysic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +53,7 @@
     <ClInclude Include="headers\MyGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\PlayerEntity.h">
+    <ClInclude Include="headers\PlayerEntity\PlayerEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\Map.h">
@@ -53,7 +62,19 @@
     <ClInclude Include="headers\playerInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\Inventory.h">
+    <ClInclude Include="headers\PlayerEntity\Inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\PlayerEntity\EntityAnimation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\PlayerEntity\EntityPhysic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\PlayerEntity\EntityWeapon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

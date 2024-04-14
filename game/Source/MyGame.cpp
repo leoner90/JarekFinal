@@ -1,8 +1,8 @@
 ﻿#include "stdafx.h"
-#include "headers/MyGame.h"
-#include "headers/PlayerEntity.h"
-#include "headers/Map.h"
-#include "headers/playerInterface.h"
+#include "../headers/MyGame.h"
+#include "../headers/PlayerEntity/PlayerEntity.h"
+#include "../headers/Map.h"
+#include "../headers/playerInterface.h"
  
 
 //Global for class

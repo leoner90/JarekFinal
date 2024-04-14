@@ -114,6 +114,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
       <ConformanceMode>false</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PrecompiledHeader>Use</PrecompiledHeader>
+      <AdditionalIncludeDirectories>C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -177,14 +178,17 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="playerInterface.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MyGame.cpp" />
-    <ClCompile Include="PlayerEntity.cpp">
+    <ClCompile Include="Source\EntityAnimation.cpp" />
+    <ClCompile Include="Source\EntityPhysic.cpp" />
+    <ClCompile Include="Source\EntityWeapon.cpp" />
+    <ClCompile Include="Source\Inventory.cpp" />
+    <ClCompile Include="Source\playerInterface.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\MyGame.cpp" />
+    <ClCompile Include="Source\PlayerEntity.cpp">
       <DeploymentContent>true</DeploymentContent>
     </ClCompile>
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Source\Map.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -198,11 +202,15 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\Inventory.h" />
+    <ClInclude Include="headers\PlayerEntity\EntityAnimation.h" />
+    <ClInclude Include="headers\PlayerEntity\EntityPhysic.h" />
+    <ClInclude Include="headers\PlayerEntity\EntityWeapon.h" />
+    <ClInclude Include="headers\PlayerEntity\Inventory.h" />
     <ClInclude Include="headers\Map.h" />
     <ClInclude Include="headers\MyGame.h" />
-    <ClInclude Include="headers\PlayerEntity.h" />
+    <ClInclude Include="headers\PlayerEntity\PlayerEntity.h" />
     <ClInclude Include="headers\playerInterface.h" />
+    <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
