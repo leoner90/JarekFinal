@@ -1,0 +1,12 @@
+﻿  Game.cpp
+  GameApp.cpp
+  Graphics.cpp
+  SDL_collide.cpp
+  Sound.cpp
+  Sprite.cpp
+  SpriteOval.cpp
+  SpriteRect.cpp
+  SpriteText.cpp
+  dllmain.cpp
+  Generating Code...
+  gfc.vcxproj -> C:\Users\leoni\OneDrive\Desktop\JarekFinal\Debug\gfc.dll

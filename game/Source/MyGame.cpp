@@ -37,7 +37,19 @@ void CMyGame::OnInitialize()
 	initSpritesHandler();
 
 	PlayerEntitys.push_back(new PlayerEntity());
+	PlayerEntitys.back()->init(500, 700, 1);
+
+	PlayerEntitys.push_back(new PlayerEntity());
+	PlayerEntitys.back()->init(300, 700, 1);
+
+	PlayerEntitys.push_back(new PlayerEntity());
 	PlayerEntitys.back()->init(100, 700, 1);
+
+	PlayerEntitys.push_back(new PlayerEntity());
+	PlayerEntitys.back()->init(600, 700, 0);
+
+	PlayerEntitys.push_back(new PlayerEntity());
+	PlayerEntitys.back()->init(250, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
 	PlayerEntitys.back()->init(400, 700, 0);
@@ -75,7 +87,7 @@ void CMyGame::OnUpdate()
 
 		//All player update
 		if (isTurnFinished) currentPlayerTurnIndex++;
-		if (currentPlayerTurnIndex > 1) currentPlayerTurnIndex = 0;
+		if (currentPlayerTurnIndex > 6) currentPlayerTurnIndex = 0;
 		int i = 0;
 		for (auto player : PlayerEntitys)
 		{
@@ -86,8 +98,13 @@ void CMyGame::OnUpdate()
 				isTurnFinished = false;
 				//mapGen->setCameraToCurrentPlayer(player->enemySprite->GetX());
 			}
-			player->OnUpdate(GetTime(), *mapGen, IsKeyDown(SDLK_d), IsKeyDown(SDLK_a), IsKeyDown(SDLK_w), IsKeyDown(SDLK_s), isTurnFinished);
+			player->OnUpdate(GetTime(), *mapGen, IsKeyDown(SDLK_d), IsKeyDown(SDLK_a), IsKeyDown(SDLK_w), IsKeyDown(SDLK_s), isTurnFinished, PlayerEntitys);
 			i++;
+
+			if (player->dead) {
+				PlayerEntitys.erase(find(PlayerEntitys.begin(), PlayerEntitys.end(), player));
+				delete player;
+			}
 		}
 		
 		

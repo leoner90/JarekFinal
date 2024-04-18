@@ -25,8 +25,18 @@ void MapGen::init(float screenHeight, int screenWidth)
 		int random = rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4);
 		a[random]++; // puts + 1 in random array cell where width is max of 4
 		if (a[random] > 15) a[random] = 15;	// maximum height limit
-		mapList.push_back(new CSprite(910.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, "brick2.jpg", 0));
-		//if (random % 2 == 0) m_castle.back()->Rotate(90);
+		//mapList.push_back(new CSprite(910.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, "brick2.jpg", 0));
+		mapList.push_back(new CSpriteRect(910.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, CColor::DarkYellow(), 0));
+
+
+		/*
+		random++;
+		if (random >= 1000) random = 0;
+		a[random]++; // puts + 1 in random array cell where width is max of 4
+		if (a[random] > 800) a[random] = 800;	// maximum height limit
+		CSpriteList rectContatiner;
+		mapList.push_back(new CSpriteRect(50 + random, 200 + a[random] * 2, 2, 2, CColor::DarkYellow(), 0));
+		*/
 	}
 
  

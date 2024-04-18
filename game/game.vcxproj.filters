@@ -21,10 +21,10 @@
     <ClCompile Include="Source\MyGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Source\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerEntity.cpp">
+    <ClCompile Include="Source\PlayerEntity\PlayerEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Map.cpp">
@@ -33,23 +33,20 @@
     <ClCompile Include="Source\playerInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Inventory.cpp">
+    <ClCompile Include="Source\PlayerEntity\Inventory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EntityAnimation.cpp">
+    <ClCompile Include="Source\PlayerEntity\EntityAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EntityPhysic.cpp">
+    <ClCompile Include="Source\PlayerEntity\EntityPhysic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\EntityWeapon.cpp">
+    <ClCompile Include="Source\PlayerEntity\EntityWeapon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="headers\MyGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>

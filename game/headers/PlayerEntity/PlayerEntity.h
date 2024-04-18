@@ -17,13 +17,13 @@ public:
 
 	//Main Functions
 	void init(int xPos, int yPos, int typeofEnemy);
-	void OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool Wkey, bool Skey, bool& isTurnFinished);
+	void OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool Wkey, bool Skey, bool& isTurnFinished, std::vector<PlayerEntity*>& PlayerEntitys);
 	void OnDraw(CGraphics* g);
 	void OnKeyDown(SDLKey sym);
 	void OnKeyUp(SDLKey sym);
 
 	//Damage
-	void EnemyGettingDamage(float damageAmount, float t, CSpriteList& DroppedPoutions);
+	void EnemyGettingDamage(float damageAmount);
 	void OnLButtonDown(Uint16 x, Uint16 y);
 	void OnMouseMove(Uint16 x, Uint16 y);
 	 
@@ -50,9 +50,10 @@ public:
 
 	CSprite chargedAttackBar;
 private:
+
 	//Variables Miroring for local use
 	MapGen* localMapVar;
- 
+	std::vector<PlayerEntity*> localAllPlayersEntitys;
 	Uint32 CurrentTime;
 
 	//Enemie Stats 
@@ -68,9 +69,7 @@ private:
 
 	//Sprite Lists for Hit Effect and Shots List
 	CSpriteList hitEffectList;
-	CSpriteList EnemyShotList;
-	CSpriteList explosionList;
-	CSprite explosionSprite;
+
 
 	//Enemie Conditions
 	enum weaponTypes { AXE, MISSILE, BOMB, BANANA, DYNAMIT, MINE, UZI, BOW, MAIL, SKIP };
@@ -80,12 +79,7 @@ private:
 
 
 	void playerPickUpItem();
-	//Combat
-	//void shotsHandler(EnemyShotList, localMapVar, explosionList, CurrentTime);
-	//Animation Handler
 	void initAnimations();
-
-	//Death
 	void deathHandler();
 
 
@@ -94,12 +88,7 @@ private:
 	int frameRatesToStop;
 	float distToEnemy;
 	bool isFriend;
-	//Base Stats
-	float enemySpeed, attackDistance;
 	float EnemyDirection;
-	char* throwAttackImgPath;
- 
-	float meleeDamage, kunaiDamage, fireboltDamage, RangeAttackDamage;
 
 	float aimAngle;
 	CSprite aimPointer;
@@ -111,7 +100,7 @@ private:
 	int action;
 	float angle = 0;
 	CVector initEnemyPos; 
-
+	int old_animation_status;
 	//enemie position
 	CVector pos;
 };
