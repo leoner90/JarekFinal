@@ -9,8 +9,12 @@
 CMyGame::CMyGame()
 {
 	mapGen = new MapGen();
-	playerInterface = new PlayerInterface();
+	playerInterface = new PlayerInterface(GetWidth(), GetHeight());
 	playerEntity = new PlayerEntity();
+
+	//menu Music
+	BgMusic.Play("mainBg.wav", -1);
+	BgMusic.Volume(0.15);
 }
 
 /******************************** INIT ********************************/
@@ -19,15 +23,13 @@ void CMyGame::OnInitialize()
 	//Basic reset
 	HideMouse();
  
-	gameStarted = isGameWon = GameWonConditon = isPlayerDead = false;
+	gameStarted = isGameWon   = false;
 
 	startScreenSelection = NEWGAME;
-	deathScreenTimer = 0;
+	gameResetTimer = 0;
 	currentPlayerTeam = 0;
 
-	//menu Music
-	menuMusic.Play("menu.wav",44);
-	menuMusic.Volume(0.5);
+	
 	
 	playerInterface->init(GetWidth(), GetHeight());
 	mapGen->init(GetHeight(), GetWidth());
@@ -37,26 +39,31 @@ void CMyGame::OnInitialize()
 	initSpritesHandler();
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(500, 700, 1);
+	PlayerEntitys.back()->init(500, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(300, 700, 1);
+	PlayerEntitys.back()->init(300, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(100, 700, 1);
+	PlayerEntitys.back()->init(100, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(600, 700, 0);
+	PlayerEntitys.back()->init(600, 700, 1);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(250, 700, 0);
+	PlayerEntitys.back()->init(250, 700, 1);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(400, 700, 0);
+	PlayerEntitys.back()->init(400, 700, 1);
 
-	currentPlayerTurnIndex = 0;
+	currentPlayerTurnIndex = -1;
 	isLoadingComplite = false;
-	isTurnFinished = false;
+	isTurnFinished = true;
+
+
+
+	teamOneTotalHealth = teamTwoTotalHealth = 0;
+	CurentPlayerTeamIndex = 0;
 }
 
 
@@ -69,63 +76,133 @@ void CMyGame::OnStartLevel(Sint16 nLevel)
 
 /******************************** UPDATE ********************************/
 void CMyGame::OnUpdate()
-{	
-	if (IsMenuMode() || IsGameOver() || GameWonConditon || !gameStarted) 
+{
+
+	if (IsMenuMode() || IsGameOver()  || !gameStarted) 
 	{
 	 
 		loadingLogo.Update(GetTime());
 		if (loadingTimer < GetTime()) isLoadingComplite = true;
-		return; //prevent update while in menu and cutscenes
+		return;  
+	}
+	else if (IsGameWon)
+	{
+		if (!victoryApplauds.IsPlaying(), 0) victoryApplauds.Play("victoryApplauds.wav");
+		for (auto player : PlayerEntitys)
+		{
+			player->enemySprite->SetStatus(8);
+			player->GameWonPlayerUpdate(GetTime());
+			mapGen->OnUpdate(GetTime(), GetHeight(), windStrengthXVel);
+		}
+
+		if (gameResetTimer < GetTime())
+		{
+			gameResetTimer = 0;
+			gameStarted = false;
+			currentMenuState = MENU;
+			startScreenSelection = NEWGAME;
+			ChangeMode(MODE_MENU);
+			IsGameWon = false;
+		}
 	}
 	else 
 	{
-		// Map Update 
-		mapGen->OnUpdate(GetTime(),GetHeight());
+		//*** PLAYERS UPDATES
+		if (isTurnFinished) 
+		{
+			if (CurentPlayerTeamIndex == 0) CurentPlayerTeamIndex = 1;
+			else CurentPlayerTeamIndex = 0;
+		}
+			
 
-		// Interface Update 
-		playerInterface->OnUpdate();
-
-		//All player update
-		if (isTurnFinished) currentPlayerTurnIndex++;
-		if (currentPlayerTurnIndex > 6) currentPlayerTurnIndex = 0;
-		int i = 0;
+		//***** Change TURN
 		for (auto player : PlayerEntitys)
 		{
-			player->isPlayerTurn = false;
-			if (currentPlayerTurnIndex == i && !player->isPlayerTurn)
+			if (CurentPlayerTeamIndex == player->isFriend && isTurnFinished)
 			{
-				player->isPlayerTurn = true;
-				isTurnFinished = false;
-				//mapGen->setCameraToCurrentPlayer(player->enemySprite->GetX());
-			}
-			player->OnUpdate(GetTime(), *mapGen, IsKeyDown(SDLK_d), IsKeyDown(SDLK_a), IsKeyDown(SDLK_w), IsKeyDown(SDLK_s), isTurnFinished, PlayerEntitys);
-			i++;
 
-			if (player->dead) {
+				// check is turns left for current team
+				bool havePlayerTurnsLeft = false; 
+				for (auto playerForReset : PlayerEntitys)
+					if (CurentPlayerTeamIndex == playerForReset->isFriend && playerForReset->beenUsed == false) havePlayerTurnsLeft = true;
+ 
+
+				//if no turn left -> reset all turns
+				if (!havePlayerTurnsLeft)
+				{
+					for (auto playerForResetTurn : PlayerEntitys)
+						if (CurentPlayerTeamIndex == playerForResetTurn->isFriend) playerForResetTurn->beenUsed = false;
+				}
+
+
+				//if this player didn't have turn
+				if (player->beenUsed == false)
+				{
+					bool posOrnegative = rand() % 2;
+					windStrengthXVel = rand() % 5; // radnom -5 to + 5
+					windStrengthXVel *= posOrnegative > 0 ? 1 : -1;
+
+
+					player->windStrength = { windStrengthXVel , 0 };
+					player->isPlayerTurn = true;
+					player->beenUsed = true;
+					isTurnFinished = false;
+				}
+			}
+		}
+
+
+		//AIPLAYERS UPDATE
+		teamOneTotalHealth = teamTwoTotalHealth = 0; // health reset for UI
+
+		bool teamOneMemberAlive = false; // just to make sure that all enemies deleted and animation finished before call GAME OVER
+		bool teamTwoMemberAlive = false;
+		for (auto player : PlayerEntitys)
+		{
+			//UPDATE
+			player->OnUpdate(GetTime(), *mapGen, IsKeyDown(SDLK_d), IsKeyDown(SDLK_a), IsKeyDown(SDLK_w), IsKeyDown(SDLK_s), IsKeyDown(SDLK_f), isTurnFinished, PlayerEntitys);
+
+			//HEALTH
+		
+			if (player->isFriend) {
+				teamOneMemberAlive = true;
+				teamOneTotalHealth += player->CurrentEnemyHealth;
+			}
+			if (!player->isFriend)
+			{
+				teamTwoMemberAlive = true;
+				teamTwoTotalHealth += player->CurrentEnemyHealth;
+			}
+
+			//IF DEAD
+			if (player->isDead  ) { // && !player->isPlayerTurn
 				PlayerEntitys.erase(find(PlayerEntitys.begin(), PlayerEntitys.end(), player));
 				delete player;
 			}
 		}
-		
-		
-		
-		//if (isPlayerDead) GameOver();
+
+		if (!teamOneMemberAlive || !teamTwoMemberAlive)
+		{
+			if (teamOneTotalHealth <= 0 && teamTwoTotalHealth > 0) GameFinished(1);
+			else if (teamTwoTotalHealth <= 0 && teamOneTotalHealth > 0) GameFinished(2);
+			else GameFinished(0);
+
+		 
+		}
+
+		// Map Update 
+		mapGen->OnUpdate(GetTime(), GetHeight(), windStrengthXVel);
+
+		// Interface Update 
+		playerInterface->OnUpdate(GetTime(), teamOneTotalHealth, teamTwoTotalHealth, windStrengthXVel);
 	}
 }
 
 /******************************** DRAW ********************************/
 void CMyGame::OnDraw(CGraphics* g)
 {
-	//*** IF GAME WON OR LOSE
-	if (IsGameOver() || GameWonConditon) {
-		BgMusic.Stop(); 
-		gameStarted = false;
-		float resetTimer = GameWonConditon ? 20500 : 2000;
-
-		if (GameWonConditon) gameWon->Draw(g);
-		else gameOver->Draw(g);
-	}
-
+ 
+ 
 	//*** IF MENU MODE OR CHARSTATS
 	if (IsMenuMode()) 
 	{
@@ -137,18 +214,31 @@ void CMyGame::OnDraw(CGraphics* g)
 	else 
 	{
 		mapGen->OnDraw(g);
-		
-		//reset world Scroll to zero
-		//g->SetScrollPos(0, 0);
+		if(!IsGameWon) playerInterface->OnDraw(g, GetWidth(), GetHeight());
 
-		playerInterface->OnDraw(g, GetWidth(), GetHeight());
+		PlayerEntity* curentPlayerTurnPlayer = nullptr;
+		for (auto player : PlayerEntitys)
+		{
+			if (player->isPlayerTurn) // for menu to be drawn last , as player inherest inventory , and each of them hhave individuall one
+			{
+				curentPlayerTurnPlayer = player;
+				continue;
+			}
+			player->OnDraw(g);
+		}
+		if (curentPlayerTurnPlayer != nullptr) curentPlayerTurnPlayer->OnDraw(g); // for inventory , inventory is drawn last
 
-		for (auto player : PlayerEntitys) player->OnDraw(g);
-
-		
+		if (IsGameWon)
+		{
+			winnerTeamBg->Draw(g);
+			winConditionOverlay->Draw(g);
+			if(winnerTeamNumber !=0)
+				*g << font(55) << color(CColor::DarkRed()) << xy(GetWidth() / 2 - 120, GetHeight() - 250) << "TEAM " << winnerTeamNumber << " WON!!!";
+			else
+				*g << font(55) << color(CColor::DarkRed()) << xy(GetWidth() / 2 - 50, GetHeight() - 250) << "DRAW";
+		}
 	}
 
-	//mousePointer.Draw(g);
 }
 
 void CMyGame::LoadingScreen(CGraphics* g)
@@ -163,24 +253,34 @@ void CMyGame::LoadingScreen(CGraphics* g)
 	
 }
 
+void CMyGame::GameFinished(int winnerTeam)
+{
+	IsGameWon = true;
+	winnerTeamNumber = winnerTeam;
+	gameResetTimer = GetTime() + 8000;
+
+}
+
 //************************************* INIT SPRITES *************************************
 void CMyGame::initSpritesHandler()
 {
 //gameOverScreen
-	delete gameOver;
-	gameOver = new CSprite();
-	gameOver->LoadImage("gameOver.jpg");
-	gameOver->SetImage("gameOver.jpg");
-	gameOver->SetSize(GetWidth(), GetHeight());
-	gameOver->SetPosition(GetWidth() / 2, GetHeight() / 2);
+	delete winConditionOverlay;
+	winConditionOverlay = new CSprite();
+	winConditionOverlay->LoadImage("winConditionOverlay.png");
+	winConditionOverlay->SetImage("winConditionOverlay.png");
+	winConditionOverlay->SetSize(GetWidth(), GetHeight());
+	winConditionOverlay->SetPosition(GetWidth() / 2, GetHeight() / 2);
 
-	//gameWon
-	delete gameWon;
-	gameWon = new CSprite();
-	gameWon->LoadImage("cutscene3.jpg");
-	gameWon->SetImage("cutscene3.jpg");
-	gameWon->SetSize(GetWidth(), GetHeight());
-	gameWon->SetPosition(GetWidth() / 2, GetHeight() / 2);
+
+	delete winnerTeamBg;
+	winnerTeamBg = new CSprite();
+	winnerTeamBg->LoadImage("winnerTeamBg.png");
+	winnerTeamBg->SetImage("winnerTeamBg.png");
+	winnerTeamBg->SetSize(400, 300);
+	winnerTeamBg->SetPosition(GetWidth() / 2, GetHeight() - 200);
+
+
 
 	//menu
 	delete startScreen;
@@ -207,17 +307,11 @@ void CMyGame::initSpritesHandler()
  
 	loadingLogo.SetOmega(90);
 
-
-
-
 	//loading
 	loadingScreen.LoadImage("loadingScreen.jpg");
 	loadingScreen.SetImage("loadingScreen.jpg");
 	loadingScreen.SetSize(GetWidth(), GetHeight());
 	loadingScreen.SetPosition(GetWidth() / 2, GetHeight() / 2);
-
-
- 
 }
 
 //************************************* ALL PLAYERS *************************************
@@ -236,7 +330,6 @@ void CMyGame::menuHandler(CGraphics* g)
 		*g << font(32) << color(CColor::White()) << xy(800, 590) << "W - AIM UP";
 		*g << font(32) << color(CColor::White()) << xy(800, 550) << "S - AIM DOWN";
 
- 
 		*g << font(32) << color(CColor::White()) << xy(800, 510) << "F - Jump";;
 		*g << font(32) << color(CColor::White()) << xy(800, 470) << "TAB - Select Weapon";
 		*g << font(32) << color(CColor::White()) << xy(800, 430) << "SPACE - START ATTACK";
@@ -303,14 +396,12 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 		if (startScreenSelection > 3) startScreenSelection = gameStarted ? 0 : 1; //Change Sequence if game started
 	}
 
+	//F11 CHANGE TURN
 	if (!IsMenuMode() && (sym == SDLK_F11))
 	{
-		currentPlayerTurnIndex++;
-		if (currentPlayerTurnIndex > 1) currentPlayerTurnIndex = 0;
+		isTurnFinished = true;
 	}
 
-
-	
 
 	if (IsMenuMode() && ((sym == SDLK_w) || (sym == SDLK_UP)) && !showControllImg)
 	{
@@ -378,6 +469,9 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 		}
 		else 
 		{
+			//stop footsteps ....
+			for (auto currentPlayer : PlayerEntitys) if (currentPlayer->isPlayerTurn) currentPlayer->footsteps.Stop();
+	 
 			if (showControllImg)
 			{
 				showControllImg = false;
@@ -388,24 +482,6 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 				ChangeMode(MODE_MENU);
 				currentMenuState = MENU;
 			}
-		}
-	}
-
-	//*** Char STATS (C Btn)
-	if (gameStarted &&  currentMenuState != MENU && sym == SDLK_c && !IsGameOver() )
-	{
-		if (gameStarted && IsMenuMode()) 
-		{
-			ChangeMode(MODE_GAME);
-			HideMouse();
-		}
-		else 
-		{
- 
-			ShowMouse();
-			ChangeMode(MODE_MENU);
- 
-			currentMenuState = CHARSTATS;
 		}
 	}
 }

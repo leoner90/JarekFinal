@@ -4,12 +4,33 @@
 #include "../headers/Map.h"
 
 //Rotated Obj Hit Test
-void EntityWeapon::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restitution)
+bool EntityWeapon::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restitution, bool isReflectNeeded = false)
 {
-
-	//Uint32 dt = GetDeltaTime();
+	//IF BOMB or BANANA
+	
 	float timeFrame = (float)dt / 1000.0f; // time between last frame in sec
-	CVector v = mainObj.GetVelocity() * timeFrame;	//next frame velocity?
+	CVector v = mainObj.GetVelocity() * dt;
+
+	if (Dot(v, { 1, 0 }) > 0) {
+		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { 1, 0 }) * 1);
+	}
+	// Check for left side
+	else if (Dot(v, { -1, 0 }) > 0) {
+		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { -1, 0 }) * 1);
+	}
+	// Check for top side
+	else if (Dot(v, { 0, 1 }) > 0) {
+		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { 0, 1 }) * 1);
+	}
+	// Check for bottom side
+	else if (Dot(v, { 0, -1 }) > 0) {
+		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { 0, -1 }) * 1);
+	}
+	 
+
+	return false;
+	//float timeFrame = (float)dt / 1000.0f; // time between last frame in sec
+	//CVector v = mainObj.GetVelocity() * timeFrame;	//next frame velocity?
 
 	//All possible Normals
 	float alpha = DEG2RAD(obstacle.GetRotation()); //in our case it's allways will be 0
@@ -34,6 +55,7 @@ void EntityWeapon::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float res
 		n = normals[i];
 		if (Dot(v, n) < 0)
 		{
+	 
 			float vy = Dot(v, n);
 			CVector d = t + (Y + R) * n;
 			float dy = Dot(d, n);
@@ -43,16 +65,24 @@ void EntityWeapon::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float res
 			float f2 = (tx - vx * f1) / (X + R);
 
 			if (f1 >= 0 && f1 <= 1 && f2 >= -1 && f2 <= 1)
-				mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), n) * restitution);
+			{
+			 
+				 mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), n) * restitution);
+				 
+				return true;
+			}
+				
 		}
 	}
 
 
 	for (int i = 2; i < 4; i++)
 	{
+	
 		n = normals[i];
 		if (Dot(v, n) < 0)
 		{
+		 
 			float vy = Dot(v, n);
 			CVector d = t + (X + R) * n;
 			float dy = Dot(d, n);
@@ -64,122 +94,165 @@ void EntityWeapon::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float res
 			float f2 = (tx - vx * f1) / (Y + R);
 
 			if (f1 >= 0 && f1 <= 1 && f2 >= -1 && f2 <= 1)
-				mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), n) * restitution);
+			{
+				 
+			
+				 mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), n) * restitution);
+		 
+				return true;
+			}
+				
 		}
 	}
+	return false;
 }
-
-
 
 void EntityWeapon::init()
 {
+	//DAMAGE
+	damageBasedOnWeaponType[AXE] = 25;
+	damageBasedOnWeaponType[MISSILE] = 50;
+	damageBasedOnWeaponType[BOMB] = 50;
+	damageBasedOnWeaponType[BANANA] = 50;
+	damageBasedOnWeaponType[DYNAMIT] = 75;
+	damageBasedOnWeaponType[MINE] = 120;
+	damageBasedOnWeaponType[UZI] = 80;
+	damageBasedOnWeaponType[BOW] = 10;
+	damageBasedOnWeaponType[MAIL] = 10;
+
 	//reset shots and hit effects
 	EnemyShotList.delete_all();
 
-	explosionSprite.LoadImage("firebolt2.png");
-	explosionSprite.SetImage("firebolt2.png");
-	explosionSprite.SetSize(30, 30);
+
 	isInAttackDelay = false;
 	explosionTimer = 0;
 	lastFrametime = 0;
+
+	explosionDamageImg.SetImageFromFile("maxExplodeRadius.jpg");
+	isAlldamageDealed = false;
+	IsInAttackChargeMode = false;
+	AmmoSpriteInit();
+
+	maxChargeAttackTime = 2000;
+	chargeAttackTimer = 0;
+	localWeaponType == NONE;
+ 
 }
 
-void EntityWeapon::OnUpdate(UINT32 time, std::vector<PlayerEntity*> PlayerEntitys, CSprite* enemySprite, int weaponType, MapGen& Map)
+void EntityWeapon::OnUpdate(UINT32 time, std::vector<PlayerEntity*> PlayerEntitys, CSprite& enemySprite, int weaponType, MapGen& Map, float EnemyDirection, float aimAngle)
 {
-	if (lastFrametime == 0) lastFrametime = time;
-	else dt = time - lastFrametime;
-
-	localEnemySprite = enemySprite;
+	if (lastFrametime != 0)  dt = time - lastFrametime;
+	localEnemyDirection = EnemyDirection;
+	localEnemySprite = &enemySprite;
 	localAllPlayerEntityes = PlayerEntitys;
 	localTime = time;
 	localMap = &Map;
 	localWeaponType = weaponType;
+	localAimAngle = aimAngle;
+	
+	
 
-	if (enemySprite->GetStatus() == INATTACK && enemySprite->GetCurrentAnimationFrame() == 2 && weaponType == AXE) meleeAttack();
-	//else if (enemySprite->GetStatus() == INATTACK && enemySprite->GetCurrentAnimationFrame() == 2 && weaponType == MAIL && !mailSelection) mailAttack();
+
+	if (chargeAttackTimer != 0 && chargeAttackTimer - localTime <= 0)
+	{
+		LoadingTick.Stop();
+		EntityWeapon::attackHandler(chargeAttackTimer, maxChargeAttackTime, chargedAttackBar);
+	}
+	
+
+
+	if (localEnemySprite->GetStatus() == INATTACK && localEnemySprite->GetCurrentAnimationFrame() == 3 && weaponType == AXE) meleeAttack();
 	else shotsHandler();
 
+
+ 
+
+	//updates
+	for (CSprite* explosion : explosionAnimationList) explosion->Update(localTime);
+	for (CSprite* shot : EnemyShotList) shot->Update(localTime);
+	chargedAttackBar.Update(localTime);
+
+	//deletes
+	explosionAnimationList.delete_if(deleted);
+	EnemyShotList.delete_if(deleted);
 	lastFrametime = time;
+
+ 
 }
 
-void EntityWeapon::attackHandler(bool& IsInAttackChargeMode, float& chargeAttackTimer,float& maxChargeAttackTime, CSprite& chargedAttackBar, float EnemyDirection, float aimAngle, bool* finishTurn)
+void EntityWeapon::attackHandler( float& chargeAttackTimer, float& maxChargeAttackTime, CSprite& chargedAttackBar)
 {
-	//calculate projectile speed
-	float fullyChargedAttack = 0;
+	float fullyChargedAttack = 0;	//calculate projectile speed
+	explosionDamageActive = false;
 	ProjectileSpeed = 0;
-	CSprite* newProjectile = new CSprite(localEnemySprite->GetX(), localEnemySprite->GetY() + 20, 0, 0, localTime);
+	CSprite* newProjectile = new CSprite();
+
 	explosionTimer = 5000 + localTime;
 	switch (localWeaponType)
 	{
-	case AXE:
-		fullyChargedAttack = 300;
-		newProjectile->AddImage("ammo.png", "AXE", 8, 1, 0, 0, 0, 0, CColor::Black());
-		newProjectile->SetAnimation("AXE", 1);
-		break;
+ 
 
 	case MISSILE:
 		fullyChargedAttack = 1000;
-		newProjectile->AddImage("ammo.png", "missileImg", 8, 1, 1, 0, 1, 0, CColor::Black());
-		newProjectile->SetAnimation("missileImg", 1);
+		missileSprite->SetPos(mailAttackMousePointer.GetPosition());
+		newProjectile = missileSprite->Clone();
 		break;
 	case BOMB:
 		fullyChargedAttack = 1000;
-		newProjectile->AddImage("ammo.png", "BOMB", 8, 1, 4, 0, 4, 0, CColor::Black());
-		newProjectile->SetAnimation("BOMB", 1);
+		newProjectile = bombSprite->Clone();
 		newProjectile->SetOmega(250);
+		explosionTimer = 2500 + localTime;
 		break;
 	case BANANA:
 		fullyChargedAttack = 1000;
-		newProjectile->AddImage("ammo.png", "BANANA", 8, 1, 3, 0, 3, 0);
-		newProjectile->SetAnimation("BANANA", 1);
+		newProjectile = bananaSprite->Clone();
 		newProjectile->SetOmega(250);
 		bananaFirstTouch = false;
+		explosionTimer = 2500 + localTime;
 		break;
 
 	case DYNAMIT:
 		fullyChargedAttack = 300;
-		newProjectile->AddImage("ammo.png", "DYNAMIT", 8, 1, 0, 0, 0, 0, CColor::Black());
-		newProjectile->SetAnimation("DYNAMIT", 1);
-		newProjectile->SetRotation(-180);
+		newProjectile = dynamitSprite->Clone();
+		newProjectile->SetRotation(0);
 		explosionTimer = 2000 + localTime;
 	
 		break;
 
 	case MINE:
 		fullyChargedAttack = 300;
-		newProjectile->AddImage("ammo.png", "MINE", 8, 1, 2, 0, 2, 0, CColor::Black());
-		newProjectile->SetAnimation("MINE", 1);
+		newProjectile = mineSprite->Clone();
 		explosionTimer = 2000 + localTime;
-		newProjectile->SetRotation(-180);
+		newProjectile->SetRotation(0);
 		break;
 	case UZI:
-		fullyChargedAttack = 1000;
-		newProjectile->AddImage("ammo.png", "UZI", 8, 1, 7, 0, 7, 0, CColor::Black());
-		newProjectile->SetAnimation("UZI", 1);
- 
+		fullyChargedAttack = 2000;
+		newProjectile = uziSprite->Clone();
+	 
 		break;
 	case BOW:
-		fullyChargedAttack = 1000;
-		newProjectile->AddImage("ammo.png", "BOW", 8, 1, 6, 0, 6, 0, CColor::Black());
-		newProjectile->SetAnimation("BOW", 1);
- 
+		fullyChargedAttack = 2000;
+		newProjectile = bowSprite->Clone();
+		 
+	 
 		break;
 	case MAIL:
 		fullyChargedAttack = 300;
-		newProjectile->AddImage("ammo.png", "MAIL", 8, 1, 5, 0, 5, 0, CColor::Black());
-		newProjectile->SetAnimation("MAIL", 1);
-		mailSelection = false;
+		newProjectile = mailSprite->Clone();
 		break;
 
 	case SKIP:
 		fullyChargedAttack = 300;
-		newProjectile->AddImage("ammo.png", "MINE", 6, 1, 4, 0, 4, 0, CColor::Black());
-		newProjectile->SetAnimation("MINE", 1);
+		newProjectile = missileSprite->Clone();
 		break;
 
 	default:
 		break;
 	}
+
+	//pos and time Reset
+	newProjectile->SetPosition(localEnemySprite->GetX(), localEnemySprite->GetY() + 20);
+	newProjectile->ResetTime(localTime);
 
 
 	//calculate projectile speed
@@ -194,162 +267,328 @@ void EntityWeapon::attackHandler(bool& IsInAttackChargeMode, float& chargeAttack
 	//reset
 	chargedAttackBar.SetSize(10, 30);
 	chargeAttackTimer = 0;
-
-	if (EnemyDirection == -90) newProjectile->SetDirection(EnemyDirection + aimAngle);
-	else newProjectile->SetDirection(EnemyDirection - aimAngle);
-	
-	
-	newProjectile->SetSpeed(ProjectileSpeed);
 	newProjectile->SetStatus(localWeaponType);
-	
+	newProjectile->SetSpeed(ProjectileSpeed);
 
-	EnemyShotList.push_back(newProjectile);
-	*finishTurn = true;
-	
+	 
+
+	if (newProjectile->GetStatus() == MAIL) {
+		for (int i = 0; i < 4; i++)
+		{
+			CSprite* copy = newProjectile->Clone();
+			copy->SetPosition(mailAttackMousePointer.GetX() + i * 50, 650 + rand() % 150 + 50 );
+			EnemyShotList.push_back(copy);
+		}
+ 
+		
+	}
+	else 
+	{
+		if (localEnemyDirection == -90) newProjectile->SetDirection(localEnemyDirection + localAimAngle);
+		else newProjectile->SetDirection(localEnemyDirection - localAimAngle);
+	 
+		EnemyShotList.push_back(newProjectile);
+
+	}
+
 }
 
 
 //**** Shots Handler for Update function
 void EntityWeapon::shotsHandler()
 {
- 
-
-	CVector gravity = { 0,-10 };
-
+	//DAMAGE APPLY
+	DamageApply();
+	
+	//HITTEST & LOGIC
 	for (CSprite* shot : EnemyShotList)
 	{
-		if (shot->GetStatus() != BOW && shot->GetStatus() != UZI) shot->Accelerate(gravity);
-
-		if (shot->GetStatus() == BOW && shot->GetStatus() == UZI) shot->Accelerate({ 0,-5 });
-		shot->SetRotation(shot->GetDirection());
-
-		if (shot->GetStatus() == DYNAMIT || shot->GetStatus() == MINE) shot->SetRotation(0);
-	 
-			
-
-
-		if(explosionTimer < localTime && (shot->GetStatus() == DYNAMIT || shot->GetStatus() == MINE) )
-		{
+		//Outside of map -> delete
+		if (shot->GetX() < 0 || shot->GetX() > 1920 || shot->GetY() < 0 || shot->GetY() > 1080) {
 			shot->Delete();
-			CSprite* explosion = new CSprite(shot->GetX(), shot->GetY(), 0, 0, localTime);
-			explosion->AddImage("explosion.bmp", "explosion", 5, 5, 0, 0, 4, 4, CColor::Black());
-			explosion->SetAnimation("explosion", 25);
-			explosion->SetStatus(0);
-			explosion->Die(1000);
-			explosionList.push_back(explosion);
+			break;
+		}
+
+		//GRAVITY APPLY and ROTATION
+		CVector gravity = { 0,-10 };
+		if (shot->GetStatus() != BOW && shot->GetStatus() != UZI) shot->Accelerate(gravity);
+		if(shot->GetStatus() == MISSILE ) shot->SetRotation(shot->GetDirection());
+		if (shot->GetStatus() == BOW || shot->GetStatus() == UZI) shot->SetRotation(shot->GetDirection() - 90);
+	 
+		if (shot->GetStatus() == MAIL) 
+		{
+
+			angle += 90;
+			float rotationalAngle = cos(angle);
+
+		 
+			shot->Rotate(rotationalAngle * 45);
+		}
+	
+		shot->Accelerate(windStrength);
+	 
+		//IF DINAMIT EXPLODE TIME
+		if (explosionTimer < localTime && (shot->GetStatus() == DYNAMIT || shot->GetStatus() == MINE))
+		{
+			exploditionSetup(shot->GetX(), shot->GetY());
+			shot->Delete();
+		 
+		}
+
+		//IF BOMB OR BANANA
+		if ((explosionTimer < localTime ) && (shot->GetStatus() == BOMB || shot->GetStatus() == BANANA)  )
+		{
+			exploditionSetup(shot->GetX(), shot->GetY());
+			shot->Delete();
 		}
 
 
 
+		//MAP HIT TEST
 		for (CSprite* mapPart : localMap->mapList)
 		{
-			
-			
-
 
 			if (shot->HitTest(mapPart))
 			{
-				if (shot->GetStatus() == BANANA && explosionTimer > localTime)
+				if (shot->GetStatus() == BOMB || shot->GetStatus() == BANANA)
 				{
-
-
-					if (!bananaFirstTouch)
-					{
-						CSprite* newProjectile = new CSprite(localEnemySprite->GetX(), localEnemySprite->GetY() + 20, 0, 0, localTime);
-						newProjectile->AddImage("ammo.png", "BANANA", 8, 1, 3, 0, 3, 0);
-						newProjectile->SetAnimation("BANANA", 1);
-						newProjectile->SetVelocity(shot->GetVelocity());
-						newProjectile->SetOmega(250);
-						hitTestHandler(*newProjectile, *mapPart, 0.5);
-
-						EnemyShotList.push_back(newProjectile);
-						bananaFirstTouch = true;
-					}
-					hitTestHandler(*shot, *mapPart, 0.5);
-					continue;
+					hitTestHandler(*shot, *mapPart, 0.5, 1);
 				}
-
-
+				
+		 
+				//IF DINAMIT
 				if (shot->GetStatus() == DYNAMIT || shot->GetStatus() == MINE)
 				{
 					shot->SetSpeed(0);
+					continue;
 				}
-				 
-				else
-				{
-					shot->Delete();
-					CSprite* explosion = new CSprite(shot->GetX(), shot->GetY(), 0, 0, localTime);
-					explosion->AddImage("explosion.bmp", "explosion", 5, 5, 0, 0, 4, 4, CColor::Black());
-					explosion->SetAnimation("explosion", 25);
-					explosion->SetStatus(0);
-					explosion->Die(1000);
-					explosionList.push_back(explosion);
-				}
+
+				
+
+				//ELSE
+				exploditionSetup(mapPart->GetX(), mapPart->GetY());
+				shot->Delete();
+				continue;
 			}
 		}
-
-		shot->Update(localTime);
-	}
 
  
-
-	for (auto explosion : explosionList)
-	{
-					/*
-			for (auto playerEntity : localAllPlayerEntityes)
+		//TODO if hit player logic broken
+		//AIPlayer HIT TEST
+		for (auto AIPlayer : localAllPlayerEntityes)
+		{
+			if (!AIPlayer->isPlayerTurn && shot->HitTest(AIPlayer->enemySprite) )
 			{
-				if (playerEntity->enemySprite->HitTest(shot))
-				{
-					playerEntity->EnemyGettingDamage(22);
-				}
+				exploditionSetup(AIPlayer->enemySprite->GetX(), AIPlayer->enemySprite->GetY());
+				shot->Delete();
+				break;
 			}
-			*/
+		 
+		}
+	}
+	 
+}
 
+void EntityWeapon::exploditionSetup(float posX, float posY)
+{
+ 
+	//animation
 
-		if (explosion->GetStatus() == 1) continue;
+	CSprite* explosion = new CSprite();
+	explosion = explosionSprite->Clone();
+	explosion->SetPosition(posX, posY);
+	explosion->ResetTime(localTime);
+	explosion->Die(750);
+	explosionAnimationList.push_back(explosion);
+
+	//Explosion Damage Image
+	explosionDamageImg.SetPos(posX, posY);
+	explosionDamageActive = true;
+}
+
+void EntityWeapon::DamageApply()
+{
+	if (explosionDamageActive)
+	{
 		for (CSprite* mapPart : localMap->mapList)
 		{
-
-			if (explosion->HitTest(mapPart))
-			{
-				mapPart->Delete();
-				//xplosion->Delete();
-				explosion->SetStatus(1);
-			}
+		
+			if (explosionDamageImg.HitTest(mapPart)) mapPart->Delete();
 		}
+
+		for (auto playerEntity : localAllPlayerEntityes)
+			if (playerEntity->enemySprite->HitTest(&explosionDamageImg)) playerEntity->EnemyGettingDamage(damageBasedOnWeaponType[localWeaponType]);
+
+		explosionDamageActive = false;
+		
+		Explodition.Play("Explosion.wav");
+		Explodition.Volume(50);
+
 	}
-	
-	for (CSprite* explosion : explosionList) explosion->Update(localTime);
-	explosionList.delete_if(deleted);
-	
-	EnemyShotList.delete_if(deleted);
-	
 }
 
-void EntityWeapon::meleeAttack()
+void EntityWeapon::AmmoSpriteInit()
 {
-	if (isInAttackDelay) return;
-	for (auto playerEntity : localAllPlayerEntityes)
-	{
-		if (playerEntity->enemySprite->HitTest(localEnemySprite) && playerEntity->isPlayerTurn == false)
-		{
-			playerEntity->EnemyGettingDamage(22);
-		}
-	}
-	isInAttackDelay = true;
-}
+	missileSprite = new CSprite();
+	missileSprite->AddImage("ammo.png", "missileImg", 8, 1, 1, 0, 1, 0, CColor::Black());
+	missileSprite->SetAnimation("missileImg", 1);
+	 
+	bombSprite = new CSprite();
+	bombSprite->AddImage("ammo.png", "BOMB", 8, 1, 4, 0, 4, 0, CColor::Black());
+	bombSprite->SetAnimation("BOMB", 1);
 
-void EntityWeapon::mailAttack(Uint16 x , Uint16 y)
-{
+	bananaSprite = new CSprite();
+	bananaSprite->AddImage("ammo.png", "BANANA", 8, 1, 3, 0, 3, 0);
+	bananaSprite->SetAnimation("BANANA", 1);
+
+	dynamitSprite = new CSprite();
+	dynamitSprite->AddImage("ammo.png", "DYNAMIT", 8, 1, 0, 0, 0, 0, CColor::Black());
+	dynamitSprite->SetAnimation("DYNAMIT", 1);
+		
+	mineSprite = new CSprite();
+	mineSprite->AddImage("ammo.png", "MINE", 8, 1, 2, 0, 2, 0, CColor::Black());
+	mineSprite->SetAnimation("MINE", 1);
+
+	uziSprite = new CSprite();
+	uziSprite->AddImage("ammo.png", "UZI", 8, 1, 7, 0, 7, 0, CColor::Black());
+	uziSprite->SetAnimation("UZI", 1);
+
+	bowSprite = new CSprite();
+	bowSprite->AddImage("ammo.png", "BOW", 8, 1, 6, 0, 6, 0, CColor::Black());
+	bowSprite->SetAnimation("BOW", 1);
+
+	mailSprite = new CSprite();
+	mailSprite->AddImage("ammo.png", "MAIL", 8, 1, 5, 0, 5, 0, CColor::Black());
+	mailSprite->SetAnimation("MAIL", 1);
+			
+
+	explosionSprite = new CSprite();
+	explosionSprite->AddImage("explosion.bmp", "explosion", 5, 5, 0, 0, 4, 4, CColor::Black());
+	explosionSprite->SetAnimation("explosion", 25);
+	
+
+	//chargedAttackBar
+	chargedAttackBar.LoadImage("chargedAttackBar.png");
+	chargedAttackBar.SetImage("chargedAttackBar.png");
+	chargedAttackBar.SetSize(10, 30);
+
+
+	mailAttackMousePointer.LoadImage("mailAttackPointer.png");
+	mailAttackMousePointer.SetImage("mailAttackPointer.png");
+	mailAttackMousePointer.SetSize(30, 30);
+
+ 
 }
 
 
 void EntityWeapon::OnDraw(CGraphics* g)
 {
+	if (IsInAttackChargeMode)
+	{
+		if(!LoadingTick.IsPlaying()) LoadingTick.Play("LoadingTick.wav");
+		CVector side;
+		if (localEnemyDirection == 90)
+		{
+			chargedAttackBar.SetSize(chargedAttackBar.GetSize() + CVector(1, 0));
+			chargedAttackBar.SetPosition(chargedAttackBar.GetPos() + CVector(0.4, 0));
+		}
+		else
+		{
+			chargedAttackBar.SetSize(chargedAttackBar.GetSize() + CVector(1, 0));
+			chargedAttackBar.SetPosition(chargedAttackBar.GetPos() - CVector(0.4, 0));
+		}
+		chargedAttackBar.Draw(g);
+	}
+
+	if (localWeaponType == MAIL) mailAttackMousePointer.Draw(g);
+
 	//Enemy shots
 	for (CSprite* shot : EnemyShotList) shot->Draw(g);
-	for (CSprite* explosion : explosionList) explosion->Draw(g);
+	for (CSprite* explosion : explosionAnimationList) explosion->Draw(g);
+	
 }
 
 
+void EntityWeapon::meleeAttack()
+{
+	 
+	if(localEnemyDirection == 90) localEnemySprite->SetStatus(STANDRIGHT);
+	else localEnemySprite->SetStatus(STANDLEFT);
+	for (auto playerEntity : localAllPlayerEntityes)
+	{
+		if (playerEntity->enemySprite->HitTest(localEnemySprite) && playerEntity->isPlayerTurn == false)
+		{
+			playerEntity->EnemyGettingDamage(damageBasedOnWeaponType[AXE]);
+		}
+	}
+
+	
+
+}
+
+void EntityWeapon::OnKeyDown(SDLKey sym)
+{
+
+	//START ATTACK CHARGING
+	if (sym == SDLK_SPACE )
+	{
+		if (localWeaponType == SKIP) return;
+
+		localEnemySprite->SetSpeed(0);
+		localEnemySprite->SetStatus(INATTACK);
+
+
+		if (localWeaponType == BOW || localWeaponType == UZI)
+		{
+			localEnemySprite->SetStatus(NONE);
+			attackHandler(chargeAttackTimer, maxChargeAttackTime, chargedAttackBar);
+		}
+
+
+		if (localWeaponType != AXE && localWeaponType != BOW && localWeaponType != UZI)
+		{
+		 
+			if (localEnemyDirection == 90) chargedAttackBar.SetPosition(localEnemySprite->GetPos() + CVector(18, 18));
+			else chargedAttackBar.SetPosition(localEnemySprite->GetPos() + CVector(-15, 18));
+
+			IsInAttackChargeMode = true;
+			chargeAttackTimer = localTime + maxChargeAttackTime;
+		}
+
  
+	}
+}
+
+void EntityWeapon::OnKeyUp(SDLKey sym)
+{
+	AttackSoundPlay();
+
+	if (localWeaponType != AXE )
+	{
+		if ( sym == SDLK_SPACE && IsInAttackChargeMode)
+		{			
+			LoadingTick.Stop();
+			EntityWeapon::attackHandler( chargeAttackTimer, maxChargeAttackTime, chargedAttackBar);
+		}
+	}
+}
+
+void EntityWeapon::AttackSoundPlay()
+{
+	if(localWeaponType == AXE) attackSound.Play("axeSlash.wav");
+	else if (localWeaponType == MISSILE) attackSound.Play("missileAttack.wav");
+	else if (localWeaponType == BOMB) attackSound.Play("HOLYGRENADE.wav");
+	else if (localWeaponType == BANANA) attackSound.Play("HOLYGRENADE.wav");
+	else if (localWeaponType == MINE || localWeaponType == DYNAMIT) attackSound.Play("mineDynamitSound.wav");
+	else if (localWeaponType == UZI) attackSound.Play("uziShot.wav");
+	else if (localWeaponType == BOW) attackSound.Play("bowAttack.wav");
+	else if (localWeaponType == MAIL) attackSound.Play("Airstrike.wav");
+	else if (localWeaponType == SKIP) attackSound.Play("attackSounds/");
+}
+
+
+void EntityWeapon::OnMouseMove(Uint16 x, Uint16 y)
+{
+	if (localWeaponType == MAIL) mailAttackMousePointer.SetPos(x, y);
+
+}

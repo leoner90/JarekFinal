@@ -4,18 +4,32 @@
 
 
 //**************************** CONTROLLER ****************************
-void EntityPhysic::playerControler(int& playerState, CSprite* enemySprite,bool isPlayerTurn, bool IsInAttackChargeMode, bool isInventoryOpen , bool Dkey, bool Akey, bool Wkey , bool Skey,float& EnemyDirection, float&aimAngle)
+void EntityPhysic::playerControler(bool InChartgeMode, int& playerState, CSprite* enemySprite,
+	bool isPlayerTurn,bool isInTurnTransitStatus, bool isInventoryOpen , bool Dkey, bool Akey, bool Wkey , bool Skey, bool Fkey, float& EnemyDirection, float&aimAngle)
 {
-	if (isPlayerTurn && !IsInAttackChargeMode && !isInventoryOpen && playerState != INAIR)
+	if(enemySprite->GetStatus() != JUMP) enemySprite->SetVelocity(0, 0);
+	if (isPlayerTurn && !isInTurnTransitStatus && enemySprite->GetStatus() != INATTACK && !isInventoryOpen && playerState != INAIR && !InChartgeMode)
 	{
+	 	
+		
 		if (Dkey)
 		{
+			if (!footsteps.IsPlaying())
+			{
+				footsteps.Play("footsteps.wav", -1);
+				footsteps.Volume(0.35);
+			}
 			enemySprite->SetXVelocity(130);
 			enemySprite->SetStatus(WALKRIGHT);
 			EnemyDirection = 90;
 		}
 		else if (Akey)
 		{
+			if (!footsteps.IsPlaying())
+			{
+				footsteps.Play("footsteps.wav", -1);
+				footsteps.Volume(0.35);
+			}
 			enemySprite->SetXVelocity(-130);
 			enemySprite->SetSize(250, 200);
 			enemySprite->SetStatus(WALKLEFT);
@@ -32,16 +46,20 @@ void EntityPhysic::playerControler(int& playerState, CSprite* enemySprite,bool i
 			enemySprite->SetXVelocity(0);
 			if (aimAngle > -50) aimAngle--;
 		}
-		else if(enemySprite->GetStatus() != INATTACK)
+		else if(enemySprite->GetStatus() != INATTACK && playerState != INAIR)
 		{
+			footsteps.Stop();
 			if (EnemyDirection == 90) 	enemySprite->SetStatus(STANDRIGHT);
 			if (EnemyDirection == -90) enemySprite->SetStatus(STANDLEFT);
 			enemySprite->SetVelocity(0, 0);
 		}
-
 	}
 
-	if (playerState == INAIR) enemySprite->SetVelocity(enemySprite->GetXVelocity(), -350);
+	if (playerState == INAIR)
+	{
+		footsteps.Stop();
+		enemySprite->SetYVelocity(-350);
+	}
 
 }
 
@@ -54,7 +72,7 @@ void EntityPhysic::playerCollision(int& playerState, CSprite* enemySprite, CVect
 
 	for (auto brik : localMapVar->mapList)
 	{
-		if (enemySprite->HitTest(brik))
+		if (enemySprite->HitTest(brik,8))
 		{
 
 			CVector displ = (brik->GetPos() + CVector(0, 30)) - enemySprite->GetPos();
@@ -74,6 +92,14 @@ void EntityPhysic::playerCollision(int& playerState, CSprite* enemySprite, CVect
 		}
 	}
 
-	if (!touchingPlatform) playerState = INAIR;
+
+	if (!touchingPlatform)
+	{
+		playerState = INAIR;
+	}
 	else enemySprite->SetYVelocity(0);
+
+
+
+
 }

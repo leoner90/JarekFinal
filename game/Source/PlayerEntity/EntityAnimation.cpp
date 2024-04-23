@@ -3,16 +3,39 @@
 
 
 //************ ANIMATION -> Restore Basic Animation
-void EntityAnimation::EnemyAnimation(int old_animation_status, CSprite* enemySprite, bool weaponSelected, int weaponType, int EnemyDirection)
+void EntityAnimation::EnemyAnimation(int old_animation_status, CSprite* enemySprite, bool weaponSelected, int weaponType, int EnemyDirection, float angleOfAttack)
 {
 	
 	if (enemySprite->GetStatus() != old_animation_status)
 	{
-		cout << old_animation_status;
-		if (enemySprite->GetStatus() == WALKLEFT) { enemySprite->SetAnimation("walkLeft", 2); }
-		if (enemySprite->GetStatus() == WALKRIGHT) { enemySprite->SetAnimation("walkRight", 2); }
+	 
+		if (enemySprite->GetStatus() == WALKLEFT) { enemySprite->SetAnimation("walkLeft", 11); }
+		if (enemySprite->GetStatus() == WALKRIGHT) { enemySprite->SetAnimation("walkRight", 11); }
+
+		if(enemySprite->GetStatus() ==  ONHIT)  
+		{ 
+			if (EnemyDirection == 90)   enemySprite->SetAnimation("inDamageRight", 2);  
+			else enemySprite->SetAnimation("inDamageLeft", 2); ;
+		}
+
+		if (enemySprite->GetStatus() == JUMP) 
+		{
+			if (EnemyDirection == 90)   enemySprite->SetAnimation("InAirRight", 2);
+			else enemySprite->SetAnimation("InAirLeft", 2); ;
+		}
 
 
+		if (enemySprite->GetStatus() == DEAD) {
+			if (EnemyDirection == 90)   enemySprite->SetAnimation("deadRight", 1);
+			else enemySprite->SetAnimation("deadLeft", 1); ;
+		}
+
+		if (enemySprite->GetStatus() == WINERTEAM) {
+		  enemySprite->SetAnimation("WINERTEAM", 1);
+		}
+
+		
+		
  
 		if (weaponSelected)
 		{
@@ -23,11 +46,9 @@ void EntityAnimation::EnemyAnimation(int old_animation_status, CSprite* enemySpr
 				if (enemySprite->GetStatus() == STANDLEFT) { enemySprite->SetAnimation("MeleeAxeLeftStand", 1); }
 				if (enemySprite->GetStatus() == INATTACK)
 				{
-					if(EnemyDirection == 90) { enemySprite->SetAnimation("MeleeAxeLeft", 3); }
+					if (EnemyDirection == 90)  enemySprite->SetAnimation("MeleeAxeLeft", 3); 
 					else  enemySprite->SetAnimation("MeleeAxeRight", 3);
 				}
-	 
-			
 				break;
 			case MISSILE:
 				if (enemySprite->GetStatus() == STANDRIGHT) { enemySprite->SetAnimation("missileRight", 1); }
@@ -72,7 +93,12 @@ void EntityAnimation::EnemyAnimation(int old_animation_status, CSprite* enemySpr
 
 		else
 		{
-			if (enemySprite->GetStatus() == STANDRIGHT) { enemySprite->SetAnimation("idleRight", 1); }
+			if (enemySprite->GetStatus() == NONE)
+			{
+				if (EnemyDirection == 90) enemySprite->SetStatus(STANDRIGHT);
+				else enemySprite->SetStatus(STANDLEFT);
+			}
+			if (enemySprite->GetStatus() == STANDRIGHT ) { enemySprite->SetAnimation("idleRight", 1); }
 			if (enemySprite->GetStatus() == STANDLEFT) { enemySprite->SetAnimation("idleLeft", 1); }
 		}
 
@@ -151,23 +177,24 @@ void EntityAnimation::initAnimations(CSprite* enemySprite)
 
 
 	//in Damage
-	enemySprite->AddImage("main.png", "inDamage", 28, 6, 18, 6, 21, 6, CColor::Black());
+	enemySprite->AddImage("main.png", "inDamageLeft", 28, 4, 0, 0, 0, 0, CColor::Black());
+	enemySprite->AddImage("main.png", "inDamageRight", 28, 4, 11, 0, 11, 0, CColor::Black());
 
 	//Dead
-	enemySprite->AddImage("main.png", "Dead", 28, 4, 18, 6, 21, 6, CColor::Black());
+	enemySprite->AddImage("main.png", "deadLeft", 28, 4, 1, 0, 2, 0, CColor::Black());
+	enemySprite->AddImage("main.png", "deadRight", 28, 4, 10, 0, 9, 0, CColor::Black());
 
 	//Skip turn
 	enemySprite->AddImage("main.png", "SkipTurnLeft", 28, 4, 3, 0, 3, 0, CColor::Black());
-	enemySprite->AddImage("main.png", "SkipTurnRight", 28, 4, 8, 6, 8, 0, CColor::Black());
+	enemySprite->AddImage("main.png", "SkipTurnRight", 28, 4, 8, 0, 8, 0, CColor::Black());
 
+	//INAIR
+	enemySprite->AddImage("main.png", "InAirLeft", 28, 4, 4, 3, 4, 3, CColor::Black());
+	enemySprite->AddImage("main.png", "InAirRight", 28, 4, 17, 3, 17, 3, CColor::Black());
 
+	//WINERTEAM
+	enemySprite->AddImage("main.png", "WINERTEAM", 28, 4, 22, 3, 23, 3, CColor::Black());
 }
 
 
-//*** RESTORE DEFAULT ANIMATION BASE ON DIRECTION
-void EntityAnimation::setDefaultStandAnimation(int EnemyDirection, CSprite* enemySprite)
-{
-	if (EnemyDirection == 90) 	enemySprite->SetStatus(STANDRIGHT);
-	if (EnemyDirection == -90) enemySprite->SetStatus(STANDLEFT);
-	enemySprite->SetVelocity(0, 0);
-}
+ 

@@ -13,17 +13,16 @@ private:
 	std::vector<PlayerEntity*> PlayerEntitys;
 
 	//Game Conditions
-	bool GameWonConditon;
 	bool gameStarted;
 	bool isGameWon;
-	bool isPlayerDead;
+ 
 	int currentPlayerTurnIndex;
 	bool currentPlayerTeam;
 	bool isTurnFinished;
 
 	// how long to show dead / Win screen img  
-	float deathScreenTimer; // saves current time + resetTimer
-	float resetTimer; // actual waiting time
+
+	float gameResetTimer; // actual waiting time
 
 	//Map Class
 	MapGen* mapGen;
@@ -34,7 +33,7 @@ private:
 
 	//Sprites todo NEW pointers
 	void initSpritesHandler();
-	CSprite* gameOver, *gameWon, *star, *LocationCompass;
+	CSprite* winConditionOverlay, *winnerTeamBg, *star, *LocationCompass;
 	CSprite* startScreen,loadingScreen;
 	CSprite loadingLogo;
 	CSprite mousePointer;
@@ -42,7 +41,7 @@ private:
 	//Menu / Cutscenes / Char stats
 	void menuHandler(CGraphics* g);
 	void LoadingScreen(CGraphics* g);
-
+	void GameFinished(int winnerTeam);
 	
 	int startScreenSelection;
 	bool showControllImg;
@@ -67,7 +66,7 @@ private:
 	//Sounds
 	CSoundPlayer BgMusic;
 	CSoundPlayer  menuMusic;
-	CSoundPlayer  victorySound;
+	CSoundPlayer  victoryApplauds;
 
 
 	//main GFC fun
@@ -79,5 +78,17 @@ private:
 	virtual void OnLButtonDown(Uint16 x, Uint16 y);
 	virtual void OnMouseMove(Uint16 x, Uint16 y, Sint16 relx, Sint16 rely, bool bLeft, bool bRight, bool bMiddle);
 
+	float windStrengthXVel;
+
+
+
+	float teamOneTotalHealth, teamTwoTotalHealth;
+	int CurentPlayerTeamIndex;
+
+	bool changeTurn;
+	bool IsGameWon;
+	int winnerTeamNumber;
+
 	
+ 
 };
