@@ -24,7 +24,7 @@ void PlayerEntity::init(int xPos, int yPos, int typeofPlayer)
 	weaponSelected = false;
 	isOnStartOfTheTurn = true;
 	turnStartTimer = 0;
-	DeathTimer = DeathExploditionTimer = 0;
+	DeathTimer = 0;
 	weaponType = -1;
 	aimAngle = 0;
 	inDamageTimer = 0;
@@ -59,9 +59,7 @@ void PlayerEntity::init(int xPos, int yPos, int typeofPlayer)
 
 
 
-	deathExplosionSprite = new CSprite();
-	deathExplosionSprite->AddImage("explosion.bmp", "deathExplosion", 5, 5, 0, 0, 4, 4, CColor::Black());
-	deathExplosionSprite->SetAnimation("deathExplosion", 10);
+
 
 
 
@@ -167,7 +165,7 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 	playerPickUpItem();
 
 
-	deathExplosionSprite->Update(CurrentTime);
+	
 	deathHandler();
  
 	// ** Interface
@@ -181,7 +179,7 @@ void PlayerEntity::OnDraw(CGraphics* g)
 {
 
 	showInfoMsg(g);
-	if(DeathExploditionTimer != 0) deathExplosionSprite->Draw(g);
+
  
 
 	//HealthBar
@@ -191,7 +189,7 @@ void PlayerEntity::OnDraw(CGraphics* g)
 
 	EntityWeapon::OnDraw(g);
 
-	if(!isDead && DeathExploditionTimer == 0 ) enemySprite->Draw(g);
+	if(!isDead) enemySprite->Draw(g);
 
 	//curent turn Arrow
 	if (showTurnArrowTimer > CurrentTime)
@@ -280,15 +278,14 @@ void PlayerEntity::deathHandler()
 	if (enemySprite->GetStatus() == DEAD && DeathTimer < CurrentTime && DeathTimer != 0)
 	{
 		DeathTimer = 0;
-		DeathExploditionTimer = CurrentTime + 1000;
-		deathExplosionSprite->SetPosition(enemySprite->GetX(), enemySprite->GetY());
-	 
 		deadSound.Play("Explosion.wav");
 		deadSound.Volume(0.3);
 		localMapVar->addGrave(enemySprite->GetX(), enemySprite->GetY());
 		isDead = true;
 		if (isPlayerTurn) *localIsTurnFinished = true;
 	}
+
+
 }
 
 void PlayerEntity::EndOfTurn()

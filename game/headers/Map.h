@@ -45,4 +45,8 @@ private:
 	CSprite* gravePrefab;
 
 	CSoundPlayer dropSound;
+
+	//probably more logical is to put it into player entity, but I delete obj before explodition , and its easier this way :)
+	CSprite* deathExplosionSprite;
+	CSpriteList deathexplosionAnimationList;
 };

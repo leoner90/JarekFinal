@@ -42,6 +42,11 @@ void MapGen::OnUpdate(long t, float screenHeight, float windStrength)
 	LootUpdate();
 	WeatherUpdate();
 	GravesUpadte();
+
+
+	for(auto explosion : deathexplosionAnimationList) 	explosion->Update(localTime);
+	deathexplosionAnimationList.delete_if(deleted);
+ 
 }
 
 void MapGen::OnDraw(CGraphics* g)
@@ -49,18 +54,25 @@ void MapGen::OnDraw(CGraphics* g)
 
 	gameBg.Draw(g);
 
-	g->SetScrollPos(offset, 0);
 	for (auto particle : weatherParticleList) particle->Draw(g);
 	for (auto brig : mapList) brig->Draw(g);
-	
-	for(auto loot : lootList) loot->Draw(g);
-
+	for (auto loot : lootList) loot->Draw(g);
 	for (auto grave : graveList) grave->Draw(g);
-	
+	for (auto explosion : deathexplosionAnimationList) 	explosion->Draw(g);	
 }
 
 void MapGen::addGrave(float xGravePos, float yGravePos)
 {
+ 
+	//probably more logical is to put it into player entity, but I delete obj before explodition , and its easier this way :)
+	CSprite* newExplodition = new CSprite();
+	newExplodition = deathExplosionSprite->Clone();
+	newExplodition->ResetTime(localTime);
+	newExplodition->SetPosition(xGravePos, yGravePos);
+	newExplodition->Die(1000);
+	deathexplosionAnimationList.push_back(newExplodition);
+
+	//Grave
 	CSprite* newGrave = new CSprite();
 	newGrave = gravePrefab->Clone();
 	newGrave->ResetTime(localTime);
@@ -150,6 +162,11 @@ void MapGen::SpritesInit()
 	gravePrefab = new CSprite();
 	gravePrefab->AddImage("gravePrefab.png", CColor::Black());
 	gravePrefab->SetAnimation("gravePrefab.png");
+
+
+	deathExplosionSprite = new CSprite();
+	deathExplosionSprite->AddImage("explosion.bmp", "deathExplosion", 5, 5, 0, 0, 4, 4, CColor::Black());
+	deathExplosionSprite->SetAnimation("deathExplosion", 20);
 }
 
 void MapGen::LootUpdate()
@@ -207,12 +224,12 @@ void MapGen::GravesUpadte()
 	{
 		for (auto brig : mapList)
 		{
-			if (grave->HitTest(brig, 16))
+			if (grave->HitTest(brig, 12))
 			{
 				grave->SetYVelocity(0);
 				break;
 			}
-			else grave->SetYVelocity(-250);
+			else grave->SetYVelocity(-150);
 
 		}
 

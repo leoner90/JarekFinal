@@ -38,7 +38,7 @@ public:
 	//Is enemy dead , And coundown till insstance is deleted to play animation
 	bool* finishTurn;
 	bool isDead;
-	float  DeathTimer, DeathExploditionTimer;
+	float  DeathTimer;
 	int enemyType;
 	bool isPlayerTurn;
 
@@ -121,8 +121,7 @@ private:
 	float inDamageTimer;
 
 
-	CSpriteList deathexplosionAnimationList;
-	CSprite* deathExplosionSprite;
+
 
 	bool hideTimer;
 
