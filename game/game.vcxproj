@@ -178,6 +178,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Physic.cpp" />
     <ClCompile Include="Source\PlayerEntity\EntityAnimation.cpp" />
     <ClCompile Include="Source\PlayerEntity\EntityPhysic.cpp" />
     <ClCompile Include="Source\PlayerEntity\EntityWeapon.cpp" />
@@ -202,6 +203,7 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Physic.h" />
     <ClInclude Include="headers\PlayerEntity\EntityAnimation.h" />
     <ClInclude Include="headers\PlayerEntity\EntityPhysic.h" />
     <ClInclude Include="headers\PlayerEntity\EntityWeapon.h" />

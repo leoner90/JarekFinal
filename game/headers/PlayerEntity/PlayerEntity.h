@@ -86,7 +86,7 @@ private:
 	void playerPickUpItem();
 	void initAnimations();
 	void deathHandler();
-	
+	void EndOfTurn();
 
 
 	int playerState;

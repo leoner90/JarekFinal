@@ -12,7 +12,13 @@ public:
 	void OnUpdate(long t, float screenHeight, float windStrength);
 	void OnDraw(CGraphics* g);
 	void addGrave(float xGravePos, float yGravePos);
+	void mapCreationInit();
+	void WeatherInit();
+	void SpritesInit();
 
+	void LootUpdate();
+	void WeatherUpdate();
+	void GravesUpadte();
 	CSpriteList mapList;
 	void setCameraToCurrentPlayer(float curentPlayerPos);
 	float offset;

@@ -13,13 +13,20 @@ CMyGame::CMyGame()
 	playerEntity = new PlayerEntity();
 
 	//menu Music
-	BgMusic.Play("mainBg.wav", -1);
-	BgMusic.Volume(0.15);
+	menuMusic.Play("mainMenu.wav", -1);
+	menuMusic.Volume(0.15);
 }
+
+
+ 
+
 
 /******************************** INIT ********************************/
 void CMyGame::OnInitialize()
 {
+	PauseGame(false);
+	ChangeMode(MODE_MENU); //Dosent stop the game time , have to use PAUSE
+	
 	//Basic reset
 	HideMouse();
  
@@ -39,22 +46,27 @@ void CMyGame::OnInitialize()
 	initSpritesHandler();
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(500, 700, 0);
+	PlayerEntitys.back()->init(1100, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(300, 700, 0);
+	PlayerEntitys.back()->init(800, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(100, 700, 0);
+	PlayerEntitys.back()->init(600, 700, 0);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(600, 700, 1);
+	PlayerEntitys.back()->init(400, 700, 1);
 
 	PlayerEntitys.push_back(new PlayerEntity());
 	PlayerEntitys.back()->init(250, 700, 1);
 
 	PlayerEntitys.push_back(new PlayerEntity());
-	PlayerEntitys.back()->init(400, 700, 1);
+	PlayerEntitys.back()->init(1400, 700, 1);
+
+	//check there is ground under Player on init
+
+
+
 
 	currentPlayerTurnIndex = -1;
 	isLoadingComplite = false;
@@ -66,6 +78,11 @@ void CMyGame::OnInitialize()
 	CurentPlayerTeamIndex = 0;
 }
 
+void CMyGame::playersPosTester(CSprite& player)
+{
+	player.SetYVelocity(-500);
+
+}
 
 void CMyGame::OnStartLevel(Sint16 nLevel)
 {
@@ -87,16 +104,25 @@ void CMyGame::OnUpdate()
 	}
 	else if (IsGameWon)
 	{
-		if (!victoryApplauds.IsPlaying(), 0) victoryApplauds.Play("victoryApplauds.wav");
+		if (!victoryApplauds.IsPlaying()) victoryApplauds.Play("victoryApplauds.wav");
+
 		for (auto player : PlayerEntitys)
 		{
 			player->enemySprite->SetStatus(8);
 			player->GameWonPlayerUpdate(GetTime());
 			mapGen->OnUpdate(GetTime(), GetHeight(), windStrengthXVel);
+
+			if (player->isDead) {
+				PlayerEntitys.erase(find(PlayerEntitys.begin(), PlayerEntitys.end(), player));
+				delete player;
+			}
 		}
+
+		mapGen->OnUpdate(GetTime(), GetHeight(), windStrengthXVel);
 
 		if (gameResetTimer < GetTime())
 		{
+			victoryApplauds.Stop();
 			gameResetTimer = 0;
 			gameStarted = false;
 			currentMenuState = MENU;
@@ -139,7 +165,7 @@ void CMyGame::OnUpdate()
 				if (player->beenUsed == false)
 				{
 					bool posOrnegative = rand() % 2;
-					windStrengthXVel = rand() % 5; // radnom -5 to + 5
+					windStrengthXVel = rand() % 7; // radnom -7 to + 7
 					windStrengthXVel *= posOrnegative > 0 ? 1 : -1;
 
 
@@ -204,7 +230,7 @@ void CMyGame::OnDraw(CGraphics* g)
  
  
 	//*** IF MENU MODE OR CHARSTATS
-	if (IsMenuMode()) 
+	if (IsMenuMode() || IsPaused()) 
 	{
 		if (currentMenuState == MENU)  menuHandler(g);
 		if (currentMenuState == LOADING) LoadingScreen(g);
@@ -257,7 +283,7 @@ void CMyGame::GameFinished(int winnerTeam)
 {
 	IsGameWon = true;
 	winnerTeamNumber = winnerTeam;
-	gameResetTimer = GetTime() + 8000;
+	gameResetTimer = GetTime() + 7000;
 
 }
 
@@ -381,7 +407,7 @@ void CMyGame::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode)
 void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 {
 
-	if (!IsMenuMode())
+	if (!IsMenuMode() && !IsPaused())
 	{
 		for (auto currentPlayer : PlayerEntitys)
 		{
@@ -390,20 +416,14 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	}
 
 	//*** MENU NAVIGATION
-	if (IsMenuMode() && ((sym == SDLK_s) || (sym == SDLK_DOWN)) && !showControllImg)
+	if ((IsMenuMode() || IsPaused()) && ((sym == SDLK_s) || (sym == SDLK_DOWN)) && !showControllImg)
 	{
 		startScreenSelection++;
 		if (startScreenSelection > 3) startScreenSelection = gameStarted ? 0 : 1; //Change Sequence if game started
 	}
 
-	//F11 CHANGE TURN
-	if (!IsMenuMode() && (sym == SDLK_F11))
-	{
-		isTurnFinished = true;
-	}
-
-
-	if (IsMenuMode() && ((sym == SDLK_w) || (sym == SDLK_UP)) && !showControllImg)
+ 
+	if ((IsMenuMode() || IsPaused()) && ((sym == SDLK_w) || (sym == SDLK_UP)) && !showControllImg)
 	{
 		startScreenSelection--;
 		int range = gameStarted ? 0 : 1;
@@ -411,7 +431,7 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	}
 
 	////*** MAIN MENU
-	if (IsMenuMode() && (sym == 13) ) //enter
+	if ((IsMenuMode() || IsPaused()) && (sym == 13) ) //enter
 	{
 
 		if (currentMenuState == LOADING && isLoadingComplite)
@@ -420,6 +440,9 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 			ChangeMode(MODE_GAME);
 			currentMenuState = INGAME;
 			gameStarted = true;
+			menuMusic.Stop();
+			BgMusic.Play("mainBg.wav", -1);
+			BgMusic.Volume(0.15);
 		}
 
 		if (currentMenuState == LOADING) return;
@@ -429,18 +452,22 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 		{
 			for (auto player : PlayerEntitys) { delete player;}
 			PlayerEntitys.clear();
+	
 
+ 
 			OnInitialize();
 			currentMenuState = LOADING;
 			startScreenSelection = CONTINUE;
-			loadingTimer = GetTime() + 3000;
+			loadingTimer = 3000; // as game time is reset after OnInitialize
+			
 		
 		}
 
 		//Continue
 		if (startScreenSelection == CONTINUE && gameStarted ) {
-			ChangeMode(MODE_GAME);
+			//ChangeMode(MODE_GAME); // do not resume GAME TIME
 			currentMenuState = INGAME;
+			PauseGame(false);
 		}
 
 		//Controls
@@ -462,9 +489,9 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 	//ESC MENU
 	if (sym == SDLK_ESCAPE && !IsGameOver())
 	{ 
-		if (gameStarted && IsMenuMode() && !showControllImg) 
+		if (gameStarted && currentMenuState == MENU && !showControllImg)
 		{
-			ChangeMode(MODE_GAME);
+			PauseGame(false);
 			currentMenuState = INGAME;
 		}
 		else 
@@ -479,7 +506,7 @@ void CMyGame::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode)
 			}
 			else 
 			{
-				ChangeMode(MODE_MENU);
+				PauseGame(true);
 				currentMenuState = MENU;
 			}
 		}
@@ -508,3 +535,5 @@ void CMyGame::OnMouseMove(Uint16 x, Uint16 y, Sint16 relx, Sint16 rely, bool bLe
 		if (currentPlayer->isPlayerTurn) currentPlayer->OnMouseMove(x, y);
 	}
 }
+
+

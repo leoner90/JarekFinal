@@ -2,123 +2,20 @@
 #include "../headers/PlayerEntity/EntityWeapon.h"
 #include "../headers/PlayerEntity/PlayerEntity.h"
 #include "../headers/Map.h"
-
-//Rotated Obj Hit Test
-bool EntityWeapon::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restitution, bool isReflectNeeded = false)
-{
-	//IF BOMB or BANANA
-	
-	float timeFrame = (float)dt / 1000.0f; // time between last frame in sec
-	CVector v = mainObj.GetVelocity() * dt;
-
-	if (Dot(v, { 1, 0 }) > 0) {
-		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { 1, 0 }) * 1);
-	}
-	// Check for left side
-	else if (Dot(v, { -1, 0 }) > 0) {
-		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { -1, 0 }) * 1);
-	}
-	// Check for top side
-	else if (Dot(v, { 0, 1 }) > 0) {
-		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { 0, 1 }) * 1);
-	}
-	// Check for bottom side
-	else if (Dot(v, { 0, -1 }) > 0) {
-		mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), { 0, -1 }) * 1);
-	}
-	 
-
-	return false;
-	//float timeFrame = (float)dt / 1000.0f; // time between last frame in sec
-	//CVector v = mainObj.GetVelocity() * timeFrame;	//next frame velocity?
-
-	//All possible Normals
-	float alpha = DEG2RAD(obstacle.GetRotation()); //in our case it's allways will be 0
-
-	CVector normals[4] =
-	{
-		{  sin(alpha), cos(alpha) }, // top normal
-		{ -sin(alpha), -cos(alpha) }, // bottom normal
-		{ -cos(alpha), sin(alpha) }, //left normal
-		{ cos(alpha), -sin(alpha) } // right normal
-	};
-
-	float R = mainObj.GetHeight() / 2; // radius of the ball
-	float X = obstacle.GetWidth() / 2; // half of the width of the box
-	float Y = obstacle.GetHeight() / 2; //  half the height of the box
-	CVector t = obstacle.GetPos() - mainObj.GetPos(); // displacment vector
-	CVector n = CVector(sin(alpha), cos(alpha));
-
-
-	for (int i = 0; i < 2; i++)
-	{
-		n = normals[i];
-		if (Dot(v, n) < 0)
-		{
-	 
-			float vy = Dot(v, n);
-			CVector d = t + (Y + R) * n;
-			float dy = Dot(d, n);
-			float f1 = dy / vy;
-			float vx = Cross(v, n);
-			float tx = Cross(t, n);
-			float f2 = (tx - vx * f1) / (X + R);
-
-			if (f1 >= 0 && f1 <= 1 && f2 >= -1 && f2 <= 1)
-			{
-			 
-				 mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), n) * restitution);
-				 
-				return true;
-			}
-				
-		}
-	}
-
-
-	for (int i = 2; i < 4; i++)
-	{
-	
-		n = normals[i];
-		if (Dot(v, n) < 0)
-		{
-		 
-			float vy = Dot(v, n);
-			CVector d = t + (X + R) * n;
-			float dy = Dot(d, n);
-
-			float vx = Cross(v, n);
-			float tx = Cross(t, n);
-
-			float f1 = dy / vy;
-			float f2 = (tx - vx * f1) / (Y + R);
-
-			if (f1 >= 0 && f1 <= 1 && f2 >= -1 && f2 <= 1)
-			{
-				 
-			
-				 mainObj.SetVelocity(Reflect(mainObj.GetVelocity(), n) * restitution);
-		 
-				return true;
-			}
-				
-		}
-	}
-	return false;
-}
+#include "../headers/Physic.h"
 
 void EntityWeapon::init()
-{
+{	
 	//DAMAGE
 	damageBasedOnWeaponType[AXE] = 25;
 	damageBasedOnWeaponType[MISSILE] = 50;
-	damageBasedOnWeaponType[BOMB] = 50;
-	damageBasedOnWeaponType[BANANA] = 50;
-	damageBasedOnWeaponType[DYNAMIT] = 75;
-	damageBasedOnWeaponType[MINE] = 120;
-	damageBasedOnWeaponType[UZI] = 80;
-	damageBasedOnWeaponType[BOW] = 10;
-	damageBasedOnWeaponType[MAIL] = 10;
+	damageBasedOnWeaponType[BOMB] = 65;
+	damageBasedOnWeaponType[BANANA] = 45;
+	damageBasedOnWeaponType[DYNAMIT] = 55;
+	damageBasedOnWeaponType[MINE] = 155;
+	damageBasedOnWeaponType[UZI] = 60;
+	damageBasedOnWeaponType[BOW] = 50;
+	damageBasedOnWeaponType[MAIL] = 25;
 
 	//reset shots and hit effects
 	EnemyShotList.delete_all();
@@ -142,6 +39,7 @@ void EntityWeapon::init()
 void EntityWeapon::OnUpdate(UINT32 time, std::vector<PlayerEntity*> PlayerEntitys, CSprite& enemySprite, int weaponType, MapGen& Map, float EnemyDirection, float aimAngle)
 {
 	if (lastFrametime != 0)  dt = time - lastFrametime;
+	lastFrametime = time;
 	localEnemyDirection = EnemyDirection;
 	localEnemySprite = &enemySprite;
 	localAllPlayerEntityes = PlayerEntitys;
@@ -151,8 +49,6 @@ void EntityWeapon::OnUpdate(UINT32 time, std::vector<PlayerEntity*> PlayerEntity
 	localAimAngle = aimAngle;
 	
 	
-
-
 	if (chargeAttackTimer != 0 && chargeAttackTimer - localTime <= 0)
 	{
 		LoadingTick.Stop();
@@ -175,7 +71,7 @@ void EntityWeapon::OnUpdate(UINT32 time, std::vector<PlayerEntity*> PlayerEntity
 	//deletes
 	explosionAnimationList.delete_if(deleted);
 	EnemyShotList.delete_if(deleted);
-	lastFrametime = time;
+	
 
  
 }
@@ -226,12 +122,12 @@ void EntityWeapon::attackHandler( float& chargeAttackTimer, float& maxChargeAtta
 		newProjectile->SetRotation(0);
 		break;
 	case UZI:
-		fullyChargedAttack = 2000;
+		fullyChargedAttack = 1200;
 		newProjectile = uziSprite->Clone();
 	 
 		break;
 	case BOW:
-		fullyChargedAttack = 2000;
+		fullyChargedAttack = 700;
 		newProjectile = bowSprite->Clone();
 		 
 	 
@@ -288,7 +184,6 @@ void EntityWeapon::attackHandler( float& chargeAttackTimer, float& maxChargeAtta
 		else newProjectile->SetDirection(localEnemyDirection - localAimAngle);
 	 
 		EnemyShotList.push_back(newProjectile);
-
 	}
 
 }
@@ -303,29 +198,31 @@ void EntityWeapon::shotsHandler()
 	//HITTEST & LOGIC
 	for (CSprite* shot : EnemyShotList)
 	{
+		//**** APPLY WIND FORCE  // GetSpeed to avoid moving object which lended on the ground
+		if(shot->GetSpeed() > 30) shot->Accelerate(windStrength);
+
+		//**** APPLY GRAVITY FORCE
+		CVector gravity = { 0,-10 };
+
+
 		//Outside of map -> delete
 		if (shot->GetX() < 0 || shot->GetX() > 1920 || shot->GetY() < 0 || shot->GetY() > 1080) {
 			shot->Delete();
 			break;
 		}
 
-		//GRAVITY APPLY and ROTATION
-		CVector gravity = { 0,-10 };
+		
 		if (shot->GetStatus() != BOW && shot->GetStatus() != UZI) shot->Accelerate(gravity);
 		if(shot->GetStatus() == MISSILE ) shot->SetRotation(shot->GetDirection());
 		if (shot->GetStatus() == BOW || shot->GetStatus() == UZI) shot->SetRotation(shot->GetDirection() - 90);
 	 
+
+		//IF MAIL ROTATE - using HOOKES LAW
 		if (shot->GetStatus() == MAIL) 
-		{
-
-			angle += 90;
-			float rotationalAngle = cos(angle);
-
-		 
-			shot->Rotate(rotationalAngle * 45);
-		}
+			Physic::UpdateSpriteRotationHookesLaw(*shot, 90, 0.1);
 	
-		shot->Accelerate(windStrength);
+	
+		
 	 
 		//IF DINAMIT EXPLODE TIME
 		if (explosionTimer < localTime && (shot->GetStatus() == DYNAMIT || shot->GetStatus() == MINE))
@@ -338,10 +235,72 @@ void EntityWeapon::shotsHandler()
 		//IF BOMB OR BANANA
 		if ((explosionTimer < localTime ) && (shot->GetStatus() == BOMB || shot->GetStatus() == BANANA)  )
 		{
-			exploditionSetup(shot->GetX(), shot->GetY());
-			shot->Delete();
+			if (shot->GetStatus() == BANANA)
+			{
+				explosionTimer += 100; // becouse i have One explodition image , so it can be in trhee places in same time , had to use List!!
+			}
+				exploditionSetup(shot->GetX(), shot->GetY());
+				shot->Delete();
 		}
 
+		//AIPlayer HIT TEST if hit player and ammo is not DYNAMIT or Minde -> explode
+		if (localWeaponType != DYNAMIT && localWeaponType != MINE) 
+		{
+			for (auto AIPlayer : localAllPlayerEntityes)
+			{
+				if (!AIPlayer->isPlayerTurn && shot->HitTest(AIPlayer->enemySprite))
+				{
+					exploditionSetup(AIPlayer->enemySprite->GetX(), AIPlayer->enemySprite->GetY());
+					shot->Delete();
+					break;
+				}
+			}
+		}
+
+		
+
+		//BOMB AND BANANA REFLECTION LOGIC
+		if (shot->GetStatus() == BOMB || shot->GetStatus() == BANANA)
+		{
+			for (CSprite* mapPart : localMap->mapList)
+			{
+				if (shot->GetSpeed() < 5)
+				{
+					shot->SetOmega(0);
+					shot->SetSpeed(0);
+					break;
+				}
+				if (Physic::hitTestHandler(*shot, *mapPart, 0.5, true, dt)) 
+				{
+					if (shot->GetStatus() == BANANA && !bananaFirstTouch)
+					{
+						
+						for (int i = 0; i < 3; i++)
+						{
+							bananaFirstTouch = true;
+							CSprite* newProjectile = new CSprite();
+							newProjectile = bananaSprite->Clone();
+							newProjectile->SetOmega(250);
+							newProjectile->SetDirection(shot->GetDirection() + (rand() % 360));
+							newProjectile->SetSpeed(shot->GetSpeed());
+							newProjectile->SetStatus(BANANA);
+							newProjectile->SetPosition(shot->GetPosition());
+
+							newProjectile->ResetTime(localTime);
+
+							EnemyShotList.push_back(newProjectile);
+						}
+						shot->Delete();
+						
+					}
+					break;
+				}
+			}
+			continue;
+
+		}
+
+		
 
 
 		//MAP HIT TEST
@@ -350,20 +309,12 @@ void EntityWeapon::shotsHandler()
 
 			if (shot->HitTest(mapPart))
 			{
-				if (shot->GetStatus() == BOMB || shot->GetStatus() == BANANA)
-				{
-					hitTestHandler(*shot, *mapPart, 0.5, 1);
-				}
-				
-		 
 				//IF DINAMIT
 				if (shot->GetStatus() == DYNAMIT || shot->GetStatus() == MINE)
 				{
 					shot->SetSpeed(0);
 					continue;
 				}
-
-				
 
 				//ELSE
 				exploditionSetup(mapPart->GetX(), mapPart->GetY());
@@ -373,18 +324,8 @@ void EntityWeapon::shotsHandler()
 		}
 
  
-		//TODO if hit player logic broken
-		//AIPlayer HIT TEST
-		for (auto AIPlayer : localAllPlayerEntityes)
-		{
-			if (!AIPlayer->isPlayerTurn && shot->HitTest(AIPlayer->enemySprite) )
-			{
-				exploditionSetup(AIPlayer->enemySprite->GetX(), AIPlayer->enemySprite->GetY());
-				shot->Delete();
-				break;
-			}
-		 
-		}
+ 
+		
 	}
 	 
 }
@@ -434,11 +375,11 @@ void EntityWeapon::AmmoSpriteInit()
 	missileSprite->SetAnimation("missileImg", 1);
 	 
 	bombSprite = new CSprite();
-	bombSprite->AddImage("ammo.png", "BOMB", 8, 1, 4, 0, 4, 0, CColor::Black());
+	bombSprite->AddImage("ammo.png", "BOMB", 8, 1, 4, 0, 4, 0 );
 	bombSprite->SetAnimation("BOMB", 1);
 
 	bananaSprite = new CSprite();
-	bananaSprite->AddImage("ammo.png", "BANANA", 8, 1, 3, 0, 3, 0);
+	bananaSprite->AddImage("ammo.png", "BANANA", 8, 1, 3, 0, 3, 0 );
 	bananaSprite->SetAnimation("BANANA", 1);
 
 	dynamitSprite = new CSprite();
@@ -485,7 +426,7 @@ void EntityWeapon::OnDraw(CGraphics* g)
 {
 	if (IsInAttackChargeMode)
 	{
-		if(!LoadingTick.IsPlaying()) LoadingTick.Play("LoadingTick.wav");
+		if(!LoadingTick.IsPlaying()) LoadingTick.Play("chargeAttack.wav");
 		CVector side;
 		if (localEnemyDirection == 90)
 		{
@@ -540,6 +481,7 @@ void EntityWeapon::OnKeyDown(SDLKey sym)
 
 		if (localWeaponType == BOW || localWeaponType == UZI)
 		{
+			//reset animation
 			localEnemySprite->SetStatus(NONE);
 			attackHandler(chargeAttackTimer, maxChargeAttackTime, chargedAttackBar);
 		}
@@ -547,7 +489,7 @@ void EntityWeapon::OnKeyDown(SDLKey sym)
 
 		if (localWeaponType != AXE && localWeaponType != BOW && localWeaponType != UZI)
 		{
-		 
+			//reset animation
 			if (localEnemyDirection == 90) chargedAttackBar.SetPosition(localEnemySprite->GetPos() + CVector(18, 18));
 			else chargedAttackBar.SetPosition(localEnemySprite->GetPos() + CVector(-15, 18));
 
@@ -578,12 +520,12 @@ void EntityWeapon::AttackSoundPlay()
 	if(localWeaponType == AXE) attackSound.Play("axeSlash.wav");
 	else if (localWeaponType == MISSILE) attackSound.Play("missileAttack.wav");
 	else if (localWeaponType == BOMB) attackSound.Play("HOLYGRENADE.wav");
-	else if (localWeaponType == BANANA) attackSound.Play("HOLYGRENADE.wav");
+	else if (localWeaponType == BANANA) attackSound.Play("bananaThrow.wav");
 	else if (localWeaponType == MINE || localWeaponType == DYNAMIT) attackSound.Play("mineDynamitSound.wav");
 	else if (localWeaponType == UZI) attackSound.Play("uziShot.wav");
 	else if (localWeaponType == BOW) attackSound.Play("bowAttack.wav");
 	else if (localWeaponType == MAIL) attackSound.Play("Airstrike.wav");
-	else if (localWeaponType == SKIP) attackSound.Play("attackSounds/");
+	else if (localWeaponType == SKIP) attackSound.Play("turnSkipSound.wav");
 }
 
 

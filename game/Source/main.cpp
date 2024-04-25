@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 {
 	//app.DebugMemoryLeaks();
 	app.OpenConsole();
-	app.OpenWindow(1920, 1080, "WORMS");
+	app.OpenWindow(1920, 1080, "BOMBA LAND");
 	//app.OpenFullScreen(1920, 1080, 32);
 
 	app.SetClearColor(CColor::Black());

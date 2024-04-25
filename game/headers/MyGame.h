@@ -81,7 +81,7 @@ private:
 	float windStrengthXVel;
 
 
-
+	void playersPosTester(CSprite& player);
 	float teamOneTotalHealth, teamTwoTotalHealth;
 	int CurentPlayerTeamIndex;
 

@@ -77,7 +77,6 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 
 	if (enemySprite->GetY() < 0)
 	{
-		cout << "dead" << isPlayerTurn << endl;
 		if (isPlayerTurn)isTurnFinished = true;
 		isDead = true;
 		deadSound.Play("UnderWaterDeath.wav");
@@ -86,8 +85,12 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 
 	}
 
-	if ((TurnTransitStatusTimer != 0 && TurnTransitStatusTimer < t) || turnEndTimer  < 0  && isPlayerTurn)
+	if (((TurnTransitStatusTimer != 0 && TurnTransitStatusTimer < t) || turnEndTimer  <= 0) && turnStartTimer != 0 && isPlayerTurn && DeathTimer == 0)
 	{
+		if(IsInAttackChargeMode) EntityWeapon::OnKeyUp(SDLK_SPACE);
+		IsInAttackChargeMode = false;
+		enemySprite->SetSpeed(0);
+		footsteps.Stop();
 		isTurnFinished = true;
 		TurnTransitStatusTimer = 0;
 		turnStartTimer = 0;
@@ -108,7 +111,12 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 		isOnStartOfTheTurn = false;
 		showTurnArrowTimer = CurrentTime + 4000;
 		StartRoundSound.Play("StartRound.wav");
+		//reset Turn Timer
+		turnStartTimer = 20000 + t;
 	}
+	if (isPlayerTurn) turnEndTimer = (int)(turnStartTimer - t) / 1000;
+
+
 
 	if (enemySprite->GetStatus() == ONHIT && inDamageTimer < t)
 	{
@@ -120,12 +128,9 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 	}
 
 
-	//oply curent player problem
- 
 
-	if (isPlayerTurn && turnStartTimer == 0)  turnStartTimer = 20000 + t;
 
-	if (isPlayerTurn) turnEndTimer = (int)(turnStartTimer - t) / 1000;
+
 
 
 
@@ -138,18 +143,17 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 
 
 	// ** COllisions
-	EntityPhysic::playerCollision(playerState, enemySprite,pos, &mapGen);
+	EntityPhysic::playerCollision(CurrentTime, playerState, enemySprite,pos, &mapGen);
 
 	// ** Enemy Controller
  
 	EntityPhysic::playerControler(EntityWeapon::IsInAttackChargeMode, playerState, enemySprite, isPlayerTurn, isInTurnTransitStatus, isInventoryOpen, Dkey, Akey, Wkey, Skey, Fkey, EnemyDirection, aimAngle);
 
-	// ** Interface
-	EnemyInterface();
+
 
 	//Enemy position
 	pos = enemySprite->GetPos();
-	enemySprite->Update(t);
+	enemySprite->Update(CurrentTime);
 
 	if (weaponSelected && !isInventoryOpen && weaponType != AXE && weaponType != MAIL )
 	{
@@ -166,7 +170,8 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 	deathExplosionSprite->Update(CurrentTime);
 	deathHandler();
  
-
+	// ** Interface
+	EnemyInterface();
 
 }
 
@@ -174,6 +179,8 @@ void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool
 //**************************** DRAW ****************************
 void PlayerEntity::OnDraw(CGraphics* g)
 {
+
+	showInfoMsg(g);
 	if(DeathExploditionTimer != 0) deathExplosionSprite->Draw(g);
  
 
@@ -203,7 +210,7 @@ void PlayerEntity::OnDraw(CGraphics* g)
 	if (!isDead && isPlayerTurn && (weaponSelected || isInventoryOpen) && (weaponType != MAIL || isInventoryOpen)  && !isInTurnTransitStatus) aimPointer.Draw(g);
 
  
-	showInfoMsg(g);
+	
 
 
 }
@@ -213,11 +220,7 @@ void PlayerEntity::EnemyInterface()
 {
 	float baseHpBarWidth = 50;
 
-	enemyHpBarRect2->SetX(enemySprite->GetX());
-	enemyHpBarRect2->SetY(enemySprite->GetY() + enemySprite->GetSize().GetY()  - 10);
 
-	enemyHpBarRect->SetX(enemySprite->GetX());
-	enemyHpBarRect->SetY(enemySprite->GetY() + enemySprite->GetSize().GetY() - 10);
 
 	float hpBarSize = baseHpBarWidth * (CurrentEnemyHealth / maxEnemyHealth);
 	if (hpBarSize < 0) hpBarSize = 0;
@@ -227,6 +230,9 @@ void PlayerEntity::EnemyInterface()
 
 	enemyHpBarRect->SetSize(hpBarSize, 15);
 	enemyHpBarRect->Update(CurrentTime);
+
+	enemyHpBarRect2->SetPosition(enemySprite->GetX(), enemySprite->GetTop() + 20);
+	enemyHpBarRect->SetPosition(enemySprite->GetX(), enemySprite->GetTop() + 20);
 }
 
 
@@ -285,6 +291,11 @@ void PlayerEntity::deathHandler()
 	}
 }
 
+void PlayerEntity::EndOfTurn()
+{
+
+}
+
 
 //**FINAL WHRN GAME WON SPRITES UPDATE
 void PlayerEntity::GameWonPlayerUpdate(float t)
@@ -308,11 +319,8 @@ void PlayerEntity::showInfoMsg(CGraphics* g)
 		infoMsgBg.SetX(enemySprite->GetCenter().GetX());
 		infoMsgBg.Draw(g);
 
-		//if not player turn text position calculated incorectly
-		float XoffsetBUG = isPlayerTurn ? 0 : -20;
-		float YoffsetBUG = isPlayerTurn ? 0 : -15;
-
-		*g << font("AFontPTSerif.ttf") << font(24) << color(infoMsg > 0 ? CColor::Green() : CColor::Red()) << xy(enemySprite->GetX() + XoffsetBUG, enemySprite->GetTop() + 50 - YoffsetBUG / 3 - floatingEffect) << infoMsg;
+ 
+		*g << font("AFontPTSerif.ttf") << font(24) << color(infoMsg > 0 ? CColor::Green() : CColor::Red()) << xy(enemySprite->GetCenter().GetX() - 18, enemySprite->GetTop() + 55 - floatingEffect) << infoMsg;
 		*g << font("ARIAL.ttf");
 	}
 }
@@ -335,6 +343,7 @@ void PlayerEntity::EnemyGettingDamage(float damageAmount)
 		CurrentEnemyHealth = 0;
 		enemySprite->SetStatus(DEAD);
 		DeathTimer = CurrentTime + 2000;
+		//turnStartTimer += 3000;
 		inDamageTimer = 0;
 
 	}
@@ -379,26 +388,36 @@ void PlayerEntity::OnKeyDown(SDLKey sym)
 		{
 			//stop footsteps and reset animtaion
 			footsteps.Stop();
-			enemySprite->SetStatus(NONE);
+			if (EnemyDirection == 90) enemySprite->SetStatus(STANDRIGHT);
+			else enemySprite->SetStatus(STANDLEFT);
+			enemySprite->SetSpeed(0);
 
 			//open inventory
 			isInventoryOpen = true;
 			Inventory::OpenShop();
 			openInventorySound.Play("openInventory.wav");
 			openInventorySound.Volume(200);
+
 		}
 
+		//ON SPACE BAR PRESSED
 		if (weaponSelected)
 		{
 			//stop footsteps and reset animtaion
 			footsteps.Stop();
+			enemySprite->SetSpeed(0);
+
 			EntityWeapon::OnKeyDown(sym);
-			//enemySprite->SetStatus(NONE);
+			if (weaponType != AXE)
+			{
+				if (EnemyDirection == 90) enemySprite->SetStatus(STANDRIGHT);
+				else enemySprite->SetStatus(STANDLEFT);
+			}
 		}
 
 
 
-		if (sym == SDLK_f && enemySprite->GetStatus() != JUMP)
+		if (sym == SDLK_f && playerState != INAIR)
 		{
 			enemySprite->SetPosition(enemySprite->GetPosition() + CVector(0, 100)); // use set Y Velocity bettter???
 			enemySprite->SetStatus(JUMP);
@@ -417,9 +436,18 @@ void PlayerEntity::OnKeyUp(SDLKey sym)
 	{
 			
 			EntityWeapon::OnKeyUp(sym);
-			TurnTransitStatusTimer = CurrentTime + 4000;
-			turnStartTimer = CurrentTime + 4000;
+			TurnTransitStatusTimer = CurrentTime + 2500;
+			turnStartTimer = CurrentTime + 2500;
 			isInTurnTransitStatus = true;
+
+			//RESET AMMO IN HAND -> becouse it was thrown
+			if (weaponType == BOMB || weaponType == BANANA || weaponType == MINE || weaponType == DYNAMIT)
+			{
+				weaponSelected = false;
+				weaponType != -1;
+				enemySprite->SetStatus(NONE);
+			}
+		
 	}
 }
 

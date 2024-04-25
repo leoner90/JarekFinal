@@ -1,8 +1,10 @@
 #pragma once
-
+#include "../headers/Physic.h"
 class MapGen;
 class PlayerEntity;
-class EntityWeapon
+class Physic;
+
+class EntityWeapon : public Physic
 {
 public:
 	void init();
@@ -14,7 +16,7 @@ public:
 	void meleeAttack();
  
 	bool isInAttackDelay;
-	bool hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restitution, bool isReflectNeeded);
+ 
 
 	void exploditionSetup(float posX, float posY);
 	void DamageApply();
@@ -87,6 +89,8 @@ private:
 	CSoundPlayer LoadingTick;
 	CSoundPlayer Explodition;
 	CSoundPlayer attackSound;
+
+	//Physic physic;
 
 protected:
 	bool IsInAttackChargeMode;
