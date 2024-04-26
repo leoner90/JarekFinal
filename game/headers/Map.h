@@ -3,50 +3,55 @@
 class MapGen 
 {
 public:
-	//Map Scrolling
-	int scrollOffset;
-	float leftScreenLimit, rightScreenLimit;
+	MapGen();
 
 	//Base Functions
 	void init(float screenHeight, int screenWidth);
 	void OnUpdate(long t, float screenHeight, float windStrength);
 	void OnDraw(CGraphics* g);
+	
+	//Adds Grave and Explosion when Entity dies
 	void addGrave(float xGravePos, float yGravePos);
-	void mapCreationInit();
-	void WeatherInit();
-	void SpritesInit();
 
-	void LootUpdate();
-	void WeatherUpdate();
-	void GravesUpadte();
+	//GETTERS & SETTER NEEDED IF WILL HAVE TIME
 	CSpriteList mapList;
-	void setCameraToCurrentPlayer(float curentPlayerPos);
-	float offset;
-	void addLootOnTheMap();
 	CSpriteList lootList;
+
 private:
-	//localVar 
+	//localVar just miroring to be able use in whole class
 	float localScreenHeight;
 	float localScreenWidth;
 	float localPlayerXpos;
 	float localWindStrength;
-
-	CSprite gameBg;
-	bool turnChanged;
-
-	float lootTimer;
-	
-	CSprite* healthBox;
 	float localTime;
 
+	//INIT
+	void mapCreationInit();
+	void WeatherInit();
+	void SpritesInit();
+
+	//UPDATE
+	void LootUpdate();
+	void WeatherUpdate();
+	void GravesUpadte();
+
+	//ADD LOOT (AirDrop Helath Boxes)
+	void addLootOnTheMap();
+	CSoundPlayer dropSound;
+	CSprite* healthBoxPreFab;
+	float lootTimer;
+
+	//Main Game Bg Img
+	CSprite gameBg;
+	
+	//Weather List
 	CSpriteList weatherParticleList;
 
+	//Graves
 	CSpriteList graveList;
 	CSprite* gravePrefab;
 
-	CSoundPlayer dropSound;
-
-	//probably more logical is to put it into player entity, but I delete obj before explodition , and its easier this way :)
+	//Explosion - probably more logical is to put it into player entity, but I delete obj before explodition , and its easier this way :)
 	CSprite* deathExplosionSprite;
 	CSpriteList deathexplosionAnimationList;
 };

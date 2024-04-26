@@ -3,22 +3,23 @@
 class Inventory
 {
 public:
- 
-	void init();
-	void OnUpdate(Uint32 t);
+	Inventory();
+
+	//Main Functions
 	void OnDraw(CGraphics* g);
- 
-	void OnKeyDown(SDLKey sym);
-	void OpenShop();
+
+	//Inventory Events
+	void OpenInventory();
 	void CloseInventory();
 	int selectWeapon(Uint16 x, Uint16 y);
-	void OnLButtonDown(Uint16 x, Uint16 y);
-	enum weaponTypes {AXE, MISSILE, BOMB, BANANA, DYNAMIT, MINE, UZI, BOW, MAIL, SKIP};
-	//ammo amount
-	int mailBomb;
-private:
-	CSprite InventoryBg;
-	bool isShopOpen;
-};
 
- 
+private:
+	//Weapon Statuses
+	enum weaponTypes { AXE, MISSILE, BOMB, BANANA, DYNAMIT, MINE, UZI, BOW, MAIL, SKIP };
+
+	//Sprite For Bg
+	CSprite InventoryBg;
+
+	//Conditions
+	bool isInventoryOpen;
+};

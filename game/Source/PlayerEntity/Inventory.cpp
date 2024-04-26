@@ -2,49 +2,38 @@
 #include "../headers/PlayerEntity/Inventory.h"
 
 
-
-
-
-void Inventory::init()
+Inventory::Inventory()
 {
 	InventoryBg.LoadImage("InventoryBg.png");
 	InventoryBg.SetImage("InventoryBg.png");
 	InventoryBg.SetSize(400, 700);
 	InventoryBg.SetPosition(200, 350);
-
-	isShopOpen = false;
-
+	isInventoryOpen = false;
 }
 
-void Inventory::OnUpdate(Uint32 t)
-{
-}
-
+//*** DRAW
 void Inventory::OnDraw(CGraphics* g)
 {
-	if(isShopOpen)InventoryBg.Draw(g);
+	if(isInventoryOpen)InventoryBg.Draw(g);
 }
 
-void Inventory::OnKeyDown(SDLKey sym)
+////*** OPEN INVENTORY
+void Inventory::OpenInventory()
 {
-
+	isInventoryOpen = true;
 }
 
-void Inventory::OpenShop()
-{
-	isShopOpen = true;
-}
-
+////*** CLOSE INVENTORY
 void Inventory::CloseInventory()
 {
-	isShopOpen = false;
+	isInventoryOpen = false;
 }
 
+////*** SELECT WEAPON
 int Inventory::selectWeapon(Uint16 x, Uint16 y)
 {
- 
-	
-	CloseInventory();
+	// close first then return, if no return , reopen shop .... Best Logic!!!
+	CloseInventory(); 
 	if (x >= 70 && x < 180 && y >= 520 && y < 600)	return AXE;
 	if (x >= 180 && x < 300 && y >= 520 && y < 600)	return MISSILE;
 
@@ -61,13 +50,6 @@ int Inventory::selectWeapon(Uint16 x, Uint16 y)
 	if (x >= 180 && x < 300 && y >= 125 && y < 206)	return SKIP;
 	 
 	//if clicked somewhere else
-	OpenShop();
+	OpenInventory();
 	return -1;
-
-
-
-}
-
-void Inventory::OnLButtonDown(Uint16 x, Uint16 y)
-{
 }

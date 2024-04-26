@@ -180,10 +180,10 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
   <ItemGroup>
     <ClCompile Include="Source\Physic.cpp" />
     <ClCompile Include="Source\PlayerEntity\EntityAnimation.cpp" />
-    <ClCompile Include="Source\PlayerEntity\EntityPhysic.cpp" />
+    <ClCompile Include="Source\PlayerEntity\EntityController.cpp" />
     <ClCompile Include="Source\PlayerEntity\EntityWeapon.cpp" />
     <ClCompile Include="Source\PlayerEntity\Inventory.cpp" />
-    <ClCompile Include="Source\playerInterface.cpp" />
+    <ClCompile Include="Source\GameInterface.cpp" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\MyGame.cpp" />
     <ClCompile Include="Source\PlayerEntity\PlayerEntity.cpp">
@@ -205,13 +205,13 @@ $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
   <ItemGroup>
     <ClInclude Include="headers\Physic.h" />
     <ClInclude Include="headers\PlayerEntity\EntityAnimation.h" />
-    <ClInclude Include="headers\PlayerEntity\EntityPhysic.h" />
+    <ClInclude Include="headers\PlayerEntity\EntityController.h" />
     <ClInclude Include="headers\PlayerEntity\EntityWeapon.h" />
     <ClInclude Include="headers\PlayerEntity\Inventory.h" />
     <ClInclude Include="headers\Map.h" />
     <ClInclude Include="headers\MyGame.h" />
     <ClInclude Include="headers\PlayerEntity\PlayerEntity.h" />
-    <ClInclude Include="headers\playerInterface.h" />
+    <ClInclude Include="headers\GameInterface.h" />
     <ClInclude Include="Source\stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

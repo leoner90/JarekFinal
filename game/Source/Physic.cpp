@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "../headers/Physic.h"
 
-//Rotated Obj Hit Test
+////HIT TEST AND REFLECTION INCLUDING RORATED OBJECTS
 bool Physic::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restitution, bool isReflectNeeded, float dt)
 {
 	float timeFrame = (float)dt / 1000.0f; // time between last frame in sec
@@ -10,6 +10,7 @@ bool Physic::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restituti
 	//All possible Normals
 	float alpha = DEG2RAD(obstacle.GetRotation()); //in our case it's allways will be 0
 
+	//ALL NORMALS
 	CVector normals[4] =
 	{
 		{  sin(alpha), cos(alpha) }, // top normal
@@ -24,6 +25,7 @@ bool Physic::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restituti
 	CVector t = obstacle.GetPos() - mainObj.GetPos(); // displacment vector
 	CVector n = CVector(sin(alpha), cos(alpha));
 
+	//TOP & BOTTOM CHECK
 	for (int i = 0; i < 2; i++)
 	{
 		n = normals[i];
@@ -45,6 +47,7 @@ bool Physic::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restituti
 		}
 	}
 
+	//LEFT & RIGHT CHECK
 	for (int i = 2; i < 4; i++)
 	{
 		n = normals[i];
@@ -71,14 +74,14 @@ bool Physic::hitTestHandler(CSprite& mainObj, CSprite& obstacle, float restituti
 }
 
 
-
-// Update function
-void Physic::UpdateSpriteRotationHookesLaw(CSprite& objForRotation, float ANGLE_INCREMENT , float SPRING_CONSTANT) {
+// HOOKS ROTATIONS 
+void Physic::UpdateSpriteRotationHookesLaw(CSprite& objForRotation, float ANGLE , float SPRING) 
+{
 	// Increment the angle
-	angle += ANGLE_INCREMENT;
+	angle += ANGLE;
 
 	// Calculate the spring force
-	float force = -SPRING_CONSTANT * angle;
+	float force = -SPRING * angle;
 
 	// Update velocity using F = ma (mass is assumed to be 1)
 	velocity += force;

@@ -30,7 +30,7 @@
     <ClCompile Include="Source\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\playerInterface.cpp">
+    <ClCompile Include="Source\GameInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerEntity\Inventory.cpp">
@@ -39,7 +39,7 @@
     <ClCompile Include="Source\PlayerEntity\EntityAnimation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\PlayerEntity\EntityPhysic.cpp">
+    <ClCompile Include="Source\PlayerEntity\EntityController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\PlayerEntity\EntityWeapon.cpp">
@@ -59,7 +59,7 @@
     <ClInclude Include="headers\Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\playerInterface.h">
+    <ClInclude Include="headers\GameInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\PlayerEntity\Inventory.h">
@@ -68,7 +68,7 @@
     <ClInclude Include="headers\PlayerEntity\EntityAnimation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\PlayerEntity\EntityPhysic.h">
+    <ClInclude Include="headers\PlayerEntity\EntityController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\PlayerEntity\EntityWeapon.h">

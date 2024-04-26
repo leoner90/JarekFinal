@@ -1,36 +1,39 @@
 ﻿#include "stdafx.h"
 #include "../headers/Map.h"
 
+MapGen::MapGen()
+{
+	SpritesInit();
+	WeatherInit();
+}
+
+//*** INIT
 void MapGen::init(float screenHeight, int screenWidth)
 {
-	//local variables
+	//Local variables
 	localScreenHeight = screenHeight;
 	localScreenWidth = screenWidth;
 
-	// resets
+	//RESETS
 	for each (CSprite * pSprite in mapList) delete pSprite;
-	for each (CSprite * particle in weatherParticleList) delete particle;
 	for each (CSprite * grave in graveList) delete grave;
 	for each (CSprite * loot in lootList) delete loot;
 
+	//RESETS
 	mapList.clear();
-	weatherParticleList.clear();
 	graveList.clear();
 	lootList.clear();
 	lootTimer = 0;
 
-	// MAP, WEATHER, Sprites INITS
+	//MAP, WEATHER, Sprites INITS
 	mapCreationInit();  
-	WeatherInit();	 
-	SpritesInit(); 
 }
 
 
+//*** UPDATE
 void MapGen::OnUpdate(long t, float screenHeight, float windStrength)
 {
-	cout << mapList.size() << endl;
-
-	//local Variables
+	//Local variables
 	localTime = t;
 	localWindStrength = windStrength;
 
@@ -38,22 +41,21 @@ void MapGen::OnUpdate(long t, float screenHeight, float windStrength)
 	for (auto brig : mapList) brig->Update(t);
 	mapList.delete_if(deleted);
 
-	// Loot, WEATHER, Graves UPDATES
+	// Loot, Weather, Graves UPDATES
 	LootUpdate();
 	WeatherUpdate();
 	GravesUpadte();
 
-
-	for(auto explosion : deathexplosionAnimationList) 	explosion->Update(localTime);
+	//Explosion Update And Deletes
+	for(auto explosion : deathexplosionAnimationList) explosion->Update(localTime);
 	deathexplosionAnimationList.delete_if(deleted);
- 
 }
 
+
+//*** DRAW
 void MapGen::OnDraw(CGraphics* g)
 {
-
 	gameBg.Draw(g);
-
 	for (auto particle : weatherParticleList) particle->Draw(g);
 	for (auto brig : mapList) brig->Draw(g);
 	for (auto loot : lootList) loot->Draw(g);
@@ -61,76 +63,35 @@ void MapGen::OnDraw(CGraphics* g)
 	for (auto explosion : deathexplosionAnimationList) 	explosion->Draw(g);	
 }
 
-void MapGen::addGrave(float xGravePos, float yGravePos)
-{
- 
-	//probably more logical is to put it into player entity, but I delete obj before explodition , and its easier this way :)
-	CSprite* newExplodition = new CSprite();
-	newExplodition = deathExplosionSprite->Clone();
-	newExplodition->ResetTime(localTime);
-	newExplodition->SetPosition(xGravePos, yGravePos);
-	newExplodition->Die(1000);
-	deathexplosionAnimationList.push_back(newExplodition);
 
-	//Grave
-	CSprite* newGrave = new CSprite();
-	newGrave = gravePrefab->Clone();
-	newGrave->ResetTime(localTime);
-	newGrave->SetPosition(xGravePos, yGravePos);
-	graveList.push_back(newGrave);
-
-}
-
-
-
-void MapGen::setCameraToCurrentPlayer(float curentPlayerPos)
-{
-	offset = curentPlayerPos;
-}
-
-void MapGen::addLootOnTheMap()
-{
-	if (lootList.size() > 3) return;
-	CSprite* AddHealthBox = new CSprite();
-	AddHealthBox = healthBox->Clone();
-	AddHealthBox->ResetTime(localTime);
-	AddHealthBox->SetPosition(rand() % 1800, 1000);
-	AddHealthBox->SetYVelocity(-350);
-	lootList.push_back(AddHealthBox);
-
-	dropSound.Play("dropSound.wav");
-	dropSound.Volume(0.35);
-}
-
-
+//*** MAP CREATION
 void MapGen::mapCreationInit()
 {
+	//MAP Variables
+	const int widthOfMap = 1920 / 32; // full hd divided by brig size
+	const int numberOfBrigs = 400; // actualy creates less brigs as if max height achived it returns
+	int mapCreationList[widthOfMap]; // array of integers size of width, each cell is map hight
+	memset(mapCreationList, 0, sizeof(mapCreationList)); // fill array with 0
 
-	//MA
-	const int W = 1920 / 32;
-	const int numberOfBrigs = 400; // creates less as if max height achived it returns
-	int a[W];		 // array of integers	size of width
-
-	memset(a, 0, sizeof(a)); // fill with 0
-
-
+	//Create A Map
 	for (int i = 0; i < numberOfBrigs; i++)
 	{
-		int random = rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4 + 1) + rand() % (W / 4);
-		a[random]++; // puts + 1 in random array cell where width is max of 60
+		int random = rand() % (widthOfMap / 4 + 1) + rand() % (widthOfMap / 4 + 1) + rand() % (widthOfMap / 4 + 1) + rand() % (widthOfMap / 4);
+		mapCreationList[random]++; // puts + 1 in random array cell where width is max of 60
 
 		// maximum height limit, return if maximum achived
-		if (a[random] > 15)
+		if (mapCreationList[random] > 15)
 		{
-			a[random] = 15;
+			mapCreationList[random] = 15;
 			continue;
 		}
-
-		mapList.push_back(new CSpriteRect(932.f + (random - W / 2) * 32 + 16, 180.f + a[random] * 32, 32, 32, CColor::DarkYellow(), 0));
-
+		//ADD Rect To List
+		mapList.push_back(new CSpriteRect(932.f + (random - widthOfMap / 2) * 32 + 16, 180.f + mapCreationList[random] * 32, 32, 32, CColor::DarkYellow(), 0));
 	}
 }
 
+
+//*** WEATHER INITS
 void MapGen::WeatherInit()
 {
 	for (int i = 0; i < 65; i++)
@@ -140,38 +101,40 @@ void MapGen::WeatherInit()
 		weatherParticle->SetAnimation("particles", 1);
 		weatherParticle->SetYVelocity(-(rand() % 250 + 200));
 		weatherParticle->SetPos(rand() % 1900, rand() % 700 + 300);
-
 		weatherParticleList.push_back(weatherParticle);
 	}
-
 }
 
+
+//*** SPRITE INITS
 void MapGen::SpritesInit()
 {
 	gameBg.LoadImage("gameBg.jpg");
 	gameBg.SetImage("gameBg.jpg");
-	gameBg.SetSize(localScreenWidth, localScreenHeight);
-	gameBg.SetPosition(localScreenWidth / 2, localScreenHeight / 2);
+	gameBg.SetSize(1920, 1080);
+	gameBg.SetPosition(1920 / 2, 1080 / 2);
 
 	//HEALT BOX SPRITe PREFAB
-	healthBox = new CSprite();
-	healthBox->AddImage("ammo2.png", "UZI", 6, 1, 3, 0, 3, 0, CColor::Black());
-	healthBox->SetAnimation("UZI", 1);
+	healthBoxPreFab = new CSprite();
+	healthBoxPreFab->AddImage("ammo2.png", "UZI", 6, 1, 3, 0, 3, 0, CColor::Black());
+	healthBoxPreFab->SetAnimation("UZI", 1);
 
 	//Grave SPRITe PREFAB
 	gravePrefab = new CSprite();
 	gravePrefab->AddImage("gravePrefab.png", CColor::Black());
 	gravePrefab->SetAnimation("gravePrefab.png");
 
-
+	//Explosion
 	deathExplosionSprite = new CSprite();
 	deathExplosionSprite->AddImage("explosion.bmp", "deathExplosion", 5, 5, 0, 0, 4, 4, CColor::Black());
 	deathExplosionSprite->SetAnimation("deathExplosion", 20);
 }
 
+
+//*** LOOT UPDATE
 void MapGen::LootUpdate()
 {
-
+	//ADD loot if timer < curent time
 	if (lootTimer == 0) lootTimer = 15000 + localTime;
 	if (lootTimer != 0 && lootTimer < localTime)
 	{
@@ -179,10 +142,10 @@ void MapGen::LootUpdate()
 		addLootOnTheMap();
 	}
 
-
+	//Check for colision
 	for (auto loot : lootList)
 	{
-
+		// HIT TEST WITH A MAP IN CASE IF MAP IS DESTROYED
 		for (auto brig : mapList)
 		{
 			if (loot->HitTest(brig, 16)) {
@@ -197,14 +160,17 @@ void MapGen::LootUpdate()
 		loot->Update(localTime);
 	}
 
+	//Delete If Deleted
 	lootList.delete_if(deleted);
 }
 
+
+//*** WEATHER UPDATE
 void MapGen::WeatherUpdate()
 {
 	for (auto particle : weatherParticleList)
 	{
-		//X velocity depending on wind
+		//X velocity dependes on the wind strenght
 		particle->SetXVelocity(localWindStrength * 50);
 		particle->SetRotation(particle->GetDirection());
 		if (particle->GetY() < 300 || particle->GetX() < 0 || particle->GetX() > localScreenWidth)
@@ -212,17 +178,17 @@ void MapGen::WeatherUpdate()
 			particle->SetX(rand() % 2000);
 			particle->SetY(1050);
 		}
-
 		particle->Update(localTime);
 	}
 }
 
+
+//*** GRAVES UPDATE
 void MapGen::GravesUpadte()
 {
-
 	for (auto grave : graveList)
 	{
-		for (auto brig : mapList)
+		for (auto brig : mapList) // HIT TEST WITH A MAP IN CASE IF MAP IS DESTROYED
 		{
 			if (grave->HitTest(brig, 12))
 			{
@@ -230,10 +196,45 @@ void MapGen::GravesUpadte()
 				break;
 			}
 			else grave->SetYVelocity(-150);
-
 		}
 
 		if (grave->GetY() < 0) grave->Delete();
 		grave->Update(localTime);
 	}
+}
+
+
+//*** ADD GRAVE & Explosion When Enemy Dies
+void MapGen::addGrave(float xGravePos, float yGravePos)
+{
+	//Explosion - probably more logical is to put it into player entity, but I delete obj before explodition , and its easier this way :)
+	CSprite* newExplodition = new CSprite();
+	newExplodition = deathExplosionSprite->Clone();
+	newExplodition->ResetTime(localTime);
+	newExplodition->SetPosition(xGravePos, yGravePos);
+	newExplodition->Die(1000);
+	deathexplosionAnimationList.push_back(newExplodition);
+
+	//Grave
+	CSprite* newGrave = new CSprite();
+	newGrave = gravePrefab->Clone();
+	newGrave->ResetTime(localTime);
+	newGrave->SetPosition(xGravePos, yGravePos);
+	graveList.push_back(newGrave);
+}
+
+
+//*** ADD LOOT
+void MapGen::addLootOnTheMap()
+{
+	if (lootList.size() > 3) return;
+	CSprite* AddHealthBox = new CSprite();
+	AddHealthBox = healthBoxPreFab->Clone();
+	AddHealthBox->ResetTime(localTime);
+	AddHealthBox->SetPosition(rand() % 1800, 1000);
+	AddHealthBox->SetYVelocity(-350);
+	lootList.push_back(AddHealthBox);
+
+	dropSound.Play("dropSound.wav");
+	dropSound.Volume(0.35);
 }

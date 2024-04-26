@@ -4,24 +4,26 @@
  
 PlayerEntity::PlayerEntity()
 {
-	enemySprite = new CSprite();
+	entitySprite = new CSprite();
+	initAnimations(); // INIT Animations And Images
 }
 
 PlayerEntity::~PlayerEntity()
 {
-	delete enemySprite;
+	delete entitySprite;
+	delete enemyHpBarRect;
 	delete enemyHpBarRect2;
-	//delete deathExplosionSprite;
 }
 
+//*** INIT (is called on PlayerEntity Creation)
 void PlayerEntity::init(int xPos, int yPos, int typeofPlayer)
 {
-	Inventory::init();
-	//Enemy Sprite
-	enemySprite = new CSprite();
+	onTheGround = false;
+	//init Resets
 	isPlayerTurn = false;
 	isInventoryOpen = false;
 	weaponSelected = false;
+	isDead = false;
 	isOnStartOfTheTurn = true;
 	turnStartTimer = 0;
 	DeathTimer = 0;
@@ -30,171 +32,93 @@ void PlayerEntity::init(int xPos, int yPos, int typeofPlayer)
 	inDamageTimer = 0;
 	showTurnArrowTimer = 0;
 	infoMsgTimer = 0;
- 
-
-	if (typeofPlayer == 0) isFriend = false;
-	if (typeofPlayer == 1) isFriend = true;
-	initEnemyPos = { float(xPos), float(yPos) };
-
- 
-
-	//reset Basic
-	isDead = false;
-	
-	//Enemy Stats
- 
-	CurrentEnemyHealth = maxEnemyHealth = 100 ;
- 
-	//Animations and images
-	initAnimations();
-
-	//default Statuses
-	enemySprite->SetStatus(STANDRIGHT);
-	enemySprite->SetPosition(initEnemyPos);
-	enemySprite->SetAnimation("idleRight", 1);
-	enemySprite->SetSpeed(0);
 	EnemyDirection = 90;
 	TurnTransitStatusTimer = 0;
+
+	//Enemy Stats
+	CurrentEnemyHealth = maxEnemyHealth = 100;
+
+	//Team Assignment
+	if (typeofPlayer == 0) teamMemberNumber = false;
+	if (typeofPlayer == 1) teamMemberNumber = true;
+ 
+	//Sprite Defaul Inits
+	entitySprite->SetStatus(STANDRIGHT);
+	entitySprite->SetPosition(float(xPos), float(yPos));
+	entitySprite->SetAnimation("idleRight", 1);
+	entitySprite->SetSpeed(0);
+
+	//Weapon Init
 	EntityWeapon::init();
-
-
-
-
-
-
-
 }
 
 //**************************** UPDATE ****************************
-void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool Dkey, bool Akey, bool Wkey, bool Skey, bool Fkey, bool& isTurnFinished, std::vector<PlayerEntity*> PlayerEntitys)
+void PlayerEntity::OnUpdate(Uint32 t, MapGen& mapGen, bool movement[], bool& isTurnFinished, std::vector<PlayerEntity*> PlayerEntitys)
 {
-	CurrentTime = t;
+	//localVar just miroring to be able use in whole class
+	localTime = t;
 	localMapVar = &mapGen;
 	localAllPlayersEntitys = PlayerEntitys;
 	localIsTurnFinished = &isTurnFinished;
 
-	if (enemySprite->GetY() < 0)
-	{
-		if (isPlayerTurn)isTurnFinished = true;
-		isDead = true;
-		deadSound.Play("UnderWaterDeath.wav");
-		deadSound.Volume(0.15);
-		return;
 
-	}
+	underWaterDeath(); // if Y < 0
+	EndOfTurn();	//ON Turn Finished
+	StartOfTurn(); // On Start Of The Turn
+	OnHitStatusReset(); // OH hit RESET
 
-	if (((TurnTransitStatusTimer != 0 && TurnTransitStatusTimer < t) || turnEndTimer  <= 0) && turnStartTimer != 0 && isPlayerTurn && DeathTimer == 0)
-	{
-		if(IsInAttackChargeMode) EntityWeapon::OnKeyUp(SDLK_SPACE);
-		IsInAttackChargeMode = false;
-		enemySprite->SetSpeed(0);
-		footsteps.Stop();
-		isTurnFinished = true;
-		TurnTransitStatusTimer = 0;
-		turnStartTimer = 0;
-		isInTurnTransitStatus = false;
-		isPlayerTurn = false;
-		weaponSelected = false;
-		weaponType = -1;
-		isOnStartOfTheTurn = true;
-		showTurnArrowTimer = 0;
-		cout << "TURN DONE";
-		enemySprite->SetStatus(NONE); // save animation if on hit
-	}
-
-	// isOnStartOfTheTurn
-
-	if (isOnStartOfTheTurn && isPlayerTurn)
-	{
-		isOnStartOfTheTurn = false;
-		showTurnArrowTimer = CurrentTime + 4000;
-		StartRoundSound.Play("StartRound.wav");
-		//reset Turn Timer
-		turnStartTimer = 20000 + t;
-	}
 	if (isPlayerTurn) turnEndTimer = (int)(turnStartTimer - t) / 1000;
 
-
-
-	if (enemySprite->GetStatus() == ONHIT && inDamageTimer < t)
-	{
-		cout << "ONHIT DONE";
-		enemySprite->SetStatus(ONHIT); //dosen't change animation ............. why for curent Turn player?
-		if (EnemyDirection == 90) enemySprite->SetStatus(STANDRIGHT);
-		else enemySprite->SetStatus(STANDLEFT);
-		inDamageTimer = 0;
-	}
-
-
-
-
-
-
-
-
-
-
-	EntityWeapon::OnUpdate(CurrentTime, localAllPlayersEntitys, *enemySprite, weaponType, mapGen, EnemyDirection, aimAngle);
-	EntityAnimation::EnemyAnimation(old_animation_status, enemySprite, weaponSelected, weaponType, EnemyDirection, aimAngle);
-	old_animation_status = enemySprite->GetStatus();
-
-
+	// ** Weapon AND ANIMTAION UPDATE
+	EntityWeapon::OnUpdate(localTime, localAllPlayersEntitys, *entitySprite, weaponType, mapGen, EnemyDirection, aimAngle);
+	EntityAnimation::EntityAnimationUpdate(old_animation_status, entitySprite, weaponSelected, weaponType, EnemyDirection, aimAngle);
+	old_animation_status = entitySprite->GetStatus();
 
 	// ** COllisions
-	EntityPhysic::playerCollision(CurrentTime, playerState, enemySprite,pos, &mapGen);
+	EntityController::playerCollision(localTime, playerState, entitySprite,pos, &mapGen);
 
 	// ** Enemy Controller
- 
-	EntityPhysic::playerControler(EntityWeapon::IsInAttackChargeMode, playerState, enemySprite, isPlayerTurn, isInTurnTransitStatus, isInventoryOpen, Dkey, Akey, Wkey, Skey, Fkey, EnemyDirection, aimAngle);
+	EntityController::playerControler(EntityWeapon::IsInAttackChargeMode, playerState, entitySprite, isPlayerTurn, isInTurnTransitStatus, isInventoryOpen, EnemyDirection, aimAngle, movement);
 
+	//Enemy position save
+	pos = entitySprite->GetPos();
 
+	//Sprite Update
+	entitySprite->Update(localTime);
 
-	//Enemy position
-	pos = enemySprite->GetPos();
-	enemySprite->Update(CurrentTime);
-
-	if (weaponSelected && !isInventoryOpen && weaponType != AXE && weaponType != MAIL )
-	{
-		CVector side;
-		if (EnemyDirection == 90)	side = { 60, aimAngle };
-		else  side = { -60, aimAngle };
-		aimPointer.SetPos(enemySprite->GetPos() + side);
-	}
-
-
+	//AIMING
+	Aiming();
+	
+	// ** PICK UP HEALTH BOXES
 	playerPickUpItem();
 
-
-	
+	// ** Death Handler
 	deathHandler();
  
-	// ** Interface
+	// ** Interface (HP BAR)
 	EnemyInterface();
-
 }
 
 
 //**************************** DRAW ****************************
 void PlayerEntity::OnDraw(CGraphics* g)
 {
-
 	showInfoMsg(g);
 
- 
-
 	//HealthBar
-	if(CurrentEnemyHealth > 0 && isFriend) enemyHpBarRect->Draw(g);
-	else if (CurrentEnemyHealth > 0 && !isFriend)  enemyHpBarRect2->Draw(g);
+	if(CurrentEnemyHealth > 0 && teamMemberNumber) enemyHpBarRect->Draw(g);
+	else if (CurrentEnemyHealth > 0 && !teamMemberNumber)  enemyHpBarRect2->Draw(g);
 	
-
+	//Weapon Draw function
 	EntityWeapon::OnDraw(g);
 
-	if(!isDead) enemySprite->Draw(g);
+	//Draw Player Sprite If not dead
+	if(!isDead) entitySprite->Draw(g);
 
-	//curent turn Arrow
-	if (showTurnArrowTimer > CurrentTime)
+	//Draw Curent turn Arrow and Animate
+	if (showTurnArrowTimer > localTime)
 	{
-		showTurnArrow.SetPosition(enemySprite->GetX(), enemySprite->GetTop() + 35 + rand() % 10);
+		showTurnArrow.SetPosition(entitySprite->GetX(), entitySprite->GetTop() + 35 + rand() % 10);
 		showTurnArrow.Draw(g);
 	}
 
@@ -205,55 +129,239 @@ void PlayerEntity::OnDraw(CGraphics* g)
 		*g << font(52) << color(turnEndTimer < 6 ? CColor::Red() :CColor::White()) << xy(0, 985) << center <<  turnEndTimer ;
 	}
 
+	//DRAW MOUSE POINTER IF NEEDED!! :))
 	if (!isDead && isPlayerTurn && (weaponSelected || isInventoryOpen) && (weaponType != MAIL || isInventoryOpen)  && !isInTurnTransitStatus) aimPointer.Draw(g);
-
- 
-	
-
-
 }
  
-//***** Health Bar
+
+//***** Health Bar UPDATE
 void PlayerEntity::EnemyInterface()
 {
 	float baseHpBarWidth = 50;
-
-
 
 	float hpBarSize = baseHpBarWidth * (CurrentEnemyHealth / maxEnemyHealth);
 	if (hpBarSize < 0) hpBarSize = 0;
 
 	enemyHpBarRect2->SetSize(hpBarSize, 15);
-	enemyHpBarRect2->Update(CurrentTime);
+	enemyHpBarRect2->Update(localTime);
 
 	enemyHpBarRect->SetSize(hpBarSize, 15);
-	enemyHpBarRect->Update(CurrentTime);
+	enemyHpBarRect->Update(localTime);
 
-	enemyHpBarRect2->SetPosition(enemySprite->GetX(), enemySprite->GetTop() + 20);
-	enemyHpBarRect->SetPosition(enemySprite->GetX(), enemySprite->GetTop() + 20);
+	enemyHpBarRect2->SetPosition(entitySprite->GetX(), entitySprite->GetTop() + 20);
+	enemyHpBarRect->SetPosition(entitySprite->GetX(), entitySprite->GetTop() + 20);
+}
+
+//Is the A ground under player on start of the game as map is randomly generated!!
+bool PlayerEntity::FindGroundForAllPlayersOnStart(float t, MapGen& mapGen)
+{
+	//It is Disabled by default in MyGame.cpp, as I haven't check it properly, but I it works fine
+	if (onTheGround) return true; // if allready on the ground return true at once
+	entitySprite->SetYVelocity(-5000);
+ 
+	//if under screen move left X axis , and reset Y axis
+	//TO DO - reset x position if player reaches end of the screen
+	if (entitySprite->GetY() < 0)
+	{
+		entitySprite->SetY(1000);
+		entitySprite->SetX(entitySprite->GetX() + 32);
+	}
+
+	//hit test with a map
+	for (auto mapPart : mapGen.mapList)
+	{
+		if (entitySprite->HitTest(mapPart))
+		{
+			onTheGround = true;
+			entitySprite->SetSpeed(0);
+			return true;
+		}
+	}
+
+	entitySprite->Update(t);
+	return false;
 }
 
 
+//***** Health Box Pick UP Logic
 void PlayerEntity::playerPickUpItem()
 {
 	for (auto loot : localMapVar->lootList)
 	{
-		if (enemySprite->HitTest(loot))
+		if (entitySprite->HitTest(loot))
 		{
 			pickUp.Play("pickUp.wav");
 			CurrentEnemyHealth += 50;
 			infoMsg = 50;
-			infoMsgTimer = CurrentTime + 2000;
+			infoMsgTimer = localTime + 2000;
 			if (CurrentEnemyHealth > maxEnemyHealth) CurrentEnemyHealth = maxEnemyHealth;
 			loot->Delete();
 		}
 	}
 }
 
+
+//***** Death Handler
+void PlayerEntity::deathHandler()
+{
+	if (entitySprite->GetStatus() == DEAD && DeathTimer < localTime && DeathTimer != 0)
+	{
+		DeathTimer = 0;
+		deadSound.Play("Explosion.wav");
+		deadSound.Volume(0.3);
+		localMapVar->addGrave(entitySprite->GetX(), entitySprite->GetY());
+		isDead = true;
+		if (isPlayerTurn) *localIsTurnFinished = true;
+	}
+}
+
+//***** END OF TURN LOGIC
+void PlayerEntity::EndOfTurn()
+{
+	//return if not all animations been played and if there is some shots left
+	if (DeathTimer > 0 || EnemyShotList.size() > 0)
+	{
+		turnEndTimer = 0;
+		return;
+	}
+
+	if (((TurnTransitStatusTimer != 0 && TurnTransitStatusTimer < localTime) || turnEndTimer <= 0) && turnStartTimer != 0 && isPlayerTurn)
+	{
+		//Release Weapon If time is over && player still charging
+		if (IsInAttackChargeMode) EntityWeapon::OnKeyUp(SDLK_SPACE);
+		//Base Resets
+		IsInAttackChargeMode = false;
+		entitySprite->SetSpeed(0);
+		footsteps.Stop();
+		*localIsTurnFinished = true;
+		TurnTransitStatusTimer = 0;
+		turnStartTimer = 0;
+		isInTurnTransitStatus = false;
+		isPlayerTurn = false;
+		weaponSelected = false;
+		weaponType = -1;
+		isOnStartOfTheTurn = true;
+		showTurnArrowTimer = 0;
+		entitySprite->SetStatus(NONE);
+	}
+}
+
+//***** START OF TURN
+void PlayerEntity::StartOfTurn()
+{
+	//SETS TIMER AND ARROW (to show current player turn)
+	if (isOnStartOfTheTurn && isPlayerTurn)
+	{
+		isOnStartOfTheTurn = false;
+		showTurnArrowTimer = localTime + 4000;
+		StartRoundSound.Play("StartRound.wav");
+		//reset Turn Timer
+		turnStartTimer = 20000 + localTime;
+	}
+}
+
+//***** RESETS ANIMATION AFTER HIT EFFECT
+void PlayerEntity::OnHitStatusReset()
+{
+	if (entitySprite->GetStatus() == ONHIT && inDamageTimer < localTime)
+	{
+		entitySprite->SetStatus(ONHIT);
+		if (EnemyDirection == 90) entitySprite->SetStatus(STANDRIGHT);
+		else entitySprite->SetStatus(STANDLEFT);
+		inDamageTimer = 0;
+	}
+}
+
+//***** AIMING
+void PlayerEntity::Aiming()
+{
+	//MOVES CURSORS AND SAVES ANGLE...
+	if (weaponSelected && !isInventoryOpen && weaponType != AXE && weaponType != MAIL)
+	{
+		CVector side;
+		if (EnemyDirection == 90)	side = { 60, aimAngle };
+		else  side = { -60, aimAngle };
+		aimPointer.SetPos(entitySprite->GetPos() + side);
+	}
+}
+
+//***** IF Dead under Water y < 0
+void PlayerEntity::underWaterDeath()
+{
+	//IF Player GetY < 0 => delete and play UnderWaterDeath sound
+	if (entitySprite->GetY() < 0)
+	{
+		if (isPlayerTurn) *localIsTurnFinished = true;
+		isDead = true;
+		deadSound.Play("UnderWaterDeath.wav");
+		deadSound.Volume(0.15);
+		return;
+	}
+}
+
+//**FINAL WHEN GAME WON SPRITES UPDATE
+void PlayerEntity::GameWonPlayerUpdate(float t)
+{
+	hideTimer = true;
+	entitySprite->SetStatus(WINERTEAM);
+	EntityAnimation::EntityAnimationUpdate(old_animation_status, entitySprite, weaponSelected, weaponType, EnemyDirection, aimAngle);
+	old_animation_status = entitySprite->GetStatus();
+	entitySprite->Update(t);
+}
+
+//***** INFO MSG WHEN PLAYER GETS DAMAGE OR PICK UPS HEALTH BOX
+void PlayerEntity::showInfoMsg(CGraphics* g)
+{
+	if (infoMsgTimer > localTime)
+	{
+		float floatingEffect = (infoMsgTimer - localTime) / 50;
+
+		infoMsgBg.SetPosition(entitySprite->GetCenter().GetX(), entitySprite->GetTop() + 65 - floatingEffect);
+		infoMsgBg.SetX(entitySprite->GetCenter().GetX());
+		infoMsgBg.Draw(g);
+
+		*g << font("AFontPTSerif.ttf") << font(24) << color(infoMsg > 0 ? CColor::Green() : CColor::Red()) << xy(entitySprite->GetCenter().GetX() - 18, entitySprite->GetTop() + 55 - floatingEffect) << infoMsg;
+		*g << font("ARIAL.ttf");
+	}
+}
+
+
+//ENEMY RECEIVING DAMAGE
+void PlayerEntity::EtityGettingDamage(float damageAmount)
+{
+	if (entitySprite->GetStatus() == DEAD || CurrentEnemyHealth <= 0) return;
+
+	//INFO MSG
+	infoMsg = -damageAmount;
+	infoMsgTimer = localTime + 2000;
+
+	//DAMAGE APPLY
+	CurrentEnemyHealth -= damageAmount;
+
+	// IF Entity DIES 
+	if (CurrentEnemyHealth <= 0)
+	{
+		preDeath.Play("preDeath.wav");
+		CurrentEnemyHealth = 0;
+		entitySprite->SetStatus(DEAD);
+		DeathTimer = localTime + 2000;
+		inDamageTimer = 0;
+	}
+	// OTHERWISE SET ONHIT EFFECT
+	else
+	{  
+		hitSound.Play("hitSound.wav");
+		inDamageTimer = 2000 + localTime;
+		entitySprite->SetStatus(ONHIT);
+		entitySprite->SetVelocity(0, 0);
+	}
+}
+
+
 //**** INITIAL SPRITES DEPENDING ON TYPE OF ENEMY
 void PlayerEntity::initAnimations()
 {
-	EntityAnimation::initAnimations(enemySprite);
+	EntityAnimation::initAnimations(entitySprite);
 	//aim
 	aimPointer.LoadImage("mousePointer.png");
 	aimPointer.SetImage("mousePointer.png");
@@ -268,92 +376,12 @@ void PlayerEntity::initAnimations()
 	infoMsgBg.LoadImage("infoMsgBg.png");
 	infoMsgBg.SetImage("infoMsgBg.png");
 	infoMsgBg.SetSize(60, 40);
-
-
-
-}
-
-void PlayerEntity::deathHandler()
-{
-	if (enemySprite->GetStatus() == DEAD && DeathTimer < CurrentTime && DeathTimer != 0)
-	{
-		DeathTimer = 0;
-		deadSound.Play("Explosion.wav");
-		deadSound.Volume(0.3);
-		localMapVar->addGrave(enemySprite->GetX(), enemySprite->GetY());
-		isDead = true;
-		if (isPlayerTurn) *localIsTurnFinished = true;
-	}
-
-
-}
-
-void PlayerEntity::EndOfTurn()
-{
-
 }
 
 
-//**FINAL WHRN GAME WON SPRITES UPDATE
-void PlayerEntity::GameWonPlayerUpdate(float t)
-{
-	hideTimer = true;
-	enemySprite->SetStatus(WINERTEAM);
-	EntityAnimation::EnemyAnimation(old_animation_status, enemySprite, weaponSelected, weaponType, EnemyDirection, aimAngle);
-	old_animation_status = enemySprite->GetStatus();
-	enemySprite->Update(t);
-}
+//********** MOUSE & KEYBOARD HANDLER
 
-
-void PlayerEntity::showInfoMsg(CGraphics* g)
-{
-	if (infoMsgTimer > CurrentTime)
-	{
-		float floatingEffect = (infoMsgTimer - CurrentTime) / 50;
-
-
-		infoMsgBg.SetPosition(enemySprite->GetCenter().GetX(), enemySprite->GetTop() + 65 - floatingEffect);
-		infoMsgBg.SetX(enemySprite->GetCenter().GetX());
-		infoMsgBg.Draw(g);
-
- 
-		*g << font("AFontPTSerif.ttf") << font(24) << color(infoMsg > 0 ? CColor::Green() : CColor::Red()) << xy(enemySprite->GetCenter().GetX() - 18, enemySprite->GetTop() + 55 - floatingEffect) << infoMsg;
-		*g << font("ARIAL.ttf");
-	}
-}
-
-
-//ENEMY RECEIVING DAMAGE
-void PlayerEntity::EnemyGettingDamage(float damageAmount)
-{
-	if (enemySprite->GetStatus() == DEAD || CurrentEnemyHealth <= 0) return;
-	CurrentEnemyHealth -= damageAmount;
- 
-	
-	infoMsg = -damageAmount;
-	infoMsgTimer = CurrentTime + 2000;
-
-	// IF ENEMY DIES , Sets proper Loot and Animations
-	if (CurrentEnemyHealth <= 0)
-	{
-		preDeath.Play("preDeath.wav");
-		CurrentEnemyHealth = 0;
-		enemySprite->SetStatus(DEAD);
-		DeathTimer = CurrentTime + 2000;
-		//turnStartTimer += 3000;
-		inDamageTimer = 0;
-
-	}
-	else
-	{  
-		hitSound.Play("hitSound.wav");
-		inDamageTimer = 2000 + CurrentTime;
-		enemySprite->SetStatus(ONHIT);
-		enemySprite->SetVelocity(0, 0);
-		
-	}
-}
-
+//SELECT WEAPON WHEN INVENTORY IS OPEN
 void PlayerEntity::OnLButtonDown(Uint16 x, Uint16 y)
 {
 	//Weapon Selection
@@ -363,7 +391,7 @@ void PlayerEntity::OnLButtonDown(Uint16 x, Uint16 y)
 		if (weaponType != -1)
 		{
 			isInventoryOpen = false;
-			enemySprite->SetStatus(NONE); // animation reset
+			entitySprite->SetStatus(NONE); // animation reset
 			weaponSelected = true;
 			weaponSelectedSound.Play("weaponSelected.wav");
 			weaponSelectedSound.Volume(75);
@@ -371,11 +399,12 @@ void PlayerEntity::OnLButtonDown(Uint16 x, Uint16 y)
 	}
 }
 
+
 void PlayerEntity::OnKeyDown(SDLKey sym)
 {
-	if (!EntityWeapon::IsInAttackChargeMode && enemySprite->GetStatus() != INATTACK && TurnTransitStatusTimer == 0)
+	if (!EntityWeapon::IsInAttackChargeMode && entitySprite->GetStatus() != INATTACK && TurnTransitStatusTimer == 0)
 	{
-		//SHOW HIDE INVENTORY
+		//### OPEN || HIDE INVENTORY
 		if (sym == SDLK_TAB && isInventoryOpen)
 		{
 			isInventoryOpen = false;
@@ -385,56 +414,60 @@ void PlayerEntity::OnKeyDown(SDLKey sym)
 		{
 			//stop footsteps and reset animtaion
 			footsteps.Stop();
-			if (EnemyDirection == 90) enemySprite->SetStatus(STANDRIGHT);
-			else enemySprite->SetStatus(STANDLEFT);
-			enemySprite->SetSpeed(0);
+			if (EnemyDirection == 90) entitySprite->SetStatus(STANDRIGHT);
+			else entitySprite->SetStatus(STANDLEFT);
+			entitySprite->SetSpeed(0);
 
 			//open inventory
 			isInventoryOpen = true;
-			Inventory::OpenShop();
+			Inventory::OpenInventory();
 			openInventorySound.Play("openInventory.wav");
 			openInventorySound.Volume(200);
-
 		}
 
-		//ON SPACE BAR PRESSED
-		if (weaponSelected)
+		//### ATTACK
+		if (weaponSelected && sym == SDLK_SPACE)
 		{
 			//stop footsteps and reset animtaion
 			footsteps.Stop();
-			enemySprite->SetSpeed(0);
+			entitySprite->SetSpeed(0);
 
 			EntityWeapon::OnKeyDown(sym);
 			if (weaponType != AXE)
 			{
-				if (EnemyDirection == 90) enemySprite->SetStatus(STANDRIGHT);
-				else enemySprite->SetStatus(STANDLEFT);
+				if (EnemyDirection == 90) entitySprite->SetStatus(STANDRIGHT);
+				else entitySprite->SetStatus(STANDLEFT);
 			}
 		}
 
-
-
-		if (sym == SDLK_f && playerState != INAIR)
+		//### JUMP
+		if (sym == SDLK_f && jumpTimer < localTime) // playerState != INAIR)
 		{
-			enemySprite->SetPosition(enemySprite->GetPosition() + CVector(0, 100)); // use set Y Velocity bettter???
-			enemySprite->SetStatus(JUMP);
+			jumpTimer = 750 + localTime;
+			//Y POS
+			entitySprite->SetPosition(entitySprite->GetPosition() + CVector(0, 100)); // use set Y Velocity bettter???
+
+			//X VELOCITY
+			//could be better , but there is a bug with constantly changing INAIR STATE
+			if (EnemyDirection == 90) entitySprite->SetXVelocity(150);
+			else entitySprite->SetXVelocity(-150);
+
+
+			entitySprite->SetStatus(JUMP);
 			jumpSound.Play("jump.wav");
 			jumpSound.Volume(0.5);
 		}
 	}
-
-	
 }
 
+//RELEASE PROJECTILE
 void PlayerEntity::OnKeyUp(SDLKey sym)
 {
-
 	if (weaponSelected && sym == SDLK_SPACE && TurnTransitStatusTimer == 0)
 	{
-			
 			EntityWeapon::OnKeyUp(sym);
-			TurnTransitStatusTimer = CurrentTime + 2500;
-			turnStartTimer = CurrentTime + 2500;
+			TurnTransitStatusTimer = localTime + 4500;
+			turnStartTimer = localTime + 4500;
 			isInTurnTransitStatus = true;
 
 			//RESET AMMO IN HAND -> becouse it was thrown
@@ -442,13 +475,13 @@ void PlayerEntity::OnKeyUp(SDLKey sym)
 			{
 				weaponSelected = false;
 				weaponType != -1;
-				enemySprite->SetStatus(NONE);
+				entitySprite->SetStatus(NONE);
 			}
-		
 	}
 }
 
 
+//SELECT X POSITION FOR MAIL ATTACK
 void PlayerEntity::OnMouseMove(Uint16 x, Uint16 y)
 {
 	if(isInventoryOpen) aimPointer.SetPosition(x, y);
