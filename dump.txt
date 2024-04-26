@@ -1,0 +1,2130 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 0A65-7D50
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+27.03.2024  21:01                 9 .gitignore
+26.04.2024  20:43                 0 dump.txt
+26.04.2024  20:42    <DIR>          game
+05.04.2024  16:05             1ÿ679 game.sln
+05.04.2024  16:05             1ÿ424 _clean.bat
+05.04.2024  16:05             5ÿ409 _pack.bat
+               5 File(s)          8ÿ521 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git
+
+26.04.2024  20:43                17 COMMIT_EDITMSG
+05.04.2024  16:05               329 config
+05.04.2024  16:05                73 description
+05.04.2024  16:05                23 HEAD
+05.04.2024  16:05    <DIR>          hooks
+26.04.2024  20:43            25ÿ205 index
+05.04.2024  16:05    <DIR>          info
+05.04.2024  16:05    <DIR>          logs
+26.04.2024  20:43    <DIR>          objects
+05.04.2024  16:05               114 packed-refs
+05.04.2024  16:05    <DIR>          refs
+               6 File(s)         25ÿ761 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\hooks
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05               478 applypatch-msg.sample
+05.04.2024  16:05               896 commit-msg.sample
+05.04.2024  16:05             4ÿ726 fsmonitor-watchman.sample
+05.04.2024  16:05               189 post-update.sample
+05.04.2024  16:05               424 pre-applypatch.sample
+05.04.2024  16:05             1ÿ643 pre-commit.sample
+05.04.2024  16:05               416 pre-merge-commit.sample
+05.04.2024  16:05             1ÿ374 pre-push.sample
+05.04.2024  16:05             4ÿ898 pre-rebase.sample
+05.04.2024  16:05               544 pre-receive.sample
+05.04.2024  16:05             1ÿ492 prepare-commit-msg.sample
+05.04.2024  16:05             2ÿ783 push-to-checkout.sample
+05.04.2024  16:05             2ÿ308 sendemail-validate.sample
+05.04.2024  16:05             3ÿ650 update.sample
+              14 File(s)         25ÿ821 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\info
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05               240 exclude
+               1 File(s)            240 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\logs
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+26.04.2024  20:43             1ÿ368 HEAD
+05.04.2024  16:05    <DIR>          refs
+               1 File(s)          1ÿ368 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\logs\refs
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05    <DIR>          heads
+05.04.2024  16:05    <DIR>          remotes
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\logs\refs\heads
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+26.04.2024  20:43             1ÿ368 master
+               1 File(s)          1ÿ368 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\logs\refs\remotes
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05    <DIR>          origin
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\logs\refs\remotes\origin
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05               179 HEAD
+               1 File(s)            179 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+23.04.2024  21:44    <DIR>          00
+25.04.2024  17:26    <DIR>          01
+25.04.2024  17:26    <DIR>          04
+26.04.2024  20:43    <DIR>          05
+23.04.2024  21:44    <DIR>          06
+18.04.2024  03:45    <DIR>          08
+23.04.2024  21:44    <DIR>          09
+23.04.2024  21:44    <DIR>          0b
+23.04.2024  21:44    <DIR>          0c
+26.04.2024  20:43    <DIR>          0d
+18.04.2024  03:45    <DIR>          0e
+14.04.2024  18:26    <DIR>          0f
+25.04.2024  17:26    <DIR>          10
+25.04.2024  17:26    <DIR>          12
+25.04.2024  17:26    <DIR>          14
+18.04.2024  03:45    <DIR>          18
+26.04.2024  20:43    <DIR>          19
+14.04.2024  18:26    <DIR>          1a
+11.04.2024  14:23    <DIR>          1c
+25.04.2024  17:26    <DIR>          1d
+18.04.2024  03:45    <DIR>          1f
+26.04.2024  20:43    <DIR>          21
+26.04.2024  20:43    <DIR>          22
+23.04.2024  21:44    <DIR>          23
+26.04.2024  20:43    <DIR>          24
+14.04.2024  18:26    <DIR>          25
+25.04.2024  17:26    <DIR>          27
+23.04.2024  21:44    <DIR>          28
+18.04.2024  03:45    <DIR>          29
+26.04.2024  20:43    <DIR>          2a
+14.04.2024  18:26    <DIR>          2c
+25.04.2024  17:26    <DIR>          2e
+25.04.2024  17:26    <DIR>          2f
+25.04.2024  17:26    <DIR>          30
+26.04.2024  20:43    <DIR>          32
+23.04.2024  21:44    <DIR>          34
+14.04.2024  18:26    <DIR>          35
+25.04.2024  18:52    <DIR>          36
+26.04.2024  20:43    <DIR>          37
+23.04.2024  21:44    <DIR>          38
+18.04.2024  03:45    <DIR>          39
+25.04.2024  17:26    <DIR>          3a
+25.04.2024  17:26    <DIR>          3c
+25.04.2024  17:26    <DIR>          3d
+25.04.2024  17:26    <DIR>          40
+18.04.2024  03:45    <DIR>          44
+18.04.2024  03:45    <DIR>          45
+23.04.2024  21:44    <DIR>          46
+25.04.2024  17:26    <DIR>          48
+25.04.2024  18:52    <DIR>          49
+18.04.2024  03:45    <DIR>          4b
+23.04.2024  21:44    <DIR>          4c
+18.04.2024  03:45    <DIR>          4f
+18.04.2024  03:45    <DIR>          50
+25.04.2024  17:26    <DIR>          51
+26.04.2024  20:43    <DIR>          57
+14.04.2024  18:26    <DIR>          58
+23.04.2024  21:44    <DIR>          59
+26.04.2024  20:43    <DIR>          5a
+25.04.2024  17:26    <DIR>          5b
+14.04.2024  18:26    <DIR>          5d
+26.04.2024  20:43    <DIR>          5e
+18.04.2024  03:45    <DIR>          61
+11.04.2024  14:23    <DIR>          62
+07.04.2024  16:06    <DIR>          63
+18.04.2024  03:45    <DIR>          64
+07.04.2024  16:06    <DIR>          65
+11.04.2024  14:23    <DIR>          66
+18.04.2024  03:45    <DIR>          67
+14.04.2024  18:26    <DIR>          68
+26.04.2024  20:43    <DIR>          6b
+26.04.2024  20:43    <DIR>          6c
+23.04.2024  21:44    <DIR>          6d
+18.04.2024  03:45    <DIR>          6e
+25.04.2024  17:26    <DIR>          70
+26.04.2024  20:43    <DIR>          71
+18.04.2024  03:45    <DIR>          72
+18.04.2024  03:45    <DIR>          73
+18.04.2024  03:45    <DIR>          74
+26.04.2024  20:43    <DIR>          75
+11.04.2024  14:23    <DIR>          77
+11.04.2024  14:23    <DIR>          78
+18.04.2024  03:45    <DIR>          79
+23.04.2024  21:44    <DIR>          7c
+18.04.2024  03:45    <DIR>          7d
+18.04.2024  03:45    <DIR>          7e
+25.04.2024  18:52    <DIR>          7f
+11.04.2024  14:23    <DIR>          80
+18.04.2024  03:45    <DIR>          81
+18.04.2024  03:45    <DIR>          82
+25.04.2024  18:52    <DIR>          86
+23.04.2024  21:44    <DIR>          89
+18.04.2024  03:45    <DIR>          8a
+25.04.2024  17:26    <DIR>          8b
+23.04.2024  21:44    <DIR>          8c
+23.04.2024  21:44    <DIR>          8d
+23.04.2024  21:44    <DIR>          8e
+25.04.2024  17:26    <DIR>          8f
+23.04.2024  21:44    <DIR>          95
+23.04.2024  21:44    <DIR>          97
+18.04.2024  03:45    <DIR>          98
+18.04.2024  03:45    <DIR>          9a
+18.04.2024  03:45    <DIR>          9b
+25.04.2024  17:26    <DIR>          9c
+23.04.2024  21:44    <DIR>          9d
+23.04.2024  21:44    <DIR>          9e
+18.04.2024  03:45    <DIR>          a0
+26.04.2024  20:43    <DIR>          a1
+23.04.2024  21:44    <DIR>          a2
+23.04.2024  21:44    <DIR>          a3
+23.04.2024  21:44    <DIR>          a4
+07.04.2024  16:06    <DIR>          a6
+23.04.2024  21:44    <DIR>          a7
+07.04.2024  16:06    <DIR>          a9
+23.04.2024  21:44    <DIR>          aa
+07.04.2024  16:06    <DIR>          ab
+26.04.2024  20:43    <DIR>          ae
+18.04.2024  03:45    <DIR>          af
+25.04.2024  18:52    <DIR>          b0
+18.04.2024  03:45    <DIR>          b1
+25.04.2024  18:52    <DIR>          b3
+25.04.2024  18:52    <DIR>          b5
+18.04.2024  03:45    <DIR>          b6
+18.04.2024  03:45    <DIR>          b7
+23.04.2024  21:44    <DIR>          ba
+18.04.2024  03:45    <DIR>          bb
+25.04.2024  18:52    <DIR>          bc
+25.04.2024  17:26    <DIR>          bd
+23.04.2024  21:44    <DIR>          be
+23.04.2024  21:44    <DIR>          bf
+18.04.2024  03:45    <DIR>          c0
+25.04.2024  17:26    <DIR>          c1
+25.04.2024  18:52    <DIR>          c2
+26.04.2024  20:43    <DIR>          c4
+25.04.2024  17:26    <DIR>          c7
+23.04.2024  21:44    <DIR>          c8
+11.04.2024  14:23    <DIR>          c9
+26.04.2024  20:43    <DIR>          ca
+25.04.2024  18:52    <DIR>          cb
+25.04.2024  17:26    <DIR>          cd
+25.04.2024  18:52    <DIR>          ce
+18.04.2024  03:45    <DIR>          d0
+23.04.2024  21:44    <DIR>          d1
+25.04.2024  17:26    <DIR>          d2
+14.04.2024  18:26    <DIR>          d3
+23.04.2024  21:44    <DIR>          d4
+23.04.2024  21:44    <DIR>          d5
+26.04.2024  20:43    <DIR>          d7
+25.04.2024  17:26    <DIR>          d8
+14.04.2024  18:26    <DIR>          da
+23.04.2024  21:44    <DIR>          dc
+26.04.2024  20:43    <DIR>          de
+07.04.2024  16:06    <DIR>          df
+14.04.2024  18:26    <DIR>          e0
+23.04.2024  21:44    <DIR>          e1
+25.04.2024  17:26    <DIR>          e3
+18.04.2024  03:45    <DIR>          e6
+26.04.2024  20:43    <DIR>          e9
+26.04.2024  20:43    <DIR>          ea
+26.04.2024  20:43    <DIR>          eb
+18.04.2024  03:45    <DIR>          ec
+18.04.2024  03:45    <DIR>          ee
+25.04.2024  18:52    <DIR>          f0
+25.04.2024  18:52    <DIR>          f1
+23.04.2024  21:44    <DIR>          f4
+23.04.2024  21:44    <DIR>          f5
+18.04.2024  03:45    <DIR>          f6
+11.04.2024  14:23    <DIR>          f7
+23.04.2024  21:44    <DIR>          f8
+18.04.2024  03:45    <DIR>          fa
+26.04.2024  20:43    <DIR>          fb
+26.04.2024  20:43    <DIR>          fc
+11.04.2024  14:23    <DIR>          fe
+05.04.2024  16:05    <DIR>          info
+05.04.2024  16:05    <DIR>          pack
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\00
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               180 1b7cb5019926a8c9da2ad0f695bb8aa53ee5d7
+23.04.2024  21:44            27ÿ925 f52d50c5c20c8236505a7ea2ae92d852ceace4
+               2 File(s)         28ÿ105 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\01
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+11.04.2024  14:23             1ÿ828 2f4a8030982f7b787331b7ad10f3e6467f4154
+25.04.2024  17:26               180 f04982c58abbab5b09859216eb81c98dc86104
+11.04.2024  14:23             2ÿ974 fe0fa45df39ef39183ae944e5933e638e9f946
+               3 File(s)          4ÿ982 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\04
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26             1ÿ357 1bfef2c17c54be74b784be0baaf0c9b6e64bd0
+25.04.2024  17:26               986 c49110593f1ce06683801a00ec7f94ec5b3174
+               2 File(s)          2ÿ343 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\05
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+23.04.2024  21:44             7ÿ602 73d202fd4d63792db2b721ae161629a675caac
+26.04.2024  20:43             2ÿ271 a2342cb74cd4280b55c19c2a3cdb6ce6a601ce
+               2 File(s)          9ÿ873 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\06
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             3ÿ574 02cfb0fecabc8959840c530f2201213e844e62
+07.04.2024  16:06             1ÿ110 58bbecfb8c439ae8ae6a1366d7c2df968a8d71
+               2 File(s)          4ÿ684 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\08
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               195 a548461e92f7da261da8ea5db23272f3a3e809
+               1 File(s)            195 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\09
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45               848 38164c0611de906da30d01cb61c049954cc5ce
+23.04.2024  21:44               193 e4cbbc506fe514de4c4f2c6f3060f21132a345
+               2 File(s)          1ÿ041 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\0b
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44            38ÿ541 a66571a85c89d66d43a32ce5be460ff8b7956d
+23.04.2024  21:44           239ÿ459 df200df02790029f071ac0d62c2b282298cedf
+               2 File(s)        278ÿ000 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\0c
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             2ÿ071 970a1093ad3e47ef2223a0e1d33112d2d638ef
+               1 File(s)          2ÿ071 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\0d
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+14.04.2024  18:26               118 26230d0e047b999075f98cd92d3b2db9199ae7
+26.04.2024  20:43               196 8b5626aac58ce349fc636d6504ef0d758b3f66
+25.04.2024  17:26             1ÿ853 a1ab62b4e32dd1593d23de465e16a047aa8233
+               3 File(s)          2ÿ167 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\0e
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45             1ÿ185 559e470ab17ba293c0679d6ecce85336cbd454
+               1 File(s)          1ÿ185 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\0f
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26             1ÿ369 0925b522e551ee1a1a358f09e04ccaea4e21c9
+18.04.2024  03:45               507 11f8bb1c945a130db8012576e77fdd856a9405
+               2 File(s)          1ÿ876 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\10
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+11.04.2024  14:23               609 31c6f7873dcaeb9962985401eda38611855fd0
+25.04.2024  17:26             3ÿ702 58ec9c42537c6e70eebd817c7a1a7be48d97e5
+11.04.2024  14:23           174ÿ149 fc6f2b861eb448e78b73e2b86cdd104a5ddf2b
+07.04.2024  16:06           179ÿ036 feac844e1af5eba4bcbcbf7016f533e3978d7c
+               4 File(s)        357ÿ496 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\12
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+18.04.2024  03:45               214 45f7753ac5921201e48abf72783d3219d63433
+18.04.2024  03:45             3ÿ072 905ea547dbb8e5802321ff9c2e309931e94294
+25.04.2024  17:26               755 c19044a99ffe9a8e1af8d146d9461711ab3609
+               3 File(s)          4ÿ041 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\14
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               977 d00a647a8d32a0a720f31bdb0597126f395ca4
+               1 File(s)            977 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\18
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               309 0170a44f18aaba2aba9600d87c98ec496d43e1
+11.04.2024  14:23            58ÿ329 2a70a7700dd7f95094ab3e461bd22be596cf0b
+               2 File(s)         58ÿ638 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\19
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+11.04.2024  14:23               188 5a43acc50fb6f4d229a24e17782cdb1cc04018
+26.04.2024  20:43               321 9abf02bbea11a95e34abab73a862b20e4a16a3
+14.04.2024  18:26               346 a26e2f4b88835ad3f5480f561bb2a3f219798c
+               3 File(s)            855 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\1a
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26               761 8749e1b33fc8442fde3d41aa15630675315673
+               1 File(s)            761 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\1c
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+11.04.2024  14:23             3ÿ617 d7eee94a864cc7310ed8f1d3c7247475435df3
+               1 File(s)          3ÿ617 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\1d
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+18.04.2024  03:45            52ÿ555 2fa37c0ccc50bb4fc5529d547719625e2dbcea
+23.04.2024  21:44               243 7165ae1c12cfbbb168dc9a37f92106b1fbf06a
+25.04.2024  17:26             4ÿ119 8175fdb477564f8c952d79dc54632028cddecd
+11.04.2024  14:23               827 9ac4b34b55e6f5985f8bef84290553d0b96b37
+               4 File(s)         57ÿ744 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\1f
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+14.04.2024  18:26               336 9e6f9aab611860d544601d9bee632138f8d8ea
+18.04.2024  03:45           330ÿ509 f00c72097ec2717fd675c273a8e215041c1afa
+               2 File(s)        330ÿ845 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\21
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             1ÿ075 d3c456cf040ebebe6406764052738712a5582e
+               1 File(s)          1ÿ075 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\22
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               453 6c752704cfac2e9cf85e6caabe5cbdc1c5a303
+               1 File(s)            453 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\23
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             1ÿ350 2ef23941fde24c1111f19fd16c93703cd0493e
+18.04.2024  03:45               256 ad5a13b354f9e84c35bd66462afca8dfd702ac
+               2 File(s)          1ÿ606 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\24
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               165 d2d864e4333d50c6adcb43fc6d85653b26a939
+25.04.2024  17:26            33ÿ895 ff924507bc6b4dad59cc9b3369900b2f64ee4a
+               2 File(s)         34ÿ060 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\25
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26             2ÿ685 c227f4205a6401e11dd85ca8539a572eb15ecf
+               1 File(s)          2ÿ685 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\27
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               680 e9084ba4b4f85d5007e01052b3dd6e6e4d76f5
+               1 File(s)            680 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\28
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44           106ÿ119 a4a8babff7618da85a10246641f767a29a2ba9
+               1 File(s)        106ÿ119 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\29
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+11.04.2024  14:23            53ÿ814 41eee283b0c850f596985c10f93e2972e0ae8e
+18.04.2024  03:45           537ÿ479 ad540b97f5b4bbf4f7e4439580078438b7c9a1
+               2 File(s)        591ÿ293 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\2a
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             4ÿ752 278baca9fb4fcd58bbb326907d0086e329360a
+               1 File(s)          4ÿ752 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\2c
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26               236 4145c4c4d7daa74dad9c5058903d14d44bdb7d
+11.04.2024  14:23               496 bc2b5416088d2dbf4841435536132d4b8988d7
+               2 File(s)            732 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\2e
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+11.04.2024  14:23               892 218dd7b1b3a93a074ed409c43a81730283722a
+25.04.2024  17:26               252 51d2158b03ecdfa282b7daecb59f35367c5aa0
+               2 File(s)          1ÿ144 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\2f
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               265 ce0ec97636cf77b8254034797d36e5e48e7f98
+               1 File(s)            265 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\30
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               902 3d96073ab30221208ee06c6128e30e0b7816b2
+               1 File(s)            902 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\32
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+23.04.2024  21:44           155ÿ066 3637b486e45e0d63e27952152055395541ff2c
+26.04.2024  20:43               273 4d52a3193384b78d361da75c1f91aed5867a7f
+               2 File(s)        155ÿ339 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\34
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               354 7a62d9975fc1e1552477e817c14c541b65aa40
+18.04.2024  03:45               257 e2bfba41764c0aab3bf6260be7b26bb13c3902
+               2 File(s)            611 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\35
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+07.04.2024  16:06               592 9e8207e5f86983c66a68713b0f91689ec0d0ab
+14.04.2024  18:26             1ÿ221 d010a516a2f8a9741f1cd3db6e1368e2580b28
+               2 File(s)          1ÿ813 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\36
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+07.04.2024  16:06           135ÿ087 3eec3969ccec166f18fb794500806ff8df318c
+25.04.2024  18:52             1ÿ321 48ad1b15bef99b607f4ecca9864289d6c7eb30
+23.04.2024  21:44               157 d96f9978109413683fc8603d0a7dde855d585c
+07.04.2024  16:06           105ÿ989 e4b2e5362477173ec1bc84063a675125c98b16
+               4 File(s)        242ÿ554 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\37
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               266 f4bb26a8ea04479c25adae28478284a0c3749b
+               1 File(s)            266 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\38
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45             1ÿ436 8c362d7f735693648048046f99ceee27b8dbb1
+23.04.2024  21:44               965 b48bd4b9c0d6df8a62bbb4c1884a7603509104
+               2 File(s)          2ÿ401 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\39
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               761 6f22e78dde6668a440ee18b0d48a44b9b981ae
+               1 File(s)            761 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\3a
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+07.04.2024  16:06             2ÿ447 1016794b377b791b530f3409eefe449ed1a94f
+14.04.2024  18:26               156 5a252c2c14ca33fe05aee073fee7fb26c8159f
+23.04.2024  21:44               673 9e741ce35a0701cccb18107617470ca67790e3
+25.04.2024  17:26             4ÿ069 bcb104f0dac87c92acb22b3f14a67e273bc4b0
+               4 File(s)          7ÿ345 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\3c
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               600 2c7e64293d69a31953e1d5de8eedec60e71bba
+               1 File(s)            600 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\3d
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               241 362b745c1c3641d537204e40d10de5d06c1128
+               1 File(s)            241 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\40
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+23.04.2024  21:44             4ÿ432 6f43d8e6c2136d9d3394fc8dbeb3d27636a3b4
+25.04.2024  17:26               411 b6c871f4e908637dabc70e05a190729662df50
+               2 File(s)          4ÿ843 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\44
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45           584ÿ786 6a4f1b522d39fe6b41e4e07946003b9fc06bb3
+               1 File(s)        584ÿ786 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\45
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               591 d8d724e22854ec28448b8e9acaf961d4d0c3fb
+               1 File(s)            591 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\46
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45         1ÿ677ÿ443 57b3f6c6954afc7015bd1d298e6eee7d7233fd
+23.04.2024  21:44             1ÿ298 f208bc7c98d6a24cdfb63e361d840bd7c0155f
+               2 File(s)      1ÿ678ÿ741 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\48
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26             1ÿ902 195a6419af4fe814250b3470241e2221089e68
+18.04.2024  03:45            55ÿ632 728f93006923e0429cd5f620505b15a459f96e
+07.04.2024  16:06               203 99c0cd693f9d4c36698f2e4403661fdebf7dca
+               3 File(s)         57ÿ737 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\49
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52               273 6b736e83f52d2f2fefc5761f9bd3ce6c0d31cd
+25.04.2024  18:52               595 cae9fbc4e89aa6be7656fb836edc21a89c0a5c
+               2 File(s)            868 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\4b
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45           186ÿ044 17ea26ce208fb7816415207f77bf3911fc8769
+               1 File(s)        186ÿ044 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\4c
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               241 56c87c24a816b42fbd3d890254b25db50cff37
+23.04.2024  21:44         1ÿ059ÿ622 df0049d2be9f923984f4ac45f5d926fa7b70d6
+               2 File(s)      1ÿ059ÿ863 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\4f
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               244 90f2621208e7eb86e795d14f433d763b4423a0
+               1 File(s)            244 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\50
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45           478ÿ301 397266515d4a56ae476a6030fbd063c113dea2
+18.04.2024  03:45           333ÿ026 86497e6e6a1a92fb02d27f3d5b2a1a788c35a4
+               2 File(s)        811ÿ327 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\51
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+18.04.2024  03:45             2ÿ804 8b484f064bcf144e36e64ebd01f266f9c521a2
+25.04.2024  17:26           908ÿ874 f2bcd87ef284c7fc9556d10009a0a6842f778d
+               2 File(s)        911ÿ678 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\57
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             1ÿ894 84306a5960fda6f3951b0536aca2e8f0255899
+07.04.2024  16:06             1ÿ814 d6aadaf00b20b820294b849095b4bed9f3d304
+               2 File(s)          3ÿ708 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\58
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26               360 cfb6c602e01c312893fa3f941fffec0ff0af59
+               1 File(s)            360 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\59
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44            17ÿ895 26ca6bbd4be144996a1882b22617db241ac5f2
+               1 File(s)         17ÿ895 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\5a
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             1ÿ774 191ca16a9bd2edd4a81edfe763abe30cbe338f
+               1 File(s)          1ÿ774 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\5b
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26             2ÿ763 fb64996e0a4c30b7d9ff4145ab7a3d3be3b08e
+               1 File(s)          2ÿ763 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\5d
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26             1ÿ298 59a5dbd33aaeee1abcdc4376d44d423c6dbb77
+               1 File(s)          1ÿ298 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\5e
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             5ÿ043 4fb56c6f2cf1bc7c37442073a8053818251d30
+11.04.2024  14:23            50ÿ938 5039581f75371fb7b1ab0c32d3c97bd1da4a3a
+               2 File(s)         55ÿ981 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\61
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+14.04.2024  18:26             2ÿ991 35aaddab2f3c9a6f0a861cfd4e36572a583816
+18.04.2024  03:45                23 9c2c311eac5d1f22a2c784f0bdcf3495c207ac
+               2 File(s)          3ÿ014 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\62
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+11.04.2024  14:23               635 0d502b8cfe20cc7a2615462147f410d0a7e9eb
+               1 File(s)            635 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\63
+
+07.04.2024  16:06    <DIR>          .
+07.04.2024  16:06    <DIR>          ..
+07.04.2024  16:06             2ÿ496 6107ac5fec607186eec9d2c0a9c947783f3c96
+               1 File(s)          2ÿ496 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\64
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               227 c690a7e9be325179779c729622ac9a0737c979
+11.04.2024  14:23            21ÿ317 da83525e0f43d071d3c30ff1a0fc0a42b53b0e
+               2 File(s)         21ÿ544 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\65
+
+07.04.2024  16:06    <DIR>          .
+07.04.2024  16:06    <DIR>          ..
+07.04.2024  16:06             1ÿ635 bce201d158764b6683f885698a0aeda13c3463
+               1 File(s)          1ÿ635 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\66
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+07.04.2024  16:06               357 76f7b66d17f5506f0bbbf8f9f8c1dd87698856
+11.04.2024  14:23               162 dd34cacd2c4f07fdad01775ed9735a4d9e5ab9
+               2 File(s)            519 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\67
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45            46ÿ906 f959d10af53d14099851303de2f60ee902c09b
+               1 File(s)         46ÿ906 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\68
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26             1ÿ887 388cf59b1edd17bcabe3b7e65a7a8e55d86a2c
+               1 File(s)          1ÿ887 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\6b
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             1ÿ078 9a8aa4fb22b42700fb2123f5dc2ba841200e8b
+               1 File(s)          1ÿ078 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\6c
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             1ÿ635 134d6eef8c6e805f6b3fa8c408fa0bef44e06f
+26.04.2024  20:43             1ÿ295 150b9afcb18fd55d28691aa1af56c293f472ca
+11.04.2024  14:23            95ÿ783 38dc4a0ceb3e767bfacfc999af177ff01c3ce7
+23.04.2024  21:44            11ÿ822 cca94197c379589bc3190cfbb4b5403e784b3d
+18.04.2024  03:45           101ÿ613 fa56d5201460112767ac5b3ad690038f0aa763
+               5 File(s)        212ÿ148 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\6d
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45               641 241c7f72ba72cae65a1f4d903b3b545ed03fa2
+18.04.2024  03:45           328ÿ534 7cd4ee45a39fe83ffe933833da46650f7d4bff
+23.04.2024  21:44            22ÿ937 d9155ed293c799a98d240f0476b5d239e12086
+               3 File(s)        352ÿ112 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\6e
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45           334ÿ050 31388a2adc44481d1ae7eb058ee106470b96e6
+18.04.2024  03:45            24ÿ715 4f702ac9795f57c8743058677e8afaab2da965
+               2 File(s)        358ÿ765 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\70
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               189 0b1501019141f115a23214da89dc7538d56730
+11.04.2024  14:23             4ÿ879 2c98da0721d0c862be5619443cb23e0937bc56
+11.04.2024  14:23             4ÿ110 d4a73403e67dd03555b9c9c504b8e223ae2291
+23.04.2024  21:44            23ÿ907 fd45ccc812ffcae31dd98d2b0faf4f54f76d09
+               4 File(s)         33ÿ085 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\71
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               688 9c6a9042c461869d2f572f432187ddb1a4fe30
+               1 File(s)            688 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\72
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+11.04.2024  14:23             2ÿ987 28b1d2544cc1113e0f8f8913f47763c8d3a4ca
+18.04.2024  03:45           324ÿ914 c56f369c697e283939419a266a6c476bf16145
+               2 File(s)        327ÿ901 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\73
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               245 2815869289b511e8931e9efb38088eb71e8b4f
+               1 File(s)            245 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\74
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               296 32abcac15e3b89e2a78dff9975ceae9d2cb460
+               1 File(s)            296 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\75
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+23.04.2024  21:44             1ÿ572 2996bf1f42452627c874c5980eb0bd83f92b14
+26.04.2024  20:43               466 317fedbfbe7b76007cd3eb52369e827cdfc7fc
+               2 File(s)          2ÿ038 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\77
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+11.04.2024  14:23               187 ccad7f353ac7ab59cf0eca63641206b6bf5853
+               1 File(s)            187 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\78
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+14.04.2024  18:26               299 72bfb0d778b217baa26e0e4df9fb0d86df3632
+               1 File(s)            299 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\79
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               716 952420c322f83ef51720299448de58ad1185c6
+               1 File(s)            716 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\7c
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+07.04.2024  16:06               716 2cdae3d1356fe7b7c12ebd7b52a388409e3663
+23.04.2024  21:44         5ÿ313ÿ961 ff0444ede329ab154d80629b050adc9fadfb5d
+               2 File(s)      5ÿ314ÿ677 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\7d
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45         1ÿ865ÿ929 48aa8524631820b5a839859f866babea39e670
+               1 File(s)      1ÿ865ÿ929 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\7e
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               318 fa80d408e706f10d624f140b02d6ef2669d21c
+               1 File(s)            318 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\7f
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52               192 6c057f0dea5081d9fc43a90994c3a95116905d
+23.04.2024  21:44             5ÿ511 e1ceeebe7bf9de8b769aca4ca08066e74d592d
+               2 File(s)          5ÿ703 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\80
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+07.04.2024  16:06           151ÿ123 205684209fed5332c5b0271beef700fc174316
+11.04.2024  14:23            15ÿ075 b54b832b177b487e16b231d923d914fa5b02d7
+               2 File(s)        166ÿ198 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\81
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               904 418b0879dd5ba44d3168b205a5c543ec97f52b
+07.04.2024  16:06               234 622bf4d8e20f16b16dde0e2b860c62dc0a50ed
+               2 File(s)          1ÿ138 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\82
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45             3ÿ444 4d72ded74b121d6c40f8cb5b35cb651df36f2c
+18.04.2024  03:45            34ÿ189 997274be270e04fd1c13d699709ac1d4236c4a
+               2 File(s)         37ÿ633 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\86
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  17:26               274 72bf3edd9a81ab973dfb943fc1f95e43119b34
+23.04.2024  21:44             2ÿ329 ad56eb2fcd682c6157f6518a19f788ea2a08bd
+25.04.2024  18:52             2ÿ069 cc776678b38c82693a1154e30069126b612928
+               3 File(s)          4ÿ672 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\89
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44           106ÿ867 2742f0b6ef66b8915bf9e723dd78582e698b29
+11.04.2024  14:23             7ÿ721 59b4f0213e8d9c9a86d8c744be4f08e83bf87a
+18.04.2024  03:45               595 d9725adbfe1c7781ce6b2655af8fefcfe897d1
+               3 File(s)        115ÿ183 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\8a
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45            15ÿ192 34f8e1097cece60958b06476a37481b72f6858
+18.04.2024  03:45               685 d1430271551c3fe9f675b22dd8998c025f89fc
+               2 File(s)         15ÿ877 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\8b
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+07.04.2024  16:06               161 1acbfd2fc6e2565d7e6f0233026203ddcf8c2d
+25.04.2024  17:26               186 7b5bf5074fbb1a5b13b1f26d5d39cb2e91190e
+25.04.2024  17:26            58ÿ376 b87d8521871720be752b3cb581fd09ee34f91d
+               3 File(s)         58ÿ723 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\8c
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45               180 2693b85df7b5c371c214258187484aa828fa41
+18.04.2024  03:45               309 aec34f0a53ec90c47d58408add3b913b2d25e4
+23.04.2024  21:44            65ÿ852 e35d0d160446395abc281967504edb04fb2304
+               3 File(s)         66ÿ341 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\8d
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44            69ÿ495 ba8b4f2811227dbb44fa7db51f7b7b7ce07675
+               1 File(s)         69ÿ495 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\8e
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               419 728af2893f36d22917ee3d51101d146e9e3aa2
+               1 File(s)            419 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\8f
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               461 4c280d27c083651fa68a56b6dd69656db01e65
+14.04.2024  18:26               731 6d3ead2e3ab7f8f70d6b8e8f47ca96eb7ebe6d
+               2 File(s)          1ÿ192 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\95
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               326 45f2122f1f29b2fca56a74178d487f192f7dd1
+               1 File(s)            326 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\97
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             1ÿ262 897ea261222a07dbc4efc0b620911b3357f6a7
+               1 File(s)          1ÿ262 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\98
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+14.04.2024  18:26               162 0bb8007b86438628ac2b2501d04246d83efa86
+18.04.2024  03:45               204 dfee588f7069603429ed94ccc06f0f4ab7acc0
+               2 File(s)            366 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\9a
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               599 afbe1fc077fb6d3c62cc10fae72f40d5891394
+               1 File(s)            599 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\9b
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               193 eeddf3d723fc82773e5c8d9888d1ed7a38aa9f
+               1 File(s)            193 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\9c
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               977 0963d572a0620b47c0f6116ec0afca0c025970
+07.04.2024  16:06               759 d7addeb1be28ea428f562fad46ee8eacb8c27c
+               2 File(s)          1ÿ736 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\9d
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44           193ÿ578 988b576555d69951c119925ad74e91fe1ae5c9
+18.04.2024  03:45               190 c4ded4753ff91098c000de23877ccdc4b85338
+18.04.2024  03:45               156 f13824211b69be717b4c25d9f0599d61b1f769
+               3 File(s)        193ÿ924 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\9e
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45         1ÿ236ÿ738 6a8d399afb22c04e39b3e3a08574db2245470c
+23.04.2024  21:44           153ÿ162 ae577ba94d0e98b486ee3d023fbfdaf8a2ed60
+               2 File(s)      1ÿ389ÿ900 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a0
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               630 9e956086d9c20011ab723b1be6c889ae63a6fe
+               1 File(s)            630 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a1
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+11.04.2024  14:23           475ÿ944 7e10539c3c4a83eff8a1428cee833c578284c9
+26.04.2024  20:43             1ÿ591 9194659a49e317fd599b87a7b3629cf196a555
+               2 File(s)        477ÿ535 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a2
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44                69 0cc08787128dfab3b957dd94cd416957013f9b
+23.04.2024  21:44            38ÿ416 2e6c788cc5c1f4e102fe866ac4fb0e6c4ca091
+               2 File(s)         38ÿ485 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a3
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               155 7db9b3aa64edf06dfb78c65ae121928658f961
+23.04.2024  21:44            38ÿ446 8e1c52f7b2b70b6cc6762f25ad980cf69461f4
+               2 File(s)         38ÿ601 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a4
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45            82ÿ661 d187c43982f1764067bb6f83367cf764f3dadc
+23.04.2024  21:44           285ÿ673 f7935f8d97a2e2164766d49dc044cd4c40748e
+               2 File(s)        368ÿ334 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a6
+
+07.04.2024  16:06    <DIR>          .
+07.04.2024  16:06    <DIR>          ..
+07.04.2024  16:06               189 945074669731251ad9393dcf6274fe0ef53a15
+               1 File(s)            189 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a7
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             4ÿ582 814a9a83e71a25ff9ab68aa917b312f220ea8f
+               1 File(s)          4ÿ582 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\a9
+
+07.04.2024  16:06    <DIR>          .
+07.04.2024  16:06    <DIR>          ..
+07.04.2024  16:06               456 a740f8988cb6941c1734ffd16ab0811285ade8
+               1 File(s)            456 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\aa
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45            12ÿ766 74eff24479dbbd834469e61ed31c2120e3dcd0
+23.04.2024  21:44               361 7f1c780ef37b703e16d8e17f9b88299e0cb966
+               2 File(s)         13ÿ127 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ab
+
+07.04.2024  16:06    <DIR>          .
+07.04.2024  16:06    <DIR>          ..
+07.04.2024  16:06               596 5a8f1c85e21e53039c4fc42e2042a2bbd5af3f
+               1 File(s)            596 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ae
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               186 388fb474e277b1be6f9f53a7293f3bfda59df6
+               1 File(s)            186 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\af
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               218 612c3005070703a52776f839bdb948adf5a61a
+               1 File(s)            218 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\b0
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52               267 33b4f9418e33c76a39f92ec066bd9786e73772
+               1 File(s)            267 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\b1
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45            18ÿ191 2446e3038c72a7c4a8764cf27549894008b594
+               1 File(s)         18ÿ191 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\b3
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+14.04.2024  18:26               326 42e0fe7946d6cb551c6f8cfb21f462f8c123c4
+25.04.2024  18:52               193 91566f8a2ae4e4ec4b190299a013840aa1c027
+               2 File(s)            519 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\b5
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52               600 1103acbc715abfb68d15cfea4e54a2eae9432c
+               1 File(s)            600 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\b6
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               160 5fc4802a96212dde3aa1996803aa72e420a429
+               1 File(s)            160 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\b7
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               254 078d284fdf1b6b1d9828bc806f7824e2d0433a
+07.04.2024  16:06               155 9de30271c13468fc27e2a1880fc77507fb20c7
+               2 File(s)            409 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ba
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44            39ÿ027 fb55c8b9bf6bfee88caa6919950cbbd4b8fc47
+               1 File(s)         39ÿ027 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\bb
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45             2ÿ703 569d5cc16365e333274791826228f86dbfe237
+18.04.2024  03:45               253 828a37dc6c96026a54bb55d9e374f91270652d
+               2 File(s)          2ÿ956 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\bc
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+23.04.2024  21:44            44ÿ514 441c6bd0359fc60b7e91c6bc93a7dbb7b92ac2
+25.04.2024  18:52               156 949c739f6a6ac49482c0d728d49391912c06b6
+25.04.2024  18:52             1ÿ893 e3bfc73a83d23e62901181f0238773113846a3
+23.04.2024  21:44            19ÿ372 f4b4dcd678420104ecd65c693207c1590ca53c
+               4 File(s)         65ÿ935 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\bd
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               310 1c6db394713b588c0c832620f2200de36035b5
+11.04.2024  14:23             8ÿ121 293ffede6f2fb0cdb1c12eb20eb1e44fd9445f
+               2 File(s)          8ÿ431 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\be
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               644 dd51c686c0fa9a19b576d83f222830d8ac8bab
+               1 File(s)            644 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\bf
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44            13ÿ448 53a6543b7b24c9c3c67d1507344dc3c44e2c74
+               1 File(s)         13ÿ448 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c0
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               695 bed258e54e48341fc78d8dbf05feffdd8b960c
+               1 File(s)            695 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c1
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26           373ÿ825 43009b89b2abb4b4018666eb37c13968e904e7
+25.04.2024  17:26             1ÿ021 4ec7ed0846766aeef27bdbd173cc23b034c838
+               2 File(s)        374ÿ846 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c2
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+18.04.2024  03:45           336ÿ611 0fed26199feeeb2c2324fe9caea8cba8b5ece3
+18.04.2024  03:45            44ÿ391 42d9f689983c680e7af09fe870ffe57adc6afb
+25.04.2024  18:52           908ÿ879 4abe812180cf0a908a75ac86315cda57c86ce1
+               3 File(s)      1ÿ289ÿ881 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c4
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               641 ad23e20dcaed30b1e2ae4876a5582090a55603
+26.04.2024  20:43               601 beee497a60c2c4025472f10f8730428fd0ec5b
+               2 File(s)          1ÿ242 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c7
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               193 0491860b70dd3a2df77dceb8008bf7aa3f64d1
+25.04.2024  17:26               595 511d15b09bf9e81f2b617999097a7a888d81e8
+23.04.2024  21:44             7ÿ828 65f11afd1d0cc7c587355429d00f903843a4a4
+23.04.2024  21:44               878 999bc1c6bcaa58aad591bab568890a5cfc8a5b
+18.04.2024  03:45             5ÿ120 c03b36a2e7f2b4f0717427559ee4718eefe7a7
+               5 File(s)         14ÿ614 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c8
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45               374 33c1fa18884fc1892d7601236cae862b66b79e
+23.04.2024  21:44               215 a6c0528dc748d85d73ff05f13b4a62b3f04fcc
+18.04.2024  03:45            82ÿ698 d43844f5854204747490d2968d0b431f0e4739
+               3 File(s)         83ÿ287 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\c9
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+11.04.2024  14:23               486 582bcaa535d328c0551d16af559ec793588687
+11.04.2024  14:23           196ÿ494 9034cee4062cc1632008362656f7297f785e49
+               2 File(s)        196ÿ980 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ca
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+18.04.2024  03:45            35ÿ609 1d82cd3dd4154a38140c655d6e670c08e0d63a
+23.04.2024  21:44               192 86786344d16daa6fa8979610187d43bedd3f42
+26.04.2024  20:43               269 be2f02a5ab251703fd2a459aba5520e3526520
+               3 File(s)         36ÿ070 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\cb
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52               186 1dca9117ccae286db0d4cbc53551887d2925e6
+23.04.2024  21:44               268 861bf5aa2be32e16b3ec02ec6589ff15628598
+               2 File(s)            454 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\cd
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               193 1f2ea439c7beb42b65c33118696647254885ba
+18.04.2024  03:45               253 631b171495b76446c0a43f88e3430065566c16
+               2 File(s)            446 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ce
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+18.04.2024  03:45               577 22e82864741f7dfbf625d16d125521a40f8241
+18.04.2024  03:45           411ÿ211 6b40337a2db5b5d46d7b48ea46d66c61cb4f12
+25.04.2024  18:52               567 7c83570969e9ae1aecce707a494cfdac3eac33
+               3 File(s)        412ÿ355 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d0
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45            73ÿ077 db7d333dec2801839b1e273fee896b7bcde4a9
+               1 File(s)         73ÿ077 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d1
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45               224 440bd7d4a15a0912acdfb512040cacba87b327
+23.04.2024  21:44             1ÿ006 724fe15799725d2cc4398a69a6ea93bbd772dc
+18.04.2024  03:45           463ÿ486 92f3ec59b94e5bc1fce4a07a9ac8945f5966e1
+               3 File(s)        464ÿ716 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d2
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26               156 917db9e0278216761fba91926d4afaddaeda89
+18.04.2024  03:45           345ÿ645 b141f28209f935e15afe7eeca6a7cdaa235434
+               2 File(s)        345ÿ801 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d3
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26               192 3dc3d7714f08ad619bacdf7f27c0f12537a022
+               1 File(s)            192 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d4
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             3ÿ907 81f1c03cf5e5c62c451f90d8289c41217a0b90
+               1 File(s)          3ÿ907 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d5
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44               973 d0187096456d8f56744180a2979b1470acce9a
+               1 File(s)            973 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d7
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+07.04.2024  16:06               295 2958aba5b61804cf9421ea12b5c46d7b4ccfff
+26.04.2024  20:43           908ÿ876 92b4bcf1aeb42aa80f8e92e0d1206ed4f1af13
+18.04.2024  03:45             6ÿ432 cfe4eadcddaf579e76d8a9ad6260f935ff9852
+               3 File(s)        915ÿ603 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\d8
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+25.04.2024  17:26             1ÿ025 b23ca704ea89541a247488b3504da6290f54c6
+18.04.2024  03:45               159 d8da1be6a712361502153875a1d1075b71f81a
+               2 File(s)          1ÿ184 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\da
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26               216 026793dce5ddb42283665a64a24283d9f1913f
+               1 File(s)            216 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\dc
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44            59ÿ868 491e676e3df7abf57a6649fb0b5fa47812f2b0
+               1 File(s)         59ÿ868 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\de
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+23.04.2024  21:44             1ÿ578 3e733ef80f4bc10ecdc012b99b44db06cab5b6
+26.04.2024  20:43             4ÿ588 88a8d4311df6fef0de1761ed63040b8a6b5d65
+               2 File(s)          6ÿ166 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\df
+
+07.04.2024  16:06    <DIR>          .
+07.04.2024  16:06    <DIR>          ..
+07.04.2024  16:06            12ÿ065 346b615eee7565308085dd94347b39e9f73df0
+07.04.2024  16:06               737 c2edd9ab4af70049bb3739ba7e11af86e56004
+               2 File(s)         12ÿ802 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\e0
+
+14.04.2024  18:26    <DIR>          .
+14.04.2024  18:26    <DIR>          ..
+14.04.2024  18:26               393 fb195f8c716e6e22970f0a1a0a4577f75a0515
+               1 File(s)            393 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\e1
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+25.04.2024  17:26        14ÿ607ÿ508 0ab3dc90838d6f6af5901c3300f29ba09a26cf
+               1 File(s)     14ÿ607ÿ508 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\e3
+
+25.04.2024  17:26    <DIR>          .
+25.04.2024  17:26    <DIR>          ..
+18.04.2024  03:45        13ÿ108ÿ159 7a70fb7b2d526f520cca5030526e500af49c60
+25.04.2024  17:26             5ÿ211 8d36e95329eac79d92872e2ce0c31f9b5ee09c
+               2 File(s)     13ÿ113ÿ370 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\e6
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45                15 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+               1 File(s)             15 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\e9
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               196 9a4517a8d5b994c8c4475adec0305418abb048
+26.04.2024  20:43               180 ba473418d4bd3d3efa11c7a0130098e5f5c40b
+               2 File(s)            376 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ea
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+14.04.2024  18:26               669 22ee05b620532ab386587c6bc60afe8476c7b3
+11.04.2024  14:23             1ÿ336 589c6a93076ff35d71961f349724ff81c05849
+26.04.2024  20:43               551 d81b8b30159ea2214ab2a205759899c3293fc4
+               3 File(s)          2ÿ556 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\eb
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43             1ÿ125 38b281d84fe3e5311746745f7c7e601e1ab646
+               1 File(s)          1ÿ125 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ec
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               672 e8e2c5f62d4c6636d60e607f70e12a460860e2
+               1 File(s)            672 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\ee
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45             1ÿ886 e964c828dd16cd0d21077aaa44bd5579d86900
+               1 File(s)          1ÿ886 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f0
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52             3ÿ573 06d7202e739cb0705e714a3e05b31cdf3564e3
+23.04.2024  21:44           105ÿ420 817a4dc9fb0ff79a0bedc183aea08da5b91224
+18.04.2024  03:45           443ÿ686 eeccc518461aba78a7c8634e634aff8e61d92a
+               3 File(s)        552ÿ679 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f1
+
+25.04.2024  18:52    <DIR>          .
+25.04.2024  18:52    <DIR>          ..
+25.04.2024  18:52               180 6ed3877bddbb9f17ed38d5e36f13d243b556ca
+18.04.2024  03:45               595 84cd69657af8058817b551cf4805978c2b9113
+               2 File(s)            775 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f4
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+18.04.2024  03:45           115ÿ356 0f25b4165a58f13341eb53eb54eb074a4a7dd8
+14.04.2024  18:26               313 a7b7ea42e7efbc265bc867e858ae4df65d912f
+23.04.2024  21:44            28ÿ851 c4bd4d392b4bd48a2c1984ad1bfbcc5893a757
+               3 File(s)        144ÿ520 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f5
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+14.04.2024  18:26            15ÿ299 c16f9dae48f45407bca86c6b3e211730d859c7
+23.04.2024  21:44               863 da6612f633c2be71c3a3b516b50557e4152f1f
+               2 File(s)         16ÿ162 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f6
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45            98ÿ069 1eacf5018717b10915f4a3b2d6ecd106824ce7
+               1 File(s)         98ÿ069 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f7
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+11.04.2024  14:23               293 296c73c87ae09d9a037cec83a8c6cd54672ed0
+               1 File(s)            293 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\f8
+
+23.04.2024  21:44    <DIR>          .
+23.04.2024  21:44    <DIR>          ..
+23.04.2024  21:44             2ÿ318 c310a1808704100ae73bb6ebb491fa2c12e67b
+23.04.2024  21:44            86ÿ526 cea5d9c6ed003e0efa7e683ac38cd2111860e8
+               2 File(s)         88ÿ844 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\fa
+
+18.04.2024  03:45    <DIR>          .
+18.04.2024  03:45    <DIR>          ..
+18.04.2024  03:45               192 ac1316ef73aae114e2483958839ed5fdbbf0be
+               1 File(s)            192 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\fb
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               595 3a08e23b148a34059ee495fb4da43585c34532
+18.04.2024  03:45               722 8aff165a301ca47884ccdc53f57367e1f2bcd3
+               2 File(s)          1ÿ317 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\fc
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43               277 d893bc5798a378e9ca718f2c791aa73a5bf634
+               1 File(s)            277 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\fe
+
+11.04.2024  14:23    <DIR>          .
+11.04.2024  14:23    <DIR>          ..
+11.04.2024  14:23           243ÿ776 ca3bfcb2203132456463c5972b4bb9e93df736
+               1 File(s)        243ÿ776 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\info
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\objects\pack
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05             9ÿ360 pack-c429f7eb6260cd68d15819eba650028bb2bb89fc.idx
+18.04.2024  03:45        36ÿ180ÿ629 pack-c429f7eb6260cd68d15819eba650028bb2bb89fc.pack
+05.04.2024  16:05             1ÿ236 pack-c429f7eb6260cd68d15819eba650028bb2bb89fc.rev
+               3 File(s)     36ÿ191ÿ225 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\refs
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+26.04.2024  20:43    <DIR>          heads
+05.04.2024  16:05    <DIR>          remotes
+05.04.2024  16:05    <DIR>          tags
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\refs\heads
+
+26.04.2024  20:43    <DIR>          .
+26.04.2024  20:43    <DIR>          ..
+26.04.2024  20:43                41 master
+               1 File(s)             41 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\refs\remotes
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05    <DIR>          origin
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\refs\remotes\origin
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05                32 HEAD
+               1 File(s)             32 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.git\refs\tags
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs
+
+14.04.2024  18:27    <DIR>          game
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game
+
+14.04.2024  18:27    <DIR>          .
+14.04.2024  18:27    <DIR>          ..
+26.04.2024  20:41    <DIR>          FileContentIndex
+26.04.2024  20:41    <DIR>          v17
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\FileContentIndex
+
+26.04.2024  20:41    <DIR>          .
+26.04.2024  20:41    <DIR>          ..
+25.04.2024  17:35            50ÿ007 644c3c86-558b-429a-882c-deb0ee373645.vsidx
+26.04.2024  20:40            38ÿ978 d40295d9-acc7-4046-aeae-2c44caeb5a78.vsidx
+20.04.2024  01:33            36ÿ403 dc563ba8-390c-4924-a954-196660dfa5e9.vsidx
+26.04.2024  20:41           177ÿ019 e259d23e-2cbd-4d92-95aa-3877cc19e658.vsidx
+26.04.2024  20:36            25ÿ288 e9307de9-8dd0-462a-9575-66c543552fea.vsidx
+               5 File(s)        327ÿ695 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17
+
+26.04.2024  20:41    <DIR>          .
+26.04.2024  20:41    <DIR>          ..
+26.04.2024  20:41        41ÿ418ÿ752 Browse.VC.db
+26.04.2024  20:41               669 DocumentLayout.json
+26.04.2024  15:58    <DIR>          ipch
+26.04.2024  20:41           847ÿ872 Solution.VC.db
+               3 File(s)     42ÿ267ÿ293 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch
+
+26.04.2024  15:58    <DIR>          .
+26.04.2024  15:58    <DIR>          ..
+26.04.2024  20:41       104ÿ726ÿ528 77213983d6e594fc.ipch
+23.04.2024  02:44    <DIR>          AutoPCH
+               1 File(s)    104ÿ726ÿ528 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch\AutoPCH
+
+23.04.2024  02:44    <DIR>          .
+23.04.2024  02:44    <DIR>          ..
+15.04.2024  22:10    <DIR>          2946961da457fe2b
+22.04.2024  02:04    <DIR>          58a47dd3528c65fd
+25.04.2024  17:07    <DIR>          7935a76db2caded3
+14.04.2024  18:56    <DIR>          acae4379c5782462
+26.04.2024  04:13    <DIR>          baf1ee49632e4f41
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch\AutoPCH\2946961da457fe2b
+
+15.04.2024  22:10    <DIR>          .
+15.04.2024  22:10    <DIR>          ..
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch\AutoPCH\58a47dd3528c65fd
+
+22.04.2024  02:04    <DIR>          .
+22.04.2024  02:04    <DIR>          ..
+26.04.2024  03:46        90ÿ570ÿ752 SPRITE.ipch
+               1 File(s)     90ÿ570ÿ752 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch\AutoPCH\7935a76db2caded3
+
+25.04.2024  17:07    <DIR>          .
+25.04.2024  17:07    <DIR>          ..
+25.04.2024  17:07        90ÿ570ÿ752 DLLMAIN.ipch
+               1 File(s)     90ÿ570ÿ752 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch\AutoPCH\acae4379c5782462
+
+14.04.2024  18:56    <DIR>          .
+14.04.2024  18:56    <DIR>          ..
+14.04.2024  18:56        38ÿ141ÿ952 SPRITEBUTTON.ipch
+               1 File(s)     38ÿ141ÿ952 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\.vs\game\v17\ipch\AutoPCH\baf1ee49632e4f41
+
+26.04.2024  04:13    <DIR>          .
+26.04.2024  04:13    <DIR>          ..
+26.04.2024  04:13        90ÿ570ÿ752 GRAPHICS.ipch
+               1 File(s)     90ÿ570ÿ752 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game
+
+26.04.2024  20:42    <DIR>          .
+26.04.2024  20:42    <DIR>          ..
+26.04.2024  20:34            11ÿ817 game.vcxproj
+26.04.2024  20:34             3ÿ210 game.vcxproj.filters
+05.04.2024  16:05               225 game.vcxproj.user
+14.04.2024  18:27    <DIR>          gfc
+26.04.2024  20:37    <DIR>          headers
+24.04.2024  21:20    <DIR>          images
+23.04.2024  22:02    <DIR>          sounds
+26.04.2024  20:41    <DIR>          Source
+               3 File(s)         15ÿ252 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc
+
+14.04.2024  18:27    <DIR>          .
+14.04.2024  18:27    <DIR>          ..
+14.04.2024  18:31    <DIR>          Debug
+05.04.2024  16:05             1ÿ103 dllmain.cpp
+05.04.2024  16:05    <DIR>          doc
+05.04.2024  16:05             8ÿ344 Game.cpp
+05.04.2024  16:05             6ÿ866 GameApp.cpp
+05.04.2024  16:05            10ÿ271 gfc.vcxproj
+05.04.2024  16:05             3ÿ470 gfc.vcxproj.filters
+05.04.2024  16:05               168 gfc.vcxproj.user
+05.04.2024  16:05            28ÿ718 Graphics.cpp
+15.04.2024  16:32    <DIR>          include
+05.04.2024  16:05               844 pch.cpp
+05.04.2024  16:05             2ÿ583 pch.h
+05.04.2024  16:05    <DIR>          sdl
+05.04.2024  16:05             7ÿ231 SDL_collide.cpp
+05.04.2024  16:05             5ÿ302 Sound.cpp
+05.04.2024  16:05            28ÿ176 Sprite.cpp
+05.04.2024  16:05             3ÿ245 SpriteOval.cpp
+05.04.2024  16:05             2ÿ273 SpriteRect.cpp
+05.04.2024  16:05             2ÿ523 SpriteText.cpp
+              15 File(s)        111ÿ117 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\Debug
+
+14.04.2024  18:31    <DIR>          .
+14.04.2024  18:31    <DIR>          ..
+15.04.2024  21:01         1ÿ285ÿ591 dllmain.obj
+15.04.2024  21:01         1ÿ322ÿ254 Game.obj
+15.04.2024  21:01         1ÿ321ÿ259 GameApp.obj
+14.04.2024  18:31             1ÿ839 gfc.Build.CppClean.log
+25.04.2024  19:13               299 gfc.dll.recipe
+25.04.2024  19:13         4ÿ735ÿ096 gfc.ilk
+25.04.2024  19:13               367 gfc.log
+25.04.2024  19:13    <DIR>          gfc.tlog
+14.04.2024  18:31                 0 gfc.vcxproj.FileListAbsolute.txt
+15.04.2024  21:01         2ÿ253ÿ885 Graphics.obj
+15.04.2024  21:01         1ÿ293ÿ797 SDL_collide.obj
+15.04.2024  21:01         1ÿ821ÿ573 Sound.obj
+15.04.2024  21:01         1ÿ656ÿ263 Sprite.obj
+15.04.2024  21:01         1ÿ321ÿ693 SpriteOval.obj
+15.04.2024  21:01         1ÿ308ÿ229 SpriteRect.obj
+15.04.2024  21:01         1ÿ384ÿ584 SpriteText.obj
+15.04.2024  21:01           666ÿ624 vc143.idb
+15.04.2024  21:01         1ÿ544ÿ192 vc143.pdb
+              17 File(s)     21ÿ917ÿ545 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\Debug\gfc.tlog
+
+25.04.2024  19:13    <DIR>          .
+25.04.2024  19:13    <DIR>          ..
+15.04.2024  21:01             9ÿ054 CL.command.1.tlog
+25.04.2024  19:13             1ÿ366 Cl.items.tlog
+15.04.2024  21:01           432ÿ304 CL.read.1.tlog
+15.04.2024  21:01             5ÿ730 CL.write.1.tlog
+25.04.2024  19:13               174 gfc.lastbuildstate
+25.04.2024  19:13             2ÿ954 link.command.1.tlog
+25.04.2024  19:13             7ÿ374 link.read.1.tlog
+25.04.2024  19:13               893 link.secondary.1.tlog
+25.04.2024  19:13             1ÿ654 link.write.1.tlog
+               9 File(s)        461ÿ503 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\doc
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05           330ÿ908 gfcsheet.pdf
+05.04.2024  16:05            10ÿ917 README.txt
+               2 File(s)        341ÿ825 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\include
+
+15.04.2024  16:32    <DIR>          .
+15.04.2024  16:32    <DIR>          ..
+05.04.2024  16:05             7ÿ139 Color.h
+05.04.2024  16:05             3ÿ831 FileMgr.h
+05.04.2024  16:05             2ÿ448 Font.h
+05.04.2024  16:05             7ÿ082 Game.h
+05.04.2024  16:05             3ÿ161 GameApp.h
+05.04.2024  16:05             2ÿ756 GFC.h
+15.04.2024  16:32            19ÿ387 Graphics.h
+05.04.2024  16:05             2ÿ579 Property.h
+05.04.2024  16:05             5ÿ935 Rectangle.h
+05.04.2024  16:05             6ÿ429 Sound.h
+05.04.2024  16:05            34ÿ278 Sprite.h
+05.04.2024  16:05             3ÿ852 SpriteContainer.h
+05.04.2024  16:05             1ÿ621 SpriteOval.h
+05.04.2024  16:05             1ÿ306 SpriteRect.h
+05.04.2024  16:05             1ÿ464 SpriteText.h
+05.04.2024  16:05             5ÿ673 Vector.h
+              16 File(s)        108ÿ941 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\sdl
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05    <DIR>          include
+05.04.2024  16:05    <DIR>          x64
+05.04.2024  16:05    <DIR>          x86
+               0 File(s)              0 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\sdl\include
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05             5ÿ426 begin_code.h
+05.04.2024  16:05             1ÿ528 close_code.h
+05.04.2024  16:05             3ÿ334 SDL.h
+05.04.2024  16:05             1ÿ996 SDL_active.h
+05.04.2024  16:05            11ÿ499 SDL_audio.h
+05.04.2024  16:05             1ÿ015 SDL_byteorder.h
+05.04.2024  16:05             6ÿ250 SDL_cdrom.h
+05.04.2024  16:05             4ÿ344 SDL_collide.h
+05.04.2024  16:05             1ÿ519 SDL_config.h
+05.04.2024  16:05             2ÿ909 SDL_config_dreamcast.h
+05.04.2024  16:05             2ÿ913 SDL_config_macos.h
+05.04.2024  16:05             4ÿ343 SDL_config_macosx.h
+05.04.2024  16:05             2ÿ044 SDL_config_minimal.h
+05.04.2024  16:05             3ÿ094 SDL_config_nds.h
+05.04.2024  16:05             3ÿ776 SDL_config_os2.h
+05.04.2024  16:05             3ÿ253 SDL_config_symbian.h
+05.04.2024  16:05             4ÿ757 SDL_config_win32.h
+05.04.2024  16:05               891 SDL_copying.h
+05.04.2024  16:05             2ÿ290 SDL_cpuinfo.h
+05.04.2024  16:05             6ÿ264 SDL_endian.h
+05.04.2024  16:05             1ÿ946 SDL_error.h
+05.04.2024  16:05            13ÿ397 SDL_events.h
+05.04.2024  16:05             1ÿ007 SDL_getenv.h
+05.04.2024  16:05            11ÿ232 SDL_gfxPrimitives.h
+05.04.2024  16:05             5ÿ651 SDL_image.h
+05.04.2024  16:05             5ÿ719 SDL_joystick.h
+05.04.2024  16:05             4ÿ233 SDL_keyboard.h
+05.04.2024  16:05             7ÿ818 SDL_keysym.h
+05.04.2024  16:05             2ÿ817 SDL_loadso.h
+05.04.2024  16:05             2ÿ972 SDL_main.h
+05.04.2024  16:05            28ÿ373 SDL_mixer.h
+05.04.2024  16:05             4ÿ897 SDL_mouse.h
+05.04.2024  16:05             6ÿ037 SDL_mutex.h
+05.04.2024  16:05               194 SDL_name.h
+05.04.2024  16:05            17ÿ743 SDL_net.h
+05.04.2024  16:05           343ÿ114 SDL_opengl.h
+05.04.2024  16:05             2ÿ818 SDL_platform.h
+05.04.2024  16:05             2ÿ064 SDL_quit.h
+05.04.2024  16:05             3ÿ107 SDL_rotozoom.h
+05.04.2024  16:05             5ÿ113 SDL_rwops.h
+05.04.2024  16:05            17ÿ093 SDL_stdinc.h
+05.04.2024  16:05             6ÿ545 SDL_syswm.h
+05.04.2024  16:05             4ÿ357 SDL_thread.h
+05.04.2024  16:05             4ÿ652 SDL_timer.h
+05.04.2024  16:05            10ÿ063 SDL_ttf.h
+05.04.2024  16:05             1ÿ007 SDL_types.h
+05.04.2024  16:05             2ÿ728 SDL_version.h
+05.04.2024  16:05            38ÿ969 SDL_video.h
+              48 File(s)        629ÿ111 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\sdl\x64
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05           273ÿ020 ARIAL.TTF
+05.04.2024  16:05           306ÿ176 libFLAC-8.dll
+05.04.2024  16:05           484ÿ352 libfreetype-6.dll
+05.04.2024  16:05           200ÿ192 libjpeg-8.dll
+05.04.2024  16:05           252ÿ416 libmikmod-2.dll
+05.04.2024  16:05            25ÿ600 libogg-0.dll
+05.04.2024  16:05           211ÿ456 libpng15-15.dll
+05.04.2024  16:05           466ÿ944 libtiff-5.dll
+05.04.2024  16:05           187ÿ392 libvorbis-0.dll
+05.04.2024  16:05            36ÿ352 libvorbisfile-3.dll
+05.04.2024  16:05           222ÿ208 libwebp-2.dll
+05.04.2024  16:05             1ÿ649 LICENSE.FLAC.txt
+05.04.2024  16:05             7ÿ033 LICENSE.freetype.txt
+05.04.2024  16:05             2ÿ998 LICENSE.jpeg.txt
+05.04.2024  16:05            25ÿ892 LICENSE.mikmod.txt
+05.04.2024  16:05             1ÿ625 LICENSE.ogg-vorbis.txt
+05.04.2024  16:05             4ÿ438 LICENSE.png.txt
+05.04.2024  16:05            25ÿ873 LICENSE.smpeg.txt
+05.04.2024  16:05             1ÿ294 LICENSE.tiff.txt
+05.04.2024  16:05             1ÿ653 LICENSE.webp.txt
+05.04.2024  16:05             1ÿ446 LICENSE.zlib.txt
+05.04.2024  16:05               438 README-SDL.txt
+05.04.2024  16:05             1ÿ131 README.txt
+05.04.2024  16:05           306ÿ688 SDL.dll
+05.04.2024  16:05            41ÿ684 SDL.lib
+05.04.2024  16:05            26ÿ842 SDLmain.lib
+05.04.2024  16:05            90ÿ112 SDL_gfx.dll
+05.04.2024  16:05            27ÿ710 SDL_gfx.lib
+05.04.2024  16:05            53ÿ248 SDL_image.dll
+05.04.2024  16:05             8ÿ478 SDL_image.lib
+05.04.2024  16:05           161ÿ792 SDL_mixer.dll
+05.04.2024  16:05            16ÿ424 SDL_mixer.lib
+05.04.2024  16:05            29ÿ184 SDL_ttf.dll
+05.04.2024  16:05            10ÿ970 SDL_ttf.lib
+05.04.2024  16:05           227ÿ328 smpeg.dll
+05.04.2024  16:05            90ÿ624 zlib1.dll
+              36 File(s)      3ÿ832ÿ662 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\gfc\sdl\x86
+
+05.04.2024  16:05    <DIR>          .
+05.04.2024  16:05    <DIR>          ..
+05.04.2024  16:05           273ÿ020 ARIAL.TTF
+05.04.2024  16:05           328ÿ192 libFLAC-8.dll
+05.04.2024  16:05           426ÿ496 libfreetype-6.dll
+05.04.2024  16:05           204ÿ288 libjpeg-8.dll
+05.04.2024  16:05           263ÿ168 libmikmod-2.dll
+05.04.2024  16:05            24ÿ064 libogg-0.dll
+05.04.2024  16:05           151ÿ552 libpng15-15.dll
+05.04.2024  16:05           408ÿ064 libtiff-5.dll
+05.04.2024  16:05           163ÿ840 libvorbis-0.dll
+05.04.2024  16:05            36ÿ352 libvorbisfile-3.dll
+05.04.2024  16:05           180ÿ224 libwebp-2.dll
+05.04.2024  16:05               438 README-SDL.txt
+05.04.2024  16:05             1ÿ073 readme.txt
+05.04.2024  16:05           518ÿ144 SDL.dll
+05.04.2024  16:05            42ÿ698 SDL.lib
+05.04.2024  16:05            31ÿ852 SDLmain.lib
+05.04.2024  16:05            68ÿ608 SDL_gfx.dll
+05.04.2024  16:05            28ÿ294 SDL_gfx.lib
+05.04.2024  16:05            51ÿ200 SDL_image.dll
+05.04.2024  16:05             8ÿ650 SDL_image.lib
+05.04.2024  16:05           150ÿ528 SDL_mixer.dll
+05.04.2024  16:05            17ÿ006 SDL_mixer.lib
+05.04.2024  16:05            13ÿ312 SDL_net.dll
+05.04.2024  16:05             8ÿ808 SDL_net.lib
+05.04.2024  16:05            19ÿ456 SDL_ttf.dll
+05.04.2024  16:05             9ÿ386 SDL_ttf.lib
+05.04.2024  16:05           209ÿ408 smpeg.dll
+05.04.2024  16:05           100ÿ352 zlib1.dll
+              28 File(s)      3ÿ738ÿ473 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\headers
+
+26.04.2024  20:37    <DIR>          .
+26.04.2024  20:37    <DIR>          ..
+26.04.2024  20:33               874 GameInterface.h
+26.04.2024  00:20             1ÿ282 Map.h
+26.04.2024  20:37             2ÿ415 MyGame.h
+25.04.2024  20:54               399 Physic.h
+26.04.2024  20:36    <DIR>          PlayerEntity
+               4 File(s)          4ÿ970 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\headers\PlayerEntity
+
+26.04.2024  20:36    <DIR>          .
+26.04.2024  20:36    <DIR>          ..
+26.04.2024  01:03               480 EntityAnimation.h
+26.04.2024  20:36               771 EntityController.h
+26.04.2024  20:36             2ÿ819 EntityWeapon.h
+26.04.2024  00:23               428 Inventory.h
+26.04.2024  20:36             4ÿ101 PlayerEntity.h
+               5 File(s)          8ÿ599 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\images
+
+24.04.2024  21:20    <DIR>          .
+24.04.2024  21:20    <DIR>          ..
+05.04.2024  16:05           196ÿ092 AFontPTSerif.ttf
+24.04.2024  19:41             5ÿ190 ammo.png
+09.04.2024  23:52             3ÿ596 ammo2.png
+05.04.2024  16:05           237ÿ544 ARIAL.ttf
+10.04.2024  19:43             4ÿ089 chargedAttackBar.png
+04.03.2024  22:18           307ÿ254 explosion.bmp
+07.04.2024  10:15           181ÿ737 gameBg.jpg
+22.04.2024  17:21             2ÿ297 gravePrefab.png
+23.04.2024  03:38            13ÿ426 infoMsgBg.png
+10.04.2024  20:32           246ÿ866 InventoryBg.png
+11.04.2024  01:01             2ÿ953 loadingLogo.png
+10.04.2024  20:24           204ÿ587 loadingScreen.jpg
+21.04.2024  15:57            38ÿ509 mailAttackPointer.png
+23.04.2024  23:15            59ÿ116 main.png
+19.04.2024  22:20             2ÿ308 maxExplodeRadius.jpg
+09.04.2024  23:23            21ÿ389 melleeAttack.png
+09.04.2024  16:40           175ÿ065 menuBar.jpg
+27.03.2024  21:01             8ÿ456 mousePointer.png
+22.04.2024  03:21               221 particles.png
+23.04.2024  03:03            19ÿ345 showTurnArrow.png
+09.04.2024  16:08            50ÿ901 star.png
+05.04.2024  16:05           181ÿ248 Thumbs.db
+23.04.2024  00:32           153ÿ180 timerBg.png
+22.04.2024  23:52           319ÿ408 winConditionOverlay.png
+23.04.2024  01:21             5ÿ855 windInfoBg.png
+23.04.2024  01:41               957 windLeftArrow.jpg
+24.04.2024  00:08             2ÿ742 windLogo.png
+23.04.2024  01:42               928 windRightArrow.jpg
+23.04.2024  00:40            65ÿ867 winnerTeamBg.png
+              29 File(s)      2ÿ511ÿ126 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\sounds
+
+23.04.2024  22:02    <DIR>          .
+23.04.2024  22:02    <DIR>          ..
+17.12.1998  14:28            41ÿ986 Airstrike.wav
+23.04.2024  18:24    <DIR>          attackSounds
+23.04.2024  21:35           279ÿ460 axeSlash.wav
+23.04.2024  21:49            46ÿ612 bananaThrow.wav
+23.04.2024  21:38           272ÿ456 bowAttack.wav
+17.12.1998  14:28            36ÿ672 dropSound.wav
+17.12.1998  14:28            24ÿ026 Explosion.wav
+21.12.1998  03:57             6ÿ902 footsteps.wav
+23.04.2024  18:55            33ÿ228 hitSound.wav
+23.04.2024  21:25           159ÿ628 HOLYGRENADE.WAV
+23.04.2024  19:18            22ÿ330 jump.wav
+17.12.1998  14:28             1ÿ266 LoadingTick.wav
+23.04.2024  17:21         5ÿ898ÿ690 mainBg.wav
+23.04.2024  17:22        15ÿ870ÿ402 mainMenu.wav
+17.12.1998  14:29            13ÿ800 mineDynamitSound.WAV
+06.06.2010  13:08            49ÿ072 missileAttack.wav
+23.04.2024  19:24           229ÿ796 openInventory.wav
+05.04.2024  16:05            66ÿ894 pickUp.wav
+23.04.2024  18:59            67ÿ882 preDeath.wav
+23.04.2024  18:47           101ÿ420 StartRound.wav
+23.04.2024  21:53           488ÿ492 turnSkipSound.wav
+17.12.1998  14:28            40ÿ482 UnderWaterDeath.wav
+23.04.2024  21:33           131ÿ372 uziShot.wav
+23.04.2024  18:15         1ÿ169ÿ436 victoryApplauds.wav
+23.04.2024  19:09           103ÿ992 weaponSelected.wav
+              24 File(s)     25ÿ156ÿ296 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\sounds\attackSounds
+
+23.04.2024  18:24    <DIR>          .
+23.04.2024  18:24    <DIR>          ..
+17.12.1998  14:28            41ÿ986 Airstrike.wav
+17.12.1998  14:28            43ÿ032 Explosion2.wav
+17.12.1998  14:28            43ÿ468 HOLYGRENADE.WAV
+06.06.2010  13:08            49ÿ072 ROCKETPOWERDOWN.wav
+17.12.1998  14:29            12ÿ232 VikingAxeImpact.wav
+               5 File(s)        189ÿ790 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\Source
+
+26.04.2024  20:41    <DIR>          .
+26.04.2024  20:41    <DIR>          ..
+26.04.2024  20:33             4ÿ579 GameInterface.cpp
+26.04.2024  16:20               329 main.cpp
+26.04.2024  00:34             6ÿ311 Map.cpp
+26.04.2024  20:41            16ÿ562 MyGame.cpp
+25.04.2024  20:54             2ÿ558 Physic.cpp
+26.04.2024  20:40    <DIR>          PlayerEntity
+14.04.2024  18:26                21 stdafx.cpp
+05.04.2024  16:05               439 stdafx.h
+               7 File(s)         30ÿ799 bytes
+
+ Directory of C:\Users\leoni\OneDrive\Desktop\JarekFinal\game\Source\PlayerEntity
+
+26.04.2024  20:40    <DIR>          .
+26.04.2024  20:40    <DIR>          ..
+26.04.2024  01:03             8ÿ541 EntityAnimation.cpp
+26.04.2024  15:41             2ÿ833 EntityController.cpp
+26.04.2024  16:45            15ÿ608 EntityWeapon.cpp
+26.04.2024  00:23             1ÿ451 Inventory.cpp
+26.04.2024  20:40            13ÿ537 PlayerEntity.cpp
+               5 File(s)         41ÿ970 bytes
+
+     Total Files Listed:
+             605 File(s)    605ÿ163ÿ657 bytes
+             647 Dir(s)  136ÿ336ÿ367ÿ616 bytes free
